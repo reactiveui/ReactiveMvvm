@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="PropertyChanged.Fody" Version="2.2.9" />
+    <PackageReference Include="ReactiveUI" Version="8.0.0-alpha0117" />
+  </ItemGroup>
+</Project>
