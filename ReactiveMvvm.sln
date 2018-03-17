@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.Xamarin.Androi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.Wpf", "ReactiveMvvm.Wpf\ReactiveMvvm.Wpf.csproj", "{35F02F28-515B-44FB-8280-60F4CC38B99A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.Tests", "ReactiveMvvm.Tests\ReactiveMvvm.Tests.csproj", "{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,22 @@ Global
 		{35F02F28-515B-44FB-8280-60F4CC38B99A}.Release|x64.Build.0 = Release|Any CPU
 		{35F02F28-515B-44FB-8280-60F4CC38B99A}.Release|x86.ActiveCfg = Release|Any CPU
 		{35F02F28-515B-44FB-8280-60F4CC38B99A}.Release|x86.Build.0 = Release|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Debug|ARM.Build.0 = Debug|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Debug|x64.Build.0 = Debug|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Debug|x86.Build.0 = Debug|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Release|ARM.Build.0 = Release|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Release|x64.ActiveCfg = Release|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Release|x64.Build.0 = Release|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Release|x86.ActiveCfg = Release|Any CPU
+		{9FED4BB7-0F5F-480F-B2B1-0CDBDB0F7434}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

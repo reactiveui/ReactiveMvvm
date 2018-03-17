@@ -1,4 +1,9 @@
-﻿using System;
+﻿// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+
+using System;
+using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveMvvm.Services;
 using PropertyChanged;
@@ -9,7 +14,7 @@ namespace ReactiveMvvm.ViewModels
     [AddINotifyPropertyChangedInterface]
     public sealed class FeedbackViewModel
     {
-        public ReactiveCommand Submit { get; }
+        public ReactiveCommand<Unit, Unit> Submit { get; }
         public bool HasErrors { get; private set; }
         
         public string Title { get; set; }
