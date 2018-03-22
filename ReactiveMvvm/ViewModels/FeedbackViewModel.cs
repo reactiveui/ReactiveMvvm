@@ -16,13 +16,13 @@ namespace ReactiveMvvm.ViewModels
     {
         public ReactiveCommand<Unit, Unit> Submit { get; }
         public bool HasErrors { get; private set; }
-        
+
         public string Title { get; set; }
-        public int TitleLength { get; private set; }
+        public int TitleLength => Title.Length;
         public int TitleLengthMax => 15;
 
         public string Message { get; set; }
-        public int MessageLength { get; private set; }
+        public int MessageLength => Message.Length;
         public int MessageLengthMax => 30;
 
         public int Section { get; set; }
@@ -32,11 +32,6 @@ namespace ReactiveMvvm.ViewModels
         public FeedbackViewModel(IService service)
         {
             Title = Message = string.Empty;
-            this.WhenAnyValue(x => x.Title)
-                .Subscribe(x => TitleLength = x.Length);
-            this.WhenAnyValue(x => x.Message)
-                .Subscribe(x => MessageLength = x.Length);
-
             this.WhenAnyValue(x => x.Idea)
                 .Where(selected => selected)
                 .Subscribe(x => Issue = false);
