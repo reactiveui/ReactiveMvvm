@@ -6,9 +6,10 @@ A minimal but truly cross-platform app created using most popular XAML UI framew
 - <a href="http://reactivex.io/">Reactive Extensions</a> for the <a href="https://github.com/Reactive-Extensions/Rx.NET">.NET platform</a>
 - <a href="https://reactiveui.net/">Reactive UI</a> modern MVVM framework
 - <a href="https://github.com/Fody/PropertyChanged">PropertyChanged.Fody</a> for INotifyPropertyChanged injections
-- <a href="https://github.com/AvaloniaUI/Avalonia">Avalonia UI</a> for Linux and MacOS
-- <a href="https://www.xamarin.com/">Xamarin.Forms</a> for Android and iOS
-- <a href="https://docs.microsoft.com/en-us/windows/uwp/index">Universal Windows Platform</a> for Windows 10
-- <a href="https://msdn.microsoft.com/ru-ru/library/aa970268(v=vs.100).aspx">Windows Presentation Foundation</a>
 - <a href="http://xunit.github.io/">xUnit</a> tests on <a href="https://www.microsoft.com/net/core">.NET Core</a>
 - <a href="https://github.com/fluentassertions/fluentassertions">FluentAssertions</a> to improve tests readability
+- <a href="https://github.com/nsubstitute/NSubstitute">NSubstitute</a> for stubs and mocks
+- <a href="https://docs.microsoft.com/en-us/windows/uwp/index">Universal Windows Platform</a> for Windows 10
+- <a href="https://github.com/AvaloniaUI/Avalonia">Avalonia UI</a> for Linux and MacOS
+- <a href="https://www.xamarin.com/">Xamarin.Forms</a> for Android and iOS
+- <a href="https://msdn.microsoft.com/ru-ru/library/aa970268(v=vs.100).aspx">Windows Presentation Foundation</a>
