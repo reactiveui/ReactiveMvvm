@@ -2,6 +2,10 @@
 
 A minimal but truly cross-platform app created using most popular XAML UI frameworks. The app implements MVVM architecture extended with <a href="https://medium.com/@worldbeater/reactive-mvvm-for-net-platform-175dc69cfc82">reactive programming and assembly weaving</a>. It was built to demonstrate how to avoid writing boilerplate code when working with the INotifyPropertyChanged interface and how to create portable and maintainable ViewModels. Article on Medium: https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b
 
+| <a href="https://docs.microsoft.com/ru-ru/windows/uwp/get-started/universal-application-platform-guide">Universal Windows Platform</a> | <a href="https://docs.microsoft.com/ru-ru/xamarin/xamarin-forms/">Xamarin Forms</a> | <a href="http://avaloniaui.net/">Avalonia UI</a> |
+| --------------- | --------- | -------------- |
+| <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img src="https://cdn-images-1.medium.com/max/900/1*EsqN0dFMCUknKc-4wuIanA.png"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img src="https://cdn-images-1.medium.com/max/1500/1*d1oeBQF9ilZ5h_IIhYktPQ.png" width="800"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img src="https://cdn-images-1.medium.com/max/1200/1*Lz7aENCsgOog1QnYiu8lzA.png"></a> | 
+
 ## Technologies and Tools Used
 - <a href="http://reactivex.io/">Reactive Extensions</a> for the <a href="https://github.com/Reactive-Extensions/Rx.NET">.NET platform</a>
 - <a href="https://reactiveui.net/">Reactive UI</a> modern MVVM framework
