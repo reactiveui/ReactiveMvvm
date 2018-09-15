@@ -12,7 +12,7 @@ namespace ReactiveMvvm.Xamarin.Views
         public FeedbackView()
         {
             InitializeComponent();
-            BindingContext = new FeedbackViewModel(new XamarinSender(this));
+            ViewModel = new FeedbackViewModel(new XamarinSender(this));
             this.WhenActivated(subscriptions =>
             {
                 this.Bind(ViewModel,

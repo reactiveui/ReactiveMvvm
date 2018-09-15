@@ -12,7 +12,7 @@ namespace ReactiveMvvm.Wpf
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new FeedbackViewModel(new WpfSender());
+            ViewModel = new FeedbackViewModel(new WpfSender());
             this.WhenActivated(subscriptions =>
             {
                 this.Bind(ViewModel,

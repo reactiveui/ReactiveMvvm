@@ -12,7 +12,7 @@ namespace ReactiveMvvm.Uwp.Views
         public FeedbackView()
         {
             InitializeComponent();
-            DataContext = new FeedbackViewModel(new UwpSender());
+            ViewModel = new FeedbackViewModel(new UwpSender());
             this.WhenActivated(subscriptions => 
             {
                 this.Bind(ViewModel,
