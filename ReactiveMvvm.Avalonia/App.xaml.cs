@@ -12,7 +12,7 @@ namespace ReactiveMvvm.Avalonia
     {
         public override void Initialize()
         {
-            AvaloniaXamlLoaderPortableXaml.Load(this);
+            AvaloniaXamlLoader.Load(this);
             base.Initialize();
         }
 

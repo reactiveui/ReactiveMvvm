@@ -10,8 +10,8 @@ namespace ReactiveMvvm.Avalonia.Views
     {
         public FeedbackView()
         {
-            AvaloniaXamlLoaderPortableXaml.Load(this);
-            DataContext = new FeedbackViewModel(new AvaloniaService());
+            AvaloniaXamlLoader.Load(this);
+            DataContext = new FeedbackViewModel(new AvaloniaSender());
             this.AttachDevTools();
         }
     }
