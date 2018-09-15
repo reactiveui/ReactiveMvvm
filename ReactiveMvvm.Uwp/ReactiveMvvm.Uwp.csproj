@@ -99,7 +99,7 @@
       <DependentUpon>FeedbackView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\UwpService.cs" />
+    <Compile Include="Services\UwpSender.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

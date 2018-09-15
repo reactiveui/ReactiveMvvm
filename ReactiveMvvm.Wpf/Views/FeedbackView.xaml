@@ -5,28 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Title="MainWindow" Height="350" Width="525">
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisible"/>
-    </Window.Resources>
     <Grid>
         <StackPanel Width="300" VerticalAlignment="Center">
-            <TextBlock Text="Feedback" Margin="0 5"/>
-            <TextBox MaxLength="{Binding TitleLengthMax, Mode=OneWay}" 
-                Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Margin="0 5">
-                <Run Text="{Binding TitleLength, Mode=OneWay}"/>
-                <Run Text="letters used from"/>
-                <Run Text="{Binding TitleLengthMax, Mode=OneTime}"/>
-            </TextBlock>
-            <TextBox MaxLength="{Binding MessageLengthMax, Mode=OneWay}"
-                Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Margin="0 5">
-                <Run Text="{Binding MessageLength, Mode=OneWay}"/>
-                <Run Text="letters used from"/>
-                <Run Text="{Binding MessageLengthMax, Mode=OneTime}"/>
-            </TextBlock>
-            <ComboBox Width="170" HorizontalAlignment="Left"
-                SelectedIndex="{Binding Section, Mode=TwoWay}">
+            <TextBlock Text="Feedback" Margin="0 5" />
+            <TextBox x:Name="TitleTextBox" />
+            <TextBlock x:Name="TitleLengthTextBox" Margin="0 5" />
+            <TextBox x:Name="MessageTextBox" />
+            <TextBlock x:Name="MessageLengthTextBox" Margin="0 5" />
+            <ComboBox  x:Name="SectionComboBox" Width="170" HorizontalAlignment="Left">
                 <ComboBoxItem Content="User Interface"/>
                 <ComboBoxItem Content="Audio"/>
                 <ComboBoxItem Content="Video"/>
@@ -37,13 +23,13 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Column="0" Content="Idea" IsChecked="{Binding Idea, Mode=TwoWay}"/>
-                <CheckBox Grid.Column="1" Content="Issue" IsChecked="{Binding Issue, Mode=TwoWay}"/>
+                <CheckBox x:Name="IdeaCheckBox" Grid.Column="0" Content="Idea" />
+                <CheckBox x:Name="IssueCheckBox" Grid.Column="1" Content="Issue" />
             </Grid>
-            <TextBlock Text="Please, fill in all the form fields." Visibility="{Binding 
-                HasErrors, Converter={StaticResource BoolToVisible}}" Foreground="Red"/>
-            <Button Width="150" HorizontalAlignment="Left" Margin="0 5"
-                    Content="Send Feedback" Command="{Binding Submit}"/>
+            <TextBlock x:Name="HasErrorsTextBox" Foreground="Red"
+                       Text="Please, fill in all the form fields." />
+            <Button x:Name="SubmitButton" Width="150" Margin="0 5"
+                    HorizontalAlignment="Left" Content="Send Feedback"/>
         </StackPanel>
     </Grid>
 </Window>

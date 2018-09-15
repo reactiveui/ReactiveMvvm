@@ -54,7 +54,7 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Services\WpfService.cs" />
+    <Compile Include="Services\WpfSender.cs" />
     <Page Include="Views\FeedbackView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,8 +101,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ReactiveUI">
-      <Version>8.0.0-alpha0117</Version>
+    <PackageReference Include="ReactiveUI.WPF">
+      <Version>8.7.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

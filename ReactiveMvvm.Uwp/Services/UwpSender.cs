@@ -5,7 +5,7 @@ using System;
 
 namespace ReactiveMvvm.Uwp.Services
 {
-    public sealed class UwpService : ISender
+    public sealed class UwpSender : ISender
     {
         public async Task Send(string title, string message, int section, bool bug)
         {

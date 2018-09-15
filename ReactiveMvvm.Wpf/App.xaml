@@ -1,9 +1,5 @@
 ﻿<Application x:Class="ReactiveMvvm.Wpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ReactiveMvvm.Wpf"
              StartupUri="Views/FeedbackView.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
 </Application>
