@@ -19,6 +19,7 @@ namespace ReactiveMvvm.Uwp.Views
                     viewModel => viewModel.Title,
                     view => view.TitleTextBox.Text)
                     .DisposeWith(subscriptions);
+
                 this.OneWayBind(ViewModel,
                     viewModel => viewModel.TitleLengthMax,
                     view => view.TitleTextBox.MaxLength)
@@ -33,6 +34,7 @@ namespace ReactiveMvvm.Uwp.Views
                     viewModel => viewModel.Message,
                     view => view.MessageTextBox.Text)
                     .DisposeWith(subscriptions);
+
                 this.OneWayBind(ViewModel,
                     viewModel => viewModel.MessageLengthMax,
                     view => view.MessageTextBox.MaxLength)
@@ -52,6 +54,7 @@ namespace ReactiveMvvm.Uwp.Views
                     viewModel => viewModel.Idea,
                     view => view.IdeaCheckBox.IsChecked)
                     .DisposeWith(subscriptions);
+
                 this.Bind(ViewModel,
                     viewModel => viewModel.Issue,
                     view => view.IssueCheckBox.IsChecked)
@@ -61,6 +64,7 @@ namespace ReactiveMvvm.Uwp.Views
                     viewModel => viewModel.HasErrors,
                     view => view.HasErrorsTextBox.Visibility)
                     .DisposeWith(subscriptions);
+
                 this.BindCommand(ViewModel,
                     viewModel => viewModel.Submit,
                     view => view.SubmitButton)
@@ -80,5 +84,4 @@ namespace ReactiveMvvm.Uwp.Views
             set => ViewModel = (FeedbackViewModel)value;
         }
     }
-
 }
