@@ -4,33 +4,48 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}"
+    d:DataContext="{d:DesignInstance Type=reactiveMvvm:ReactiveViewModel}"
     mc:Ignorable="d">
     <Grid>
         <StackPanel Width="300" VerticalAlignment="Center">
             <TextBlock Text="Feedback" Style="{StaticResource TitleTextBlockStyle}" />
-            <TextBox x:Name="TitleTextBox" PlaceholderText="Title" />
-            <TextBlock x:Name="TitleLengthTextBox" Margin="0 5"
-                       Style="{StaticResource CaptionTextBlockStyle}" />
-            <TextBox x:Name="MessageTextBox" PlaceholderText="Message" />
-            <TextBlock x:Name="MessageLengthTextBox" Margin="0 5"
-                       Style="{StaticResource CaptionTextBlockStyle}" />
-            <ComboBox x:Name="SectionComboBox" Width="170">
-                <ComboBoxItem Content="User Interface" />
-                <ComboBoxItem Content="Audio" />
-                <ComboBoxItem Content="Video" />
-                <ComboBoxItem Content="Voice" />
+            <TextBox Text="{x:Bind ViewModel.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="{x:Bind ViewModel.TitleLengthMax}" 
+                     PlaceholderText="Title" />
+            <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Margin="0 5">
+                <Run Text="{x:Bind ViewModel.TitleLength, Mode=OneWay}"/>
+                <Run Text="letters used from"/>
+                <Run Text="{x:Bind ViewModel.TitleLengthMax}"/>
+            </TextBlock>
+            <TextBox Text="{x:Bind ViewModel.Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="{Binding MessageLengthMax}"
+                     PlaceholderText="Message" />
+            <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Margin="0 5">
+                <Run Text="{x:Bind ViewModel.MessageLength, Mode=OneWay}"/>
+                <Run Text="letters used from"/>
+                <Run Text="{x:Bind ViewModel.MessageLengthMax}"/>
+            </TextBlock>
+            <ComboBox Width="170" SelectedIndex="{x:Bind ViewModel.Section, Mode=TwoWay}">
+                <ComboBoxItem Content="User Interface"/>
+                <ComboBoxItem Content="Audio"/>
+                <ComboBoxItem Content="Video"/>
+                <ComboBoxItem Content="Voice"/>
             </ComboBox>
             <Grid Margin="0 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <CheckBox x:Name="IdeaCheckBox" Grid.Column="0" Content="Idea" />
-                <CheckBox x:Name="IssueCheckBox" Grid.Column="1" Content="Issue" />
+                <CheckBox IsChecked="{x:Bind ViewModel.Idea, Mode=TwoWay}"
+                          Grid.Column="0" Content="Idea" />
+                <CheckBox IsChecked="{x:Bind ViewModel.Issue, Mode=TwoWay}"
+                          Grid.Column="1" Content="Issue" />
             </Grid>
-            <TextBlock x:Name="HasErrorsTextBox" Text="Please, fill in all the form fields." 
-                       Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-            <Button x:Name="SubmitButton" Width="150" Content="Send Feedback" Margin="0 5" />
+            <TextBlock Text="Please, fill in all the form fields." 
+                       Visibility="{x:Bind (Visibility)ViewModel.HasErrors, Mode=OneWay}" 
+                       Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+            <Button Width="150" Content="Send Feedback" Margin="0 5"
+                    Command="{x:Bind ViewModel.Submit}" />
         </StackPanel>
     </Grid>
 </Page>
