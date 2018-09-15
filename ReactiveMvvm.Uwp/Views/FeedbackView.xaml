@@ -1,52 +1,36 @@
-﻿<Page
-    x:Class="ReactiveMvvm.Uwp.Views.FeedbackView"
+﻿<Page x:Class="ReactiveMvvm.Uwp.Views.FeedbackView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DataContext="{d:DesignInstance Type=reactiveMvvm:ReactiveViewModel}"
     Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}"
-    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
-    xmlns:reactiveMvvm="using:ReactiveMvvm.ViewModels"
     mc:Ignorable="d">
-    <Page.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisible"/>
-    </Page.Resources>
     <Grid>
         <StackPanel Width="300" VerticalAlignment="Center">
-            <TextBlock Text="Feedback" Style="{StaticResource TitleTextBlockStyle}" Margin="0 5"/>
-            <TextBox PlaceholderText="Title" MaxLength="{Binding TitleLengthMax}" 
-                Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Margin="0 5">
-                <Run Text="{Binding TitleLength, Mode=OneWay}"/>
-                <Run Text="letters used from"/>
-                <Run Text="{Binding TitleLengthMax}"/>
-            </TextBlock>
-            <TextBox PlaceholderText="Message" MaxLength="{Binding MessageLengthMax}"
-                Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Margin="0 5">
-                <Run Text="{Binding MessageLength, Mode=OneWay}"/>
-                <Run Text="letters used from"/>
-                <Run Text="{Binding MessageLengthMax}"/>
-            </TextBlock>
-            <ComboBox Width="170" SelectedIndex="{Binding Section, Mode=TwoWay}">
-                <ComboBoxItem Content="User Interface"/>
-                <ComboBoxItem Content="Audio"/>
-                <ComboBoxItem Content="Video"/>
-                <ComboBoxItem Content="Voice"/>
+            <TextBlock Text="Feedback" Style="{StaticResource TitleTextBlockStyle}" />
+            <TextBox x:Name="TitleTextBox" PlaceholderText="Title" />
+            <TextBlock x:Name="TitleLengthTextBox" Margin="0 5"
+                       Style="{StaticResource CaptionTextBlockStyle}" />
+            <TextBox x:Name="MessageTextBox" PlaceholderText="Message" />
+            <TextBlock x:Name="MessageLengthTextBox" Margin="0 5"
+                       Style="{StaticResource CaptionTextBlockStyle}" />
+            <ComboBox x:Name="SectionComboBox" Width="170">
+                <ComboBoxItem Content="User Interface" />
+                <ComboBoxItem Content="Audio" />
+                <ComboBoxItem Content="Video" />
+                <ComboBoxItem Content="Voice" />
             </ComboBox>
             <Grid Margin="0 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Column="0" Content="Idea" IsChecked="{Binding Idea, Mode=TwoWay}"/>
-                <CheckBox Grid.Column="1" Content="Issue" IsChecked="{Binding Issue, Mode=TwoWay}"/>
+                <CheckBox x:Name="IdeaCheckBox" Grid.Column="0" Content="Idea" />
+                <CheckBox x:Name="IssueCheckBox" Grid.Column="1" Content="Issue" />
             </Grid>
-            <TextBlock Text="Please, fill in all the form fields." Visibility="{Binding 
-                HasErrors, Converter={StaticResource BoolToVisible}}" Foreground="{
-                ThemeResource SystemControlForegroundAccentBrush}"/>
-            <Button Width="150" Content="Send Feedback" Command="{Binding Submit}" Margin="0 5"/>
+            <TextBlock x:Name="HasErrorsTextBox" Text="Please, fill in all the form fields." 
+                       Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+            <Button x:Name="SubmitButton" Width="150" Content="Send Feedback" Margin="0 5" />
         </StackPanel>
     </Grid>
 </Page>

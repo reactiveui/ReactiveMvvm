@@ -1,8 +1,4 @@
-﻿// ReSharper disable UnusedMember.Global
-// ReSharper disable UnusedAutoPropertyAccessor.Global
-// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
-
-using System;
+﻿using System;
 using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveMvvm.Services;
@@ -29,7 +25,7 @@ namespace ReactiveMvvm.ViewModels
         public bool Issue { get; set; }
         public bool Idea { get; set; }
 
-        public FeedbackViewModel(IService service)
+        public FeedbackViewModel(ISender sender)
         {
             this.WhenAnyValue(x => x.Idea)
                 .Where(selected => selected)
@@ -48,8 +44,9 @@ namespace ReactiveMvvm.ViewModels
                     (idea || issue) && section >= 0);
 
             valid.Subscribe(x => HasErrors = !x);
-            Submit = ReactiveCommand.Create(
-                () => service.Send(Title, Message), valid);
+            Submit = ReactiveCommand.CreateFromTask(
+                () => sender.Send(Title, Message, Section, Issue), 
+                valid);
         } 
     }
 }

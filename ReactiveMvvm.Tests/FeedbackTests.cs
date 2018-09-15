@@ -12,7 +12,7 @@ namespace ReactiveMvvm.Tests
         [Fact] 
         public void ShouldDisableCommandWhenFeedbackIsInvalid()
         {
-            var service = Substitute.For<IService>();
+            var service = Substitute.For<ISender>();
             var feedback = new FeedbackViewModel(service);
             feedback.HasErrors.Should().BeTrue();
         }
@@ -20,7 +20,7 @@ namespace ReactiveMvvm.Tests
         [Fact]
         public void ShouldEnableCommandWhenFeedbackIsValid()
         {
-            var service = Substitute.For<IService>();
+            var service = Substitute.For<ISender>();
             var feedback = new FeedbackViewModel(service)
             {
                 Message = "Message!",
@@ -34,16 +34,16 @@ namespace ReactiveMvvm.Tests
         [Fact]
         public void ShouldSendFeedbackWhenSubmitIsPressed()
         {
-            var service = Substitute.For<IService>();
+            var service = Substitute.For<ISender>();
             var feedback = new FeedbackViewModel(service)
             {
                 Message = "Message!",
                 Title = "Title!",
                 Section = 0,
-                Idea = true
+                Issue = true
             };
             feedback.Submit.Execute().Subscribe();
-            service.Received().Send("Title!", "Message!");
+            service.Received().Send("Title!", "Message!", 0, true);
         }
     }
 }

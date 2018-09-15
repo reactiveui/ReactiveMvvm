@@ -1,11 +1,16 @@
 ﻿using ReactiveMvvm.Services;
 using Windows.UI.Popups;
+using System.Threading.Tasks;
 using System;
 
 namespace ReactiveMvvm.Uwp.Services
 {
-    public sealed class UwpService : IService
+    public sealed class UwpService : ISender
     {
-        public async void Send(string h, string m) => await new MessageDialog(h, m).ShowAsync();
+        public async Task Send(string title, string message, int section, bool bug)
+        {
+            var content = $"{message}, Bug: {bug}, Section: {section}";
+            await new MessageDialog(content, title).ShowAsync();
+        }
     }
 }
