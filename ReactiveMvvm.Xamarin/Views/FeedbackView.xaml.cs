@@ -10,8 +10,8 @@ namespace ReactiveMvvm.Xamarin.Views
     public partial class FeedbackView : ContentPage, IViewFor<FeedbackViewModel>
     {
         public FeedbackView()
-	    {
-	        InitializeComponent();
+        {
+            InitializeComponent();
             BindingContext = new FeedbackViewModel(new XamarinSender(this));
             this.WhenActivated(subscriptions =>
             {
