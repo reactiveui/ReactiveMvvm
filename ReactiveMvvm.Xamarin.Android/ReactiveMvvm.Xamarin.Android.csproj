@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ReactiveUI.AndroidSupport">
-      <Version>8.0.0-alpha0117</Version>
+      <Version>8.7.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.280555" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />

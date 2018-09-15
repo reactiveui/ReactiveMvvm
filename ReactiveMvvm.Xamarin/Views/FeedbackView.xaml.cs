@@ -1,68 +1,58 @@
 ﻿using ReactiveMvvm.ViewModels;
-using ReactiveMvvm.Wpf.Services;
-using System.Reactive.Linq;
+using ReactiveMvvm.Xamarin.Services;
 using System.Reactive.Disposables;
-using System.Windows;
+using System.Reactive.Linq;
+using Xamarin.Forms;
 using ReactiveUI;
 
-namespace ReactiveMvvm.Wpf
+namespace ReactiveMvvm.Xamarin.Views
 {
-    public partial class MainWindow : Window, IViewFor<FeedbackViewModel>
+    public partial class FeedbackView : ContentPage, IViewFor<FeedbackViewModel>
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            DataContext = new FeedbackViewModel(new WpfSender());
+        public FeedbackView()
+	    {
+	        InitializeComponent();
+            BindingContext = new FeedbackViewModel(new XamarinSender(this));
             this.WhenActivated(subscriptions =>
             {
                 this.Bind(ViewModel,
                     viewModel => viewModel.Title,
-                    view => view.TitleTextBox.Text)
-                    .DisposeWith(subscriptions);
-
-                this.OneWayBind(ViewModel,
-                    viewModel => viewModel.TitleLengthMax,
-                    view => view.TitleTextBox.MaxLength)
+                    view => view.TitleEntry.Text)
                     .DisposeWith(subscriptions);
 
                 ViewModel.WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
-                    .BindTo(this, view => view.TitleLengthTextBox.Text)
+                    .BindTo(this, view => view.TitleLengthEntry.Text)
                     .DisposeWith(subscriptions);
 
                 this.Bind(ViewModel,
                     viewModel => viewModel.Message,
-                    view => view.MessageTextBox.Text)
-                    .DisposeWith(subscriptions);
-
-                this.OneWayBind(ViewModel,
-                    viewModel => viewModel.MessageLengthMax,
-                    view => view.MessageTextBox.MaxLength)
+                    view => view.MessageEntry.Text)
                     .DisposeWith(subscriptions);
 
                 ViewModel.WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
-                    .BindTo(this, view => view.MessageLengthTextBox.Text)
+                    .BindTo(this, view => view.MessageLengthEntry.Text)
                     .DisposeWith(subscriptions);
 
                 this.Bind(ViewModel,
                     viewModel => viewModel.Section,
-                    view => view.SectionComboBox.SelectedIndex)
+                    view => view.SectionPicker.SelectedIndex)
                     .DisposeWith(subscriptions);
 
                 this.Bind(ViewModel,
                     viewModel => viewModel.Idea,
-                    view => view.IdeaCheckBox.IsChecked)
+                    view => view.IdeaSwitch.IsToggled)
                     .DisposeWith(subscriptions);
 
                 this.Bind(ViewModel,
                     viewModel => viewModel.Issue,
-                    view => view.IssueCheckBox.IsChecked)
+                    view => view.IssueSwitch.IsToggled)
                     .DisposeWith(subscriptions);
 
                 this.OneWayBind(ViewModel,
                     viewModel => viewModel.HasErrors,
-                    view => view.HasErrorsTextBox.Visibility)
+                    view => view.HasErrorsLabel.IsVisible)
                     .DisposeWith(subscriptions);
 
                 this.BindCommand(ViewModel,
@@ -74,8 +64,8 @@ namespace ReactiveMvvm.Wpf
 
         public FeedbackViewModel ViewModel
         {
-            get => (FeedbackViewModel)DataContext;
-            set => DataContext = value;
+            get => (FeedbackViewModel)BindingContext;
+            set => BindingContext = value;
         }
 
         object IViewFor.ViewModel

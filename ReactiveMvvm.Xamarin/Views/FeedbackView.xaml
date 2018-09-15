@@ -1,0 +1,32 @@
+﻿<ContentPage 
+    x:Class="ReactiveMvvm.Xamarin.Views.FeedbackView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Entry x:Name="TitleEntry" Placeholder="Title" />
+            <Entry x:Name="TitleLengthEntry" />
+            <Entry x:Name="MessageEntry" Placeholder="Message" />
+            <Entry x:Name="MessageLengthEntry" />
+            <Picker x:Name="SectionPicker">
+                <Picker.Items>
+                    <x:String>User Interface</x:String>
+                    <x:String>Audio</x:String>
+                    <x:String>Video</x:String>
+                    <x:String>Voice</x:String>
+                </Picker.Items>
+            </Picker>
+            <StackLayout Orientation="Horizontal">
+                <Switch x:Name="IdeaSwitch" />
+                <Label Text="Idea" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Switch x:Name="IssueSwitch" />
+                <Label Text="Issue" />
+            </StackLayout>
+            <Label Text="Please, fill in all the form fields." 
+                   x:Name="HasErrorsLabel" TextColor="Red" />
+            <Button x:Name="SubmitButton" Text="Send Feedback" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
