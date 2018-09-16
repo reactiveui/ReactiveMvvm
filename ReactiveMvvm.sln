@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactiveMvvm.Tests", "React
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.WinForms", "ReactiveMvvm.WinForms\ReactiveMvvm.WinForms.csproj", "{1751EFC7-79EC-43E8-8CF4-443152A0A64C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.Xamarin.Tizen", "ReactiveMvvm.Xamarin.Tizen\ReactiveMvvm.Xamarin.Tizen\ReactiveMvvm.Xamarin.Tizen.csproj", "{BE19EE60-B130-4C6D-9020-7B9CD11BF38C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.Xamarin.Tizen", "ReactiveMvvm.Xamarin.Tizen\ReactiveMvvm.Xamarin.Tizen.csproj", "{BE19EE60-B130-4C6D-9020-7B9CD11BF38C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
