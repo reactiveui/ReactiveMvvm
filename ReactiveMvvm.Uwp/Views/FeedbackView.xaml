@@ -18,7 +18,7 @@
                 <Run Text="{x:Bind ViewModel.TitleLengthMax}"/>
             </TextBlock>
             <TextBox Text="{x:Bind ViewModel.Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     MaxLength="{x:Bind MessageLengthMax}"
+                     MaxLength="{x:Bind ViewModel.MessageLengthMax}"
                      PlaceholderText="Message" />
             <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Margin="0 5">
                 <Run Text="{x:Bind ViewModel.MessageLength, Mode=OneWay}"/>
