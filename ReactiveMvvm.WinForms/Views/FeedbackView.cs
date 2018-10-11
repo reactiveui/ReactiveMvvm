@@ -12,10 +12,6 @@ namespace ReactiveMvvm.WinForms
         public FeedbackView()
         {
             InitializeComponent();
-            SectionComboBox.Items.Add("User Interface");
-            SectionComboBox.Items.Add("Audio");
-            SectionComboBox.Items.Add("Video");
-
             ViewModel = new FeedbackViewModel(new WinFormsSender());
             this.WhenActivated(subscriptions =>
             {
@@ -28,8 +24,9 @@ namespace ReactiveMvvm.WinForms
                     viewModel => viewModel.TitleLengthMax,
                     view => view.TitleTextBox.MaxLength)
                     .DisposeWith(subscriptions);
-
-                ViewModel.WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax)
+                
+                this.ViewModel
+                    .WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
                     .BindTo(this, view => view.TitleLengthLabel.Text)
                     .DisposeWith(subscriptions);
@@ -44,7 +41,8 @@ namespace ReactiveMvvm.WinForms
                     view => view.MessageTextBox.MaxLength)
                     .DisposeWith(subscriptions);
 
-                ViewModel.WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax)
+                this.ViewModel
+                    .WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
                     .BindTo(this, view => view.MessageLengthLabel.Text)
                     .DisposeWith(subscriptions);

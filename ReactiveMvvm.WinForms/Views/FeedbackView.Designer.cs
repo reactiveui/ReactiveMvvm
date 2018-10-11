@@ -94,6 +94,10 @@
             // 
             this.SectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SectionComboBox.FormattingEnabled = true;
+            this.SectionComboBox.Items.AddRange(new object[] {
+            "User Interface",
+            "Audio",
+            "Video"});
             this.SectionComboBox.Location = new System.Drawing.Point(112, 177);
             this.SectionComboBox.Name = "SectionComboBox";
             this.SectionComboBox.Size = new System.Drawing.Size(169, 21);
@@ -117,7 +121,7 @@
             this.HasErrorsTextBox.TabIndex = 9;
             this.HasErrorsTextBox.Text = "Please, fill in all the form fields.";
             // 
-            // Form1
+            // FeedbackView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -132,7 +136,7 @@
             this.Controls.Add(this.IdeaCheckBox);
             this.Controls.Add(this.IssueCheckBox);
             this.Controls.Add(this.SubmitButton);
-            this.Name = "Form1";
+            this.Name = "FeedbackView";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

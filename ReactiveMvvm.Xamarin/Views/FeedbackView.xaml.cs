@@ -20,7 +20,8 @@ namespace ReactiveMvvm.Xamarin.Views
                     view => view.TitleEntry.Text)
                     .DisposeWith(subscriptions);
 
-                ViewModel.WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax)
+                this.ViewModel
+                    .WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
                     .BindTo(this, view => view.TitleLengthEntry.Text)
                     .DisposeWith(subscriptions);
@@ -30,7 +31,8 @@ namespace ReactiveMvvm.Xamarin.Views
                     view => view.MessageEntry.Text)
                     .DisposeWith(subscriptions);
 
-                ViewModel.WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax)
+                this.ViewModel
+                    .WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
                     .BindTo(this, view => view.MessageLengthEntry.Text)
                     .DisposeWith(subscriptions);

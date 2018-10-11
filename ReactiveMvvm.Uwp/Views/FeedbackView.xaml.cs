@@ -11,6 +11,10 @@ namespace ReactiveMvvm.Uwp.Views
         {
             InitializeComponent();
             ViewModel = new FeedbackViewModel(new UwpSender());
+            this.WhenActivated(disposables =>
+            {
+                // Handle interactions and complex scenarios...
+            });
         }
 
         public FeedbackViewModel ViewModel
