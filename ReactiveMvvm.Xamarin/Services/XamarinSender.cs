@@ -1,4 +1,4 @@
-﻿using ReactiveMvvm.Services;
+﻿using ReactiveMvvm.Interfaces;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 

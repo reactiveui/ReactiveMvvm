@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ReactiveMvvm.Services
+namespace ReactiveMvvm.Interfaces
 {
     public interface ISender
     {

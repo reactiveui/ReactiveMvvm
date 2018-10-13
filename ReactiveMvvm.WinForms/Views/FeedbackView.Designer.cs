@@ -27,6 +27,7 @@
             this.SectionComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.HasErrorsTextBox = new System.Windows.Forms.Label();
+            this.TimeElapsedLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SubmitButton
@@ -106,7 +107,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(109, 80);
+            this.label3.Location = new System.Drawing.Point(109, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 8;
@@ -121,11 +122,21 @@
             this.HasErrorsTextBox.TabIndex = 9;
             this.HasErrorsTextBox.Text = "Please, fill in all the form fields.";
             // 
+            // TimeElapsedLabel
+            // 
+            this.TimeElapsedLabel.AutoSize = true;
+            this.TimeElapsedLabel.Location = new System.Drawing.Point(109, 83);
+            this.TimeElapsedLabel.Name = "TimeElapsedLabel";
+            this.TimeElapsedLabel.Size = new System.Drawing.Size(35, 13);
+            this.TimeElapsedLabel.TabIndex = 10;
+            this.TimeElapsedLabel.Text = "label1";
+            // 
             // FeedbackView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(392, 369);
+            this.Controls.Add(this.TimeElapsedLabel);
             this.Controls.Add(this.HasErrorsTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.SectionComboBox);
@@ -155,6 +166,7 @@
         private System.Windows.Forms.ComboBox SectionComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label HasErrorsTextBox;
+        private System.Windows.Forms.Label TimeElapsedLabel;
     }
 }
 

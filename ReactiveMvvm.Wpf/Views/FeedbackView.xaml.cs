@@ -1,7 +1,8 @@
 ﻿using ReactiveMvvm.ViewModels;
 using ReactiveMvvm.Wpf.Services;
-using System.Reactive.Linq;
+using ReactiveMvvm.Services;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Windows;
 using ReactiveUI;
 
@@ -12,7 +13,7 @@ namespace ReactiveMvvm.Wpf
         public MainWindow()
         {
             InitializeComponent();
-            ViewModel = new FeedbackViewModel(new WpfSender());
+            ViewModel = new FeedbackViewModel(new WpfSender(), new Clock());
             this.WhenActivated(subscriptions =>
             {
                 this.Bind(ViewModel,
@@ -70,6 +71,12 @@ namespace ReactiveMvvm.Wpf
                 this.BindCommand(ViewModel,
                     viewModel => viewModel.Submit,
                     view => view.SubmitButton)
+                    .DisposeWith(subscriptions);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Elapsed,
+                    view => view.TimeTextBlock.Text,
+                    time => $"Time elapsed: {time}")
                     .DisposeWith(subscriptions);
             });
         }

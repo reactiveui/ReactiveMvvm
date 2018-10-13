@@ -1,5 +1,6 @@
 ﻿using ReactiveMvvm.ViewModels;
 using ReactiveMvvm.Xamarin.Services;
+using ReactiveMvvm.Services;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Xamarin.Forms;
@@ -12,7 +13,7 @@ namespace ReactiveMvvm.Xamarin.Views
         public FeedbackView()
         {
             InitializeComponent();
-            ViewModel = new FeedbackViewModel(new XamarinSender(this));
+            ViewModel = new FeedbackViewModel(new XamarinSender(this), new Clock());
             this.WhenActivated(subscriptions =>
             {
                 this.Bind(ViewModel,
@@ -60,6 +61,12 @@ namespace ReactiveMvvm.Xamarin.Views
                 this.BindCommand(ViewModel,
                     viewModel => viewModel.Submit,
                     view => view.SubmitButton)
+                    .DisposeWith(subscriptions);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Elapsed,
+                    view => view.TimeElapsedLabel.Text,
+                    time => $"Time elapsed: {time}")
                     .DisposeWith(subscriptions);
             });
         }

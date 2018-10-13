@@ -1,9 +1,10 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Diagnostics;
 using Avalonia.Logging.Serilog;
 using Avalonia.Markup.Xaml;
+using ReactiveMvvm.Avalonia.Services;
 using ReactiveMvvm.Avalonia.Views;
+using ReactiveMvvm.Services;
+using ReactiveMvvm.ViewModels;
 using Serilog;
 
 namespace ReactiveMvvm.Avalonia
@@ -19,19 +20,15 @@ namespace ReactiveMvvm.Avalonia
         private static void Main(string[] args)
         {
             InitializeLogging();
-            AppBuilder
-                .Configure<App>()
-                .UseReactiveUI()
-                .UsePlatformDetect()
-                .Start<FeedbackView>();
+            BuildAvaloniaApp().Start<FeedbackView>(() =>
+                new FeedbackViewModel(new AvaloniaSender(), new Clock())
+            );
         }
 
-        public static void AttachDevTools(Window window)
-        {
-#if DEBUG
-            DevTools.Attach(window);
-#endif
-        }
+        public static AppBuilder BuildAvaloniaApp() =>
+            AppBuilder.Configure<App>()
+                .UseReactiveUI()
+                .UsePlatformDetect();
 
         private static void InitializeLogging()
         {
@@ -41,16 +38,6 @@ namespace ReactiveMvvm.Avalonia
                 .WriteTo.Trace(outputTemplate: "{Area}: {Message}")
                 .CreateLogger());
 #endif
-        }
-
-        public static AppBuilder BuildAvaloniaApp()
-        {
-            // Build Avalonia application to make 
-            // visual designer work.
-            return AppBuilder
-                .Configure<App>()
-                .UseReactiveUI()
-                .UsePlatformDetect();
         }
     }
 }

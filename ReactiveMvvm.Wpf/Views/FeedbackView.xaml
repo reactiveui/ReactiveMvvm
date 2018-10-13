@@ -7,7 +7,8 @@
     mc:Ignorable="d" Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel Width="300" VerticalAlignment="Center">
-            <TextBlock Text="Feedback" Margin="0 5" />
+            <TextBlock Text="Feedback" />
+            <TextBlock x:Name="TimeTextBlock" Margin="0 5" />
             <TextBox x:Name="TitleTextBox" />
             <TextBlock x:Name="TitleLengthTextBox" Margin="0 5" />
             <TextBox x:Name="MessageTextBox" />

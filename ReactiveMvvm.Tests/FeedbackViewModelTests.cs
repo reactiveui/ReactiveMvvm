@@ -1,5 +1,5 @@
-using ReactiveMvvm.Services;
 using ReactiveMvvm.ViewModels;
+using ReactiveMvvm.Interfaces;
 using FluentAssertions;
 using NSubstitute;
 using System;
@@ -7,21 +7,22 @@ using Xunit;
 
 namespace ReactiveMvvm.Tests
 {
-    public sealed class FeedbackTests
+    public sealed class FeedbackViewModelTests
     {
+        private readonly ISender sender = Substitute.For<ISender>();
+        private readonly IClock clock = Substitute.For<IClock>();
+
         [Fact] 
         public void ShouldDisableCommandWhenFeedbackIsInvalid()
         {
-            var service = Substitute.For<ISender>();
-            var feedback = new FeedbackViewModel(service);
+            var feedback = new FeedbackViewModel(sender, clock);
             feedback.HasErrors.Should().BeTrue();
         }
 
         [Fact]
         public void ShouldEnableCommandWhenFeedbackIsValid()
         {
-            var service = Substitute.For<ISender>();
-            var feedback = new FeedbackViewModel(service)
+            var feedback = new FeedbackViewModel(sender, clock)
             {
                 Message = "Message!",
                 Title = "Title!",
@@ -34,8 +35,7 @@ namespace ReactiveMvvm.Tests
         [Fact]
         public void ShouldSendFeedbackWhenSubmitIsPressed()
         {
-            var service = Substitute.For<ISender>();
-            var feedback = new FeedbackViewModel(service)
+            var feedback = new FeedbackViewModel(sender, clock)
             {
                 Message = "Message!",
                 Title = "Title!",
@@ -43,7 +43,7 @@ namespace ReactiveMvvm.Tests
                 Issue = true
             };
             feedback.Submit.Execute().Subscribe();
-            service.Received().Send("Title!", "Message!", 0, true);
+            sender.Received().Send("Title!", "Message!", 0, true);
         }
     }
 }

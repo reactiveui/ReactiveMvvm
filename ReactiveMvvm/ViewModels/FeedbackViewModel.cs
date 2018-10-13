@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Reactive;
 using System.Reactive.Linq;
-using ReactiveMvvm.Services;
+using System.Reactive.Disposables;
+using ReactiveMvvm.Interfaces;
 using PropertyChanged;
 using ReactiveUI;
 
 namespace ReactiveMvvm.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public sealed class FeedbackViewModel
+    public sealed class FeedbackViewModel : ISupportsActivation
     {
         public ReactiveCommand<Unit, Unit> Submit { get; }
+        public ViewModelActivator Activator { get; }
         public bool HasErrors { get; private set; }
+        public string Elapsed { get; private set; }
 
         public string Title { get; set; } = string.Empty;
         public int TitleLength => Title.Length;
@@ -25,7 +28,7 @@ namespace ReactiveMvvm.ViewModels
         public bool Issue { get; set; }
         public bool Idea { get; set; }
 
-        public FeedbackViewModel(ISender sender)
+        public FeedbackViewModel(ISender sender, IClock clock)
         {
             this.WhenAnyValue(x => x.Idea)
                 .Where(selected => selected)
@@ -43,10 +46,19 @@ namespace ReactiveMvvm.ViewModels
                     !string.IsNullOrWhiteSpace(title) &&
                     (idea || issue) && section >= 0);
 
-            valid.Subscribe(x => HasErrors = !x);
+            valid.Subscribe(hasErrors => HasErrors = !hasErrors);
             Submit = ReactiveCommand.CreateFromTask(
                 () => sender.Send(Title, Message, Section, Issue), 
                 valid);
+
+            Activator = new ViewModelActivator();
+            this.WhenActivated(disposables => 
+            {
+                clock.Tick.Select(second => $"{second}s")
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Subscribe(elapsed => Elapsed = elapsed)
+                    .DisposeWith(disposables);
+            });
         } 
     }
 }

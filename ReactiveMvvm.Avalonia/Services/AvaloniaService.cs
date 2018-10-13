@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using ReactiveMvvm.Services;
+using ReactiveMvvm.Interfaces;
 
 namespace ReactiveMvvm.Avalonia.Services
 {

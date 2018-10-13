@@ -2,6 +2,10 @@
   <Grid>
     <StackPanel Width="300" VerticalAlignment="Center">
       <TextBlock Text="Feedback" Margin="0 5"/>
+      <StackPanel Orientation="Horizontal" Margin="0 5">
+        <TextBlock Text="Time passed: "/>
+        <TextBlock Text="{Binding Elapsed, Mode=OneWay}"/>
+      </StackPanel>
       <TextBox Text="{Binding Title, Mode=TwoWay}"/>
       <StackPanel Orientation="Horizontal" Margin="0 5">
         <TextBlock Text="{Binding TitleLength, Mode=OneWay}"/>  

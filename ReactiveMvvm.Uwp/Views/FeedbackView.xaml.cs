@@ -1,6 +1,7 @@
 ﻿using ReactiveMvvm.ViewModels;
 using Windows.UI.Xaml.Controls;
 using ReactiveMvvm.Uwp.Services;
+using ReactiveMvvm.Services;
 using ReactiveUI;
 
 namespace ReactiveMvvm.Uwp.Views
@@ -10,7 +11,7 @@ namespace ReactiveMvvm.Uwp.Views
         public FeedbackView()
         {
             InitializeComponent();
-            ViewModel = new FeedbackViewModel(new UwpSender());
+            ViewModel = new FeedbackViewModel(new UwpSender(), new Clock());
             this.WhenActivated(disposables =>
             {
                 // Handle interactions and complex scenarios...

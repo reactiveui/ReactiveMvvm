@@ -9,6 +9,10 @@
     <Grid>
         <StackPanel Width="300" VerticalAlignment="Center">
             <TextBlock Text="Feedback" Style="{StaticResource TitleTextBlockStyle}" />
+            <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Margin="0 5">
+                <Run Text="Time elapsed:"/>
+                <Run Text="{x:Bind ViewModel.Elapsed, Mode=OneWay}"/>
+            </TextBlock>
             <TextBox Text="{x:Bind ViewModel.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      MaxLength="{x:Bind ViewModel.TitleLengthMax}" 
                      PlaceholderText="Title" />

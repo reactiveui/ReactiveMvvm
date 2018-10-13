@@ -1,5 +1,5 @@
-﻿using ReactiveMvvm.Services;
-using Windows.UI.Popups;
+﻿using Windows.UI.Popups;
+using ReactiveMvvm.Interfaces;
 using System.Threading.Tasks;
 using System;
 
