@@ -1,7 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.Logging.Serilog;
 using Avalonia.Markup.Xaml;
+using ReactiveMvvm.Avalonia.Services;
 using ReactiveMvvm.Avalonia.Views;
+using ReactiveMvvm.Services;
+using ReactiveMvvm.ViewModels;
 using Serilog;
 
 namespace ReactiveMvvm.Avalonia
@@ -17,7 +20,9 @@ namespace ReactiveMvvm.Avalonia
         private static void Main(string[] args)
         {
             InitializeLogging();
-            BuildAvaloniaApp().Start<FeedbackView>();
+            BuildAvaloniaApp().Start<FeedbackView>(
+                () => new FeedbackViewModel(new AvaloniaSender(), new Clock())
+            );
         }
 
         public static AppBuilder BuildAvaloniaApp() =>

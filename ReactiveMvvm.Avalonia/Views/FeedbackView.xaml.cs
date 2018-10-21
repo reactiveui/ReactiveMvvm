@@ -1,7 +1,6 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using ReactiveMvvm.Avalonia.Services;
-using ReactiveMvvm.Services;
 using ReactiveMvvm.ViewModels;
 using ReactiveUI;
 
@@ -9,9 +8,12 @@ namespace ReactiveMvvm.Avalonia.Views
 {
     public class FeedbackView : Window, IViewFor<FeedbackViewModel>
     {
+        public static readonly AvaloniaProperty<FeedbackViewModel> ViewModelProperty =
+            AvaloniaProperty.Register<FeedbackView, FeedbackViewModel>(nameof(ViewModel));
+
         public FeedbackView()
         {
-            ViewModel = new FeedbackViewModel(new AvaloniaSender(), new Clock());
+            DataContextChanged += (sender, args) => ViewModel = DataContext as FeedbackViewModel;
             this.WhenActivated(disposables =>
             {
                 // Handle interactions and complex scenarios...
@@ -22,8 +24,8 @@ namespace ReactiveMvvm.Avalonia.Views
 
         public FeedbackViewModel ViewModel
         {
-            get => (FeedbackViewModel)DataContext;
-            set => DataContext = value;
+            get => GetValue(ViewModelProperty);
+            set => SetValue(ViewModelProperty, value);
         }
 
         object IViewFor.ViewModel
