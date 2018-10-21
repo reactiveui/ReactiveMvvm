@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using ReactiveMvvm.Avalonia.Services;
+using ReactiveMvvm.Services;
 using ReactiveMvvm.ViewModels;
 using ReactiveUI;
 
@@ -9,11 +11,13 @@ namespace ReactiveMvvm.Avalonia.Views
     {
         public FeedbackView()
         {
-            AvaloniaXamlLoader.Load(this);
+            ViewModel = new FeedbackViewModel(new AvaloniaSender(), new Clock());
             this.WhenActivated(disposables =>
             {
                 // Handle interactions and complex scenarios...
             });
+
+            AvaloniaXamlLoader.Load(this);
         }
 
         public FeedbackViewModel ViewModel

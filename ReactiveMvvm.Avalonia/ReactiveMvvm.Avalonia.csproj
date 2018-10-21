@@ -12,9 +12,9 @@
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.6.2-build6440-beta" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.6.2-build6440-beta" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="0.6.2-build6440-beta" />
+        <PackageReference Include="Avalonia" Version="0.6.2-build6445-beta" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.6.2-build6445-beta" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="0.6.2-build6445-beta" />
         <PackageReference Include="System.Reactive.Compatibility" Version="4.1.0" />
     </ItemGroup>
     <ItemGroup>
