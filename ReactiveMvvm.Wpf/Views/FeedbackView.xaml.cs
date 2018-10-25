@@ -10,6 +10,9 @@ namespace ReactiveMvvm.Wpf
 {
     public partial class MainWindow : Window, IViewFor<FeedbackViewModel>
     {
+        public static readonly DependencyProperty ViewModelProperty = DependencyProperty
+            .Register(nameof(ViewModel), typeof(FeedbackViewModel), typeof(MainWindow));
+
         public MainWindow()
         {
             InitializeComponent();
@@ -83,8 +86,8 @@ namespace ReactiveMvvm.Wpf
 
         public FeedbackViewModel ViewModel
         {
-            get => (FeedbackViewModel)DataContext;
-            set => DataContext = value;
+            get => (FeedbackViewModel)GetValue(ViewModelProperty);
+            set => SetValue(ViewModelProperty, value);
         }
 
         object IViewFor.ViewModel

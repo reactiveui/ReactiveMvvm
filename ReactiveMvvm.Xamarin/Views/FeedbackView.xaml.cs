@@ -5,10 +5,11 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Xamarin.Forms;
 using ReactiveUI;
+using ReactiveUI.XamForms;
 
 namespace ReactiveMvvm.Xamarin.Views
 {
-    public partial class FeedbackView : ContentPage, IViewFor<FeedbackViewModel>
+    public partial class FeedbackView : ReactiveContentPage<FeedbackViewModel>
     {
         public FeedbackView()
         {
@@ -69,18 +70,6 @@ namespace ReactiveMvvm.Xamarin.Views
                     time => $"Time elapsed: {time}")
                     .DisposeWith(subscriptions);
             });
-        }
-
-        public FeedbackViewModel ViewModel
-        {
-            get => (FeedbackViewModel)BindingContext;
-            set => BindingContext = value;
-        }
-
-        object IViewFor.ViewModel
-        {
-            get => ViewModel;
-            set => ViewModel = (FeedbackViewModel)value;
         }
     }
 }
