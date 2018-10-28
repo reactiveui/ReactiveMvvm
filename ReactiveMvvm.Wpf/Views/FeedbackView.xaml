@@ -1,9 +1,12 @@
-﻿<Window 
+﻿<rxui:ReactiveWindow 
+    xmlns:rxui="http://reactiveui.net"
     x:Class="ReactiveMvvm.Wpf.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:TypeArguments="viewmodels:FeedbackViewModel"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:ReactiveMvvm.ViewModels;assembly=ReactiveMvvm"
     mc:Ignorable="d" Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel Width="300" VerticalAlignment="Center">
@@ -33,4 +36,4 @@
                     HorizontalAlignment="Left" Content="Send Feedback"/>
         </StackPanel>
     </Grid>
-</Window>
+</rxui:ReactiveWindow>

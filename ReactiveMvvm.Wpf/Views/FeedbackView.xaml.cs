@@ -3,16 +3,12 @@ using ReactiveMvvm.Wpf.Services;
 using ReactiveMvvm.Services;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Windows;
 using ReactiveUI;
 
 namespace ReactiveMvvm.Wpf
 {
-    public partial class MainWindow : Window, IViewFor<FeedbackViewModel>
+    public partial class MainWindow : ReactiveWindow<FeedbackViewModel>
     {
-        public static readonly DependencyProperty ViewModelProperty = DependencyProperty
-            .Register(nameof(ViewModel), typeof(FeedbackViewModel), typeof(MainWindow));
-
         public MainWindow()
         {
             InitializeComponent();
@@ -82,18 +78,6 @@ namespace ReactiveMvvm.Wpf
                     time => $"Time elapsed: {time}")
                     .DisposeWith(subscriptions);
             });
-        }
-
-        public FeedbackViewModel ViewModel
-        {
-            get => (FeedbackViewModel)GetValue(ViewModelProperty);
-            set => SetValue(ViewModelProperty, value);
-        }
-
-        object IViewFor.ViewModel
-        {
-            get => ViewModel;
-            set => ViewModel = (FeedbackViewModel)value;
         }
     }
 }
