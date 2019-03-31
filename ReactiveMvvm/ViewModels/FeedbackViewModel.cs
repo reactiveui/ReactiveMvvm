@@ -5,11 +5,12 @@ using System.Reactive.Disposables;
 using ReactiveMvvm.Interfaces;
 using PropertyChanged;
 using ReactiveUI;
+using Splat;
 
 namespace ReactiveMvvm.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public sealed class FeedbackViewModel : ISupportsActivation
+    public sealed class FeedbackViewModel : ISupportsActivation, IEnableLogger
     {
         public ReactiveCommand<Unit, Unit> Submit { get; }
         public ViewModelActivator Activator { get; }
@@ -37,14 +38,18 @@ namespace ReactiveMvvm.ViewModels
                 .Where(selected => selected)
                 .Subscribe(x => Idea = false);
 
-            var valid = this.WhenAnyValue(
-                x => x.Title, x => x.Message,
-                x => x.Issue, x => x.Idea,
-                x => x.Section, 
-                (title, message, issue, idea, section) =>
-                    !string.IsNullOrWhiteSpace(message) &&
-                    !string.IsNullOrWhiteSpace(title) &&
-                    (idea || issue) && section >= 0);
+            var valid = this
+                .WhenAnyValue(
+                    x => x.Title, x => x.Message,
+                    x => x.Issue, x => x.Idea,
+                    x => x.Section, 
+                    (title, message, issue, idea, section) =>
+                        !string.IsNullOrWhiteSpace(message) &&
+                        !string.IsNullOrWhiteSpace(title) &&
+                        (idea || issue) && section >= 0)
+                .Log(this, "Form validity changed")
+                .Publish()
+                .RefCount();
 
             valid.Subscribe(hasErrors => HasErrors = !hasErrors);
             Submit = ReactiveCommand.CreateFromTask(
