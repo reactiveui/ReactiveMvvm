@@ -1,6 +1,6 @@
 ﻿<rxui:ReactiveWindow 
     xmlns:rxui="http://reactiveui.net"
-    x:Class="ReactiveMvvm.Wpf.MainWindow"
+    x:Class="ReactiveMvvm.Wpf.Views.FeedbackView"
     x:TypeArguments="viewmodels:FeedbackViewModel"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,11 +11,11 @@
     <Grid>
         <StackPanel Width="300" VerticalAlignment="Center">
             <TextBlock Text="Feedback" />
-            <TextBlock x:Name="TimeTextBlock" Margin="0 5" />
+            <TextBlock x:Name="TimeTextBlock" Margin="0 5" Text="Time elapsed: 0s" />
             <TextBox x:Name="TitleTextBox" />
-            <TextBlock x:Name="TitleLengthTextBox" Margin="0 5" />
+            <TextBlock x:Name="TitleLengthTextBox" Margin="0 5" Text="0 letters used from 15" />
             <TextBox x:Name="MessageTextBox" />
-            <TextBlock x:Name="MessageLengthTextBox" Margin="0 5" />
+            <TextBlock x:Name="MessageLengthTextBox" Margin="0 5" Text="0 letters used from 30" />
             <ComboBox  x:Name="SectionComboBox" Width="170" HorizontalAlignment="Left">
                 <ComboBoxItem Content="User Interface"/>
                 <ComboBoxItem Content="Audio"/>

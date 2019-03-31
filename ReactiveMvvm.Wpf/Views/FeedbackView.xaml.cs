@@ -5,77 +5,50 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ReactiveUI;
 
-namespace ReactiveMvvm.Wpf
+namespace ReactiveMvvm.Wpf.Views
 {
-    public partial class MainWindow : ReactiveWindow<FeedbackViewModel>
+    public partial class FeedbackView : ReactiveWindow<FeedbackViewModel>
     {
-        public MainWindow()
+        public FeedbackView()
         {
             InitializeComponent();
             ViewModel = new FeedbackViewModel(new WpfSender(), new Clock());
             this.WhenActivated(subscriptions =>
             {
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Title,
-                    view => view.TitleTextBox.Text)
+                this.Bind(ViewModel, x => x.Title, x => x.TitleTextBox.Text)
+                    .DisposeWith(subscriptions);
+                this.OneWayBind(ViewModel, x => x.TitleLengthMax, x => x.TitleTextBox.MaxLength)
                     .DisposeWith(subscriptions);
 
-                this.OneWayBind(ViewModel,
-                    viewModel => viewModel.TitleLengthMax,
-                    view => view.TitleTextBox.MaxLength)
-                    .DisposeWith(subscriptions);
-
-                this.ViewModel
-                    .WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax)
+                this.WhenAnyValue(x => x.ViewModel.TitleLength, x => x.ViewModel.TitleLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
-                    .BindTo(this, view => view.TitleLengthTextBox.Text)
+                    .BindTo(this, x => x.TitleLengthTextBox.Text)
                     .DisposeWith(subscriptions);
 
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Message,
-                    view => view.MessageTextBox.Text)
+                this.Bind(ViewModel, x => x.Message, x => x.MessageTextBox.Text)
+                    .DisposeWith(subscriptions);
+                this.OneWayBind(ViewModel, x => x.MessageLengthMax, x => x.MessageTextBox.MaxLength)
                     .DisposeWith(subscriptions);
 
-                this.OneWayBind(ViewModel,
-                    viewModel => viewModel.MessageLengthMax,
-                    view => view.MessageTextBox.MaxLength)
-                    .DisposeWith(subscriptions);
-
-                this.ViewModel
-                    .WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax)
+                this.WhenAnyValue(x => x.ViewModel.MessageLength, x => x.ViewModel.MessageLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
-                    .BindTo(this, view => view.MessageLengthTextBox.Text)
+                    .BindTo(this, x => x.MessageLengthTextBox.Text)
                     .DisposeWith(subscriptions);
 
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Section,
-                    view => view.SectionComboBox.SelectedIndex)
+                this.Bind(ViewModel, x => x.Section, x => x.SectionComboBox.SelectedIndex)
                     .DisposeWith(subscriptions);
 
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Idea,
-                    view => view.IdeaCheckBox.IsChecked)
+                this.Bind(ViewModel, x => x.Idea, x => x.IdeaCheckBox.IsChecked)
+                    .DisposeWith(subscriptions);
+                this.Bind(ViewModel, x => x.Issue, x => x.IssueCheckBox.IsChecked)
                     .DisposeWith(subscriptions);
 
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Issue,
-                    view => view.IssueCheckBox.IsChecked)
+                this.OneWayBind(ViewModel, x => x.HasErrors, x => x.HasErrorsTextBox.Visibility)
+                    .DisposeWith(subscriptions);
+                this.BindCommand(ViewModel, x => x.Submit, x => x.SubmitButton)
                     .DisposeWith(subscriptions);
 
-                this.OneWayBind(ViewModel,
-                    viewModel => viewModel.HasErrors,
-                    view => view.HasErrorsTextBox.Visibility)
-                    .DisposeWith(subscriptions);
-
-                this.BindCommand(ViewModel,
-                    viewModel => viewModel.Submit,
-                    view => view.SubmitButton)
-                    .DisposeWith(subscriptions);
-
-                this.OneWayBind(ViewModel,
-                    viewModel => viewModel.Elapsed,
-                    view => view.TimeTextBlock.Text,
-                    time => $"Time elapsed: {time}")
+                this.OneWayBind(ViewModel, x => x.Elapsed, x => x.TimeTextBlock.Text, time => $"Time elapsed: {time}")
                     .DisposeWith(subscriptions);
             });
         }

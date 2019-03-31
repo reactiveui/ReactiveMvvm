@@ -3,7 +3,6 @@ using ReactiveMvvm.Xamarin.Services;
 using ReactiveMvvm.Services;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using Xamarin.Forms;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 
@@ -17,57 +16,40 @@ namespace ReactiveMvvm.Xamarin.Views
             ViewModel = new FeedbackViewModel(new XamarinSender(this), new Clock());
             this.WhenActivated(subscriptions =>
             {
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Title,
-                    view => view.TitleEntry.Text)
+                this.Bind(ViewModel, x => x.Title, x => x.TitleEntry.Text)
+                    .DisposeWith(subscriptions);
+                this.OneWayBind(ViewModel, x => x.TitleLengthMax, x => x.TitleEntry.MaxLength)
                     .DisposeWith(subscriptions);
 
-                this.ViewModel
-                    .WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax)
+                this.WhenAnyValue(x => x.ViewModel.TitleLength, x => x.ViewModel.TitleLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
-                    .BindTo(this, view => view.TitleLengthEntry.Text)
+                    .BindTo(this, x => x.TitleLengthEntry.Text)
                     .DisposeWith(subscriptions);
 
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Message,
-                    view => view.MessageEntry.Text)
+                this.Bind(ViewModel, x => x.Message, x => x.MessageEntry.Text)
+                    .DisposeWith(subscriptions);
+                this.OneWayBind(ViewModel, x => x.MessageLengthMax, x => x.MessageEntry.MaxLength)
                     .DisposeWith(subscriptions);
 
-                this.ViewModel
-                    .WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax)
+                this.WhenAnyValue(x => x.ViewModel.MessageLength, x => x.ViewModel.MessageLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
-                    .BindTo(this, view => view.MessageLengthEntry.Text)
+                    .BindTo(this, x => x.MessageLengthEntry.Text)
                     .DisposeWith(subscriptions);
 
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Section,
-                    view => view.SectionPicker.SelectedIndex)
+                this.Bind(ViewModel, x => x.Section, x => x.SectionPicker.SelectedIndex)
                     .DisposeWith(subscriptions);
 
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Idea,
-                    view => view.IdeaSwitch.IsToggled)
+                this.Bind(ViewModel, x => x.Idea, x => x.IdeaSwitch.IsToggled)
+                    .DisposeWith(subscriptions);
+                this.Bind(ViewModel, x => x.Issue, x => x.IssueSwitch.IsToggled)
                     .DisposeWith(subscriptions);
 
-                this.Bind(ViewModel,
-                    viewModel => viewModel.Issue,
-                    view => view.IssueSwitch.IsToggled)
+                this.OneWayBind(ViewModel, x => x.HasErrors, x => x.HasErrorsLabel.IsVisible)
+                    .DisposeWith(subscriptions);
+                this.BindCommand(ViewModel, x => x.Submit, x => x.SubmitButton)
                     .DisposeWith(subscriptions);
 
-                this.OneWayBind(ViewModel,
-                    viewModel => viewModel.HasErrors,
-                    view => view.HasErrorsLabel.IsVisible)
-                    .DisposeWith(subscriptions);
-
-                this.BindCommand(ViewModel,
-                    viewModel => viewModel.Submit,
-                    view => view.SubmitButton)
-                    .DisposeWith(subscriptions);
-
-                this.OneWayBind(ViewModel,
-                    viewModel => viewModel.Elapsed,
-                    view => view.TimeElapsedLabel.Text,
-                    time => $"Time elapsed: {time}")
+                this.OneWayBind(ViewModel, x => x.Elapsed, x => x.TimeElapsedLabel.Text, time => $"Time elapsed: {time}")
                     .DisposeWith(subscriptions);
             });
         }

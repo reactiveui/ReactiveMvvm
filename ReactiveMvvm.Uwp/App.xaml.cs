@@ -11,20 +11,16 @@ namespace ReactiveMvvm.Uwp
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame == null)
+            if (!(Window.Current.Content is Frame rootFrame))
             {
                 rootFrame = new Frame();
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated) { }
                 Window.Current.Content = rootFrame;
             }
 
-            if (e.PrelaunchActivated == false)
-            {
-                if (rootFrame.Content == null)
-                    rootFrame.Navigate(typeof(FeedbackView), e.Arguments);
-                Window.Current.Activate();
-            }
+            if (e.PrelaunchActivated) return;
+            if (rootFrame.Content == null)
+                rootFrame.Navigate(typeof(FeedbackView), e.Arguments);
+            Window.Current.Activate();
         }
     }
 }

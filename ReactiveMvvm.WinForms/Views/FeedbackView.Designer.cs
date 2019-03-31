@@ -1,4 +1,4 @@
-﻿namespace ReactiveMvvm.WinForms
+﻿namespace ReactiveMvvm.WinForms.Views
 {
     partial class FeedbackView
     {
