@@ -12,10 +12,10 @@
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.7.1-build800-beta" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.7.1-build800-beta" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="0.7.1-build800-beta" />
-        <PackageReference Include="System.Reactive.Compatibility" Version="4.1.3" />
+        <PackageReference Include="Avalonia" Version="0.8.999-cibuild0003269-beta" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.8.999-cibuild0003269-beta" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.999-cibuild0003269-beta" />
+        <PackageReference Include="System.Reactive.Compatibility" Version="4.1.5" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />

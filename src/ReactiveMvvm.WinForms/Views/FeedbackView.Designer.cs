@@ -13,7 +13,7 @@
             base.Dispose(disposing);
         }
 
-        #region Код, автоматически созданный конструктором форм Windows
+        #region
 
         private void InitializeComponent()
         {

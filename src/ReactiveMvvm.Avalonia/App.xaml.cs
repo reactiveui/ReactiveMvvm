@@ -17,20 +17,7 @@ namespace ReactiveMvvm.Avalonia
             base.Initialize();
         }
 
-        private static void Main(string[] args)
-        {
-            InitializeLogging();
-            BuildAvaloniaApp().Start<FeedbackView>(
-                () => new FeedbackViewModel(new AvaloniaSender(), new Clock())
-            );
-        }
-
-        public static AppBuilder BuildAvaloniaApp() =>
-            AppBuilder.Configure<App>()
-                .UseReactiveUI()
-                .UsePlatformDetect();
-
-        private static void InitializeLogging()
+        public override void OnFrameworkInitializationCompleted()
         {
 #if DEBUG
             SerilogLogger.Initialize(new LoggerConfiguration()
@@ -38,6 +25,15 @@ namespace ReactiveMvvm.Avalonia
                 .WriteTo.Trace(outputTemplate: "{Area}: {Message}")
                 .CreateLogger());
 #endif
+            var view = new FeedbackView();
+            var context = new FeedbackViewModel(
+                new AvaloniaSender(), 
+                new Clock());
+
+            view.DataContext = context;
+            view.Show();
+
+            base.OnFrameworkInitializationCompleted();
         }
     }
 }
