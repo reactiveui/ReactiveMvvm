@@ -4,7 +4,7 @@ A  truly cross-platform app example created using <a href="https://reactiveui.ne
 
 | <a href="https://github.com/AvaloniaUI/Avalonia">Avalonia UI</a> | <a href="https://docs.microsoft.com/ru-ru/xamarin/xamarin-forms/">Xamarin Forms</a> | <a href="https://docs.microsoft.com/ru-ru/windows/uwp/get-started/universal-application-platform-guide">Universal Windows Platform</a> |
 | --------------- | --------- | -------------- |
-| <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="800" src="https://cdn-images-1.medium.com/max/1200/1*Lz7aENCsgOog1QnYiu8lzA.png"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img src="https://cdn-images-1.medium.com/max/1500/1*d1oeBQF9ilZ5h_IIhYktPQ.png" width="800"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="800" src="https://cdn-images-1.medium.com/max/900/1*EsqN0dFMCUknKc-4wuIanA.png"></a> | 
+| <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="800" src="https://cdn-images-1.medium.com/max/675/1*JPlUC1YoAuE2eFng29LpaQ.png"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img src="https://cdn-images-1.medium.com/max/1500/1*d1oeBQF9ilZ5h_IIhYktPQ.png" width="800"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="800" src="https://cdn-images-1.medium.com/max/900/1*EsqN0dFMCUknKc-4wuIanA.png"></a> | 
 
 ## Technologies and Tools Used
 - <a href="https://reactiveui.net/">ReactiveUI</a> modern MVVM framework
@@ -14,6 +14,7 @@ A  truly cross-platform app example created using <a href="https://reactiveui.ne
 - <a href="https://github.com/fluentassertions/fluentassertions">FluentAssertions</a> to improve tests readability
 - <a href="https://github.com/nsubstitute/NSubstitute">NSubstitute</a> for stubs and mocks
 - <a href="https://github.com/AvaloniaUI/Avalonia">AvaloniaUI</a> for Linux and MacOS
+- <a href="https://github.com/worldbeater/Citrus.Avalonia">Citrus</a> bright and modern AvaloniaUI theme
 - <a href="https://www.xamarin.com/">Xamarin.Forms</a> for Android, iOS and Tizen
 - <a href="https://docs.microsoft.com/en-us/windows/uwp/index">Universal Windows Platform</a> for Windows 10
 - <a href="https://msdn.microsoft.com/ru-ru/library/aa970268(v=vs.100).aspx">Windows Presentation Foundation</a>
