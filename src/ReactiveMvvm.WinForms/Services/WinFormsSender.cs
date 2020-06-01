@@ -1,6 +1,6 @@
 ﻿using ReactiveMvvm.Interfaces;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Forms;
 
 namespace ReactiveMvvm.WinForms.Services
 {
