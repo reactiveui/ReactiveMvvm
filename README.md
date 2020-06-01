@@ -19,3 +19,4 @@ A  truly cross-platform app example created using <a href="https://reactiveui.ne
 - <a href="https://docs.microsoft.com/en-us/windows/uwp/index">Universal Windows Platform</a> for Windows 10
 - <a href="https://msdn.microsoft.com/ru-ru/library/aa970268(v=vs.100).aspx">Windows Presentation Foundation</a>
 - <a href="https://docs.microsoft.com/ru-ru/dotnet/framework/winforms/windows-forms-overview">Windows Forms</a>
+- <a href="https://www.jetbrains.com/rider/">JetBrains Rider</a> and <a href="https://visualstudio.microsoft.com/">Microsoft Visual Studio</a> IDEs
