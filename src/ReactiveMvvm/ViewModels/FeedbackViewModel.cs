@@ -10,7 +10,7 @@ using Splat;
 namespace ReactiveMvvm.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public sealed class FeedbackViewModel : ISupportsActivation, IEnableLogger
+    public sealed class FeedbackViewModel : IActivatableViewModel, IEnableLogger
     {
         public ReactiveCommand<Unit, Unit> Submit { get; }
         public ViewModelActivator Activator { get; }
