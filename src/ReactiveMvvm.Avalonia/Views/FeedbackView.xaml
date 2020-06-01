@@ -3,43 +3,49 @@
         x:Class="ReactiveMvvm.Avalonia.Views.FeedbackView"
         MinWidth="500" MinHeight="300" Background="#f0f0f0">
   <Grid>
-    <StackPanel Width="300" VerticalAlignment="Center">
-      <TextBlock Text="Feedback" Margin="0 5"/>
-      <StackPanel Orientation="Horizontal" Margin="0 5">
-        <TextBlock Text="Time passed: "/>
-        <TextBlock Text="{Binding Elapsed, Mode=OneWay}"/>
-      </StackPanel>
-      <TextBox Text="{Binding Title, Mode=TwoWay}"/>
-      <StackPanel Orientation="Horizontal" Margin="0 5">
-        <TextBlock Text="{Binding TitleLength, Mode=OneWay}"/>  
-        <TextBlock Text=" letters used from "/>
-        <TextBlock Text="{Binding TitleLengthMax, Mode=OneTime}"/>  
-      </StackPanel>
-      <TextBox Text="{Binding Message, Mode=TwoWay}"/>
-      <StackPanel Orientation="Horizontal" Margin="0 5">
-        <TextBlock Text="{Binding MessageLength, Mode=OneWay}"/>  
-        <TextBlock Text=" letters used from "/>
-        <TextBlock Text="{Binding MessageLengthMax, Mode=OneTime}"/>  
-      </StackPanel>
-      <DropDown Width="170" HorizontalAlignment="Left"
-          SelectedIndex="{Binding Section, Mode=TwoWay}">
-        <DropDownItem Content="User Interface"/>
-        <DropDownItem Content="Audio"/>
-        <DropDownItem Content="Video"/>
-        <DropDownItem Content="Voice"/>
-      </DropDown>
-      <Grid Margin="0 5">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition />
-          <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <CheckBox Grid.Column="0" Content="Idea" IsChecked="{Binding Idea, Mode=TwoWay}"/>
-        <CheckBox Grid.Column="1" Content="Issue" IsChecked="{Binding Issue, Mode=TwoWay}"/>
-      </Grid>
-      <TextBlock Text="Please, fill in all the form fields." 
-          IsVisible="{Binding HasErrors}" Foreground="Red"/>
-      <Button Width="150" HorizontalAlignment="Left" Margin="0 5"
-          Content="Send Feedback" Command="{Binding Submit}"/>
+    <StackPanel Width="400" VerticalAlignment="Center">
+      <Border Classes="Card">
+        <StackPanel>
+          <TextBlock Text="Feedback Form" Classes="Heading" />
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Time passed: "/>
+            <TextBlock Text="{Binding Elapsed, Mode=OneWay}"/>
+          </StackPanel>
+          <TextBox Text="{Binding Title, Mode=TwoWay}" Watermark="Issue title"/>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding TitleLength, Mode=OneWay}"/>  
+            <TextBlock Text=" letters used from "/>
+            <TextBlock Text="{Binding TitleLengthMax, Mode=OneTime}"/>  
+          </StackPanel>
+          <TextBox Text="{Binding Message, Mode=TwoWay}" Watermark="Issue description"/>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding MessageLength, Mode=OneWay}"/>  
+            <TextBlock Text=" letters used from "/>
+            <TextBlock Text="{Binding MessageLengthMax, Mode=OneTime}"/>  
+          </StackPanel>
+          <DropDown Width="170" HorizontalAlignment="Left" Margin="0 5"
+                    SelectedIndex="{Binding Section, Mode=TwoWay}">
+            <DropDownItem Content="User Interface"/>
+            <DropDownItem Content="Audio"/>
+            <DropDownItem Content="Video"/>
+            <DropDownItem Content="Voice"/>
+          </DropDown>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <CheckBox Grid.Column="0" Content="Idea" IsChecked="{Binding Idea, Mode=TwoWay}"/>
+            <CheckBox Grid.Column="1" Content="Issue" IsChecked="{Binding Issue, Mode=TwoWay}"/>
+          </Grid>
+          <TextBlock Text="Please, fill in all the form fields." 
+                     IsVisible="{Binding HasErrors}" Foreground="Red"/>
+          <Button Width="200" HorizontalAlignment="Left" 
+                  Margin="0 5" Classes="Primary"
+                  Content="Send Feedback" 
+                  Command="{Binding Submit}"/>
+        </StackPanel>
+      </Border>
     </StackPanel>
   </Grid>
 </Window>
