@@ -1,6 +1,8 @@
 ﻿using ReactiveMvvm.Interfaces;
 using System;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
+using ReactiveUI;
 
 namespace ReactiveMvvm.Services
 {
@@ -8,10 +10,13 @@ namespace ReactiveMvvm.Services
     {
         public IObservable<long> Tick { get; }
 
-        public Clock()
+        public Clock(IScheduler scheduler = null)
         {
             var interval = TimeSpan.FromSeconds(1);
-            Tick = Observable.Timer(interval, interval);
+            Tick = Observable.Timer(
+                interval,
+                interval,
+                scheduler ?? RxApp.TaskpoolScheduler);
         }
     }
 }
