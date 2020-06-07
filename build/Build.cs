@@ -110,7 +110,7 @@ internal class Build : NukeBuild
             if (!execute) return;
 
             Logger.Normal("Restoring packages required by Xamarin Android...");
-            var project = SourceDirectory.GlobFiles("**/*.Xamarin.Droid.csproj").First();
+            var project = SourceDirectory.GlobFiles("**/*.Xamarin.Android.csproj").First();
             MSBuild(settings => settings
                 .SetProjectFile(project)
                 .SetTargets("Restore"));
@@ -165,9 +165,9 @@ internal class Build : NukeBuild
 
     Target RunInteractive => _ => _
         .DependsOn(CompileAvaloniaApp)
-        // .DependsOn(CompileUniversalWindowsApp)
-        // .DependsOn(CompileXamarinAndroidApp)
-        // .DependsOn(CompileWindowsPresentationApp)
+        .DependsOn(CompileUniversalWindowsApp)
+        .DependsOn(CompileXamarinAndroidApp)
+        .DependsOn(CompileWindowsPresentationApp)
         .Executes(() => SourceDirectory
             .GlobFiles($"**/{InteractiveProjectName}.csproj")
             .Where(x => Interactive)

@@ -10,13 +10,10 @@ namespace ReactiveMvvm.Services
     {
         public IObservable<long> Tick { get; }
 
-        public Clock(IScheduler scheduler = null)
+        public Clock()
         {
             var interval = TimeSpan.FromSeconds(1);
-            Tick = Observable.Timer(
-                interval,
-                interval,
-                scheduler ?? RxApp.TaskpoolScheduler);
+            Tick = Observable.Timer(interval, interval, RxApp.TaskpoolScheduler);
         }
     }
 }
