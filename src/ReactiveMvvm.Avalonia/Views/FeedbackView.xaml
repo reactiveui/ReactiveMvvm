@@ -1,7 +1,9 @@
 ﻿<Window xmlns="https://github.com/avaloniaui" 
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="ReactiveMvvm.Avalonia.Views.FeedbackView"
-        MinWidth="500" MinHeight="300" Background="#f0f0f0">
+        MinWidth="500" MinHeight="400"
+        Width="500" Height="400"
+        Background="#f0f0f0">
   <Grid>
     <StackPanel Width="400" VerticalAlignment="Center">
       <Border Classes="Card">
@@ -23,13 +25,13 @@
             <TextBlock Text=" letters used from "/>
             <TextBlock Text="{Binding MessageLengthMax, Mode=OneTime}"/>  
           </StackPanel>
-          <DropDown Width="170" HorizontalAlignment="Left" Margin="0 5"
+          <ComboBox Width="170" HorizontalAlignment="Left" Margin="0 5"
                     SelectedIndex="{Binding Section, Mode=TwoWay}">
-            <DropDownItem Content="User Interface"/>
-            <DropDownItem Content="Audio"/>
-            <DropDownItem Content="Video"/>
-            <DropDownItem Content="Voice"/>
-          </DropDown>
+            <ComboBoxItem Content="User Interface"/>
+            <ComboBoxItem Content="Audio"/>
+            <ComboBoxItem Content="Video"/>
+            <ComboBoxItem Content="Voice"/>
+          </ComboBox>
           <Grid>
             <Grid.ColumnDefinitions>
               <ColumnDefinition />

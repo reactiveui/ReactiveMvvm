@@ -15,7 +15,7 @@ namespace ReactiveMvvm.ViewModels
         public ReactiveCommand<Unit, Unit> Submit { get; }
         public ViewModelActivator Activator { get; }
         public bool HasErrors { get; private set; }
-        public string Elapsed { get; private set; }
+        public string Elapsed { get; private set; } = string.Empty;
 
         public string Title { get; set; } = string.Empty;
         public int TitleLength => Title.Length;

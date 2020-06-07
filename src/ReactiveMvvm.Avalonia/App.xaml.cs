@@ -27,7 +27,7 @@ namespace ReactiveMvvm.Avalonia
 #endif
             var view = new FeedbackView();
             var context = new FeedbackViewModel(
-                new AvaloniaSender(), 
+                new AvaloniaSender(view),
                 new Clock());
 
             view.DataContext = context;
