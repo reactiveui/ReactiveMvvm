@@ -165,9 +165,9 @@ internal class Build : NukeBuild
 
     Target RunInteractive => _ => _
         .DependsOn(CompileAvaloniaApp)
-        // .DependsOn(CompileUniversalWindowsApp)
-        // .DependsOn(CompileXamarinAndroidApp)
-        // .DependsOn(CompileWindowsPresentationApp)
+        .DependsOn(CompileUniversalWindowsApp)
+        .DependsOn(CompileXamarinAndroidApp)
+        .DependsOn(CompileWindowsPresentationApp)
         .Executes(() => SourceDirectory
             .GlobFiles($"**/{InteractiveProjectName}.csproj")
             .Where(x => Interactive)
