@@ -33,8 +33,13 @@ namespace ReactiveMvvm.Tests
             _feedback = new FeedbackViewModel(_sender, _clock);
         }
 
-        [Fact] 
-        public void ShouldDisableCommandWhenFeedbackIsInvalid() => _feedback.HasErrors.Should().BeTrue();
+        [Fact]
+        public void ShouldInitializeDefaultsProperly()
+        {
+            _feedback.HasErrors.Should().BeTrue();
+            _feedback.Elapsed.Should().BeEmpty();
+            _feedback.Section.Should().Be(0);
+        }
 
         [Fact]
         public void ShouldEnableCommandWhenFeedbackIsValid()
@@ -56,9 +61,6 @@ namespace ReactiveMvvm.Tests
             _feedback.Submit.Execute().Subscribe();
             _sender.Received().Send("Title!", "Message!", 0, true);
         }
-
-        [Fact]
-        public void ShouldNotDisplayElapsedPropertyByDefault() => _feedback.Elapsed.Should().BeEmpty();
 
         [Fact]
         public void ShouldStartTheClockWhenActivated()
