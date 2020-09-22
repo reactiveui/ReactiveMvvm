@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using NStack;
+using System.Reactive.Subjects;
 using ReactiveMvvm.ViewModels;
 using ReactiveUI;
 using Terminal.Gui;
+using NStack;
 
 namespace ReactiveMvvm.Terminal.Views
 {
@@ -12,7 +13,7 @@ namespace ReactiveMvvm.Terminal.Views
     {
         private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
         
-        public FeedbackView(FeedbackViewModel viewModel) : base(new Rect(0, 0, 30, 15), "Feedback Form")
+        public FeedbackView(FeedbackViewModel viewModel) : base(new Rect(0, 0, 30, 20), "Feedback Form")
         {
             ViewModel = viewModel;
             ViewModel.Activator.Activate();
@@ -26,9 +27,26 @@ namespace ReactiveMvvm.Terminal.Views
                 .Append(new Label("Feedback Type"))
                 .Append(IssueCheckBox())
                 .Append(IdeaCheckBox())
-                .Append(new Button("Send Feedback"));
+                .Append(new Label("Feedback Category"))
+                .Append(SectionRadioGroup())
+                .Append(new Button("Send Feedback"), 4);
         }
 
+        private RadioGroup SectionRadioGroup()
+        {
+            var radioGroup = new RadioGroup(new[] {"User Interface", "Audio", "Video", "Voice"});
+            this.WhenAnyValue(x => x.ViewModel.Section)
+                .BindTo(radioGroup, x => x.Selected)
+                .DisposeWith(_subscriptions);
+
+            var selected = new Subject<int>().DisposeWith(_subscriptions);
+            radioGroup.SelectionChanged = index => selected.OnNext(index);
+            selected.AsObservable()
+                .BindTo(this, x => x.ViewModel.Section)
+                .DisposeWith(_subscriptions);
+            return radioGroup;
+        }
+        
         private CheckBox IssueCheckBox()
         {
             var item = new CheckBox("Issue", ViewModel.Issue);

@@ -13,13 +13,14 @@ namespace ReactiveMvvm.Terminal
 
         public static MemoizedElement<TOwner, TNew> Append<TOwner, TOld, TNew>(
             this MemoizedElement<TOwner, TOld> owner, 
-            TNew control)
+            TNew control,
+            int height = 1)
             where TOwner : View 
             where TOld : View
             where TNew : View
         {
             control.X = Pos.Left(owner.Control);
-            control.Y = Pos.Top(owner.Control) + 1;
+            control.Y = Pos.Top(owner.Control) + height;
             return new MemoizedElement<TOwner, TNew>(owner.View, control);
         }
 
