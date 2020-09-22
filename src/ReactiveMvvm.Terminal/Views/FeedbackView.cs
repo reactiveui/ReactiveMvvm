@@ -40,6 +40,10 @@ namespace ReactiveMvvm.Terminal.Views
                 .Select(args => item.Checked)
                 .BindTo(this, x => x.ViewModel.Issue)
                 .DisposeWith(_subscriptions);
+            this.WhenAnyValue(x => x.ViewModel.Idea)
+                .Skip(1)
+                .Subscribe(args => item.Redraw(item.Frame))
+                .DisposeWith(_subscriptions);
             return item;
         }
 
@@ -53,6 +57,10 @@ namespace ReactiveMvvm.Terminal.Views
                 .Toggled
                 .Select(old => item.Checked)
                 .BindTo(this, x => x.ViewModel.Idea)
+                .DisposeWith(_subscriptions);
+            this.WhenAnyValue(x => x.ViewModel.Issue)
+                .Skip(1)
+                .Subscribe(args => item.Redraw(item.Frame))
                 .DisposeWith(_subscriptions);
             return item;
         }
