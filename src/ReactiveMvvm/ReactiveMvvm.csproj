@@ -6,4 +6,8 @@
     <PackageReference Include="PropertyChanged.Fody" Version="3.2.8" />
     <PackageReference Include="ReactiveUI" Version="11.4.1" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Pharmacist.MsBuild" Version="1.8.1" PrivateAssets="all" />
+    <PackageReference Include="Pharmacist.Common" Version="1.8.1" />
+  </ItemGroup>
 </Project>

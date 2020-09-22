@@ -1,4 +1,5 @@
-﻿using ReactiveMvvm.Services;
+﻿using System;
+using ReactiveMvvm.Services;
 using ReactiveMvvm.Terminal.Services;
 using ReactiveMvvm.Terminal.Views;
 using ReactiveMvvm.ViewModels;

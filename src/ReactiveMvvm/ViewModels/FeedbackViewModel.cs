@@ -26,17 +26,17 @@ namespace ReactiveMvvm.ViewModels
         public int MessageLengthMax => 30;
 
         public int Section { get; set; }
-        public bool Issue { get; set; }
+        public bool Issue { get; set; } = true;
         public bool Idea { get; set; }
 
         public FeedbackViewModel(ISender sender, IClock clock)
         {
             this.WhenAnyValue(x => x.Idea)
-                .Where(selected => selected)
-                .Subscribe(x => Issue = false);
+                .Select(selected => !selected)
+                .Subscribe(value => Issue = value);
             this.WhenAnyValue(x => x.Issue)
-                .Where(selected => selected)
-                .Subscribe(x => Idea = false);
+                .Select(selected => !selected)
+                .Subscribe(value => Idea = value);
 
             var valid = this
                 .WhenAnyValue(
@@ -57,7 +57,7 @@ namespace ReactiveMvvm.ViewModels
                 valid);
 
             Activator = new ViewModelActivator();
-            this.WhenActivated(disposables => 
+            this.WhenActivated(disposables =>
             {
                 clock.Tick.Select(second => $"{second}s")
                     .ObserveOn(RxApp.MainThreadScheduler)

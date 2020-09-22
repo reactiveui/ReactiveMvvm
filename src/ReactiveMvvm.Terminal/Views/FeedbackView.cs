@@ -12,22 +12,54 @@ namespace ReactiveMvvm.Terminal.Views
     {
         private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
         
-        public FeedbackView(FeedbackViewModel viewModel) : base("Feedback Form")
+        public FeedbackView(FeedbackViewModel viewModel) : base(new Rect(0, 0, 30, 15), "Feedback Form")
         {
             ViewModel = viewModel;
             ViewModel.Activator.Activate();
-            this.StackPanel(new Label("Issue Title"))
+            this.StackPanel(TimeElapsedLabel())
+                .Append(new Label("Issue Title"))
                 .Append(TitleDescription())
                 .Append(TitleInput())
                 .Append(new Label("Issue Description"))
                 .Append(MessageDescription())
                 .Append(MessageInput())
+                .Append(new Label("Feedback Type"))
+                .Append(IssueCheckBox())
+                .Append(IdeaCheckBox())
                 .Append(new Button("Send Feedback"));
+        }
+
+        private CheckBox IssueCheckBox()
+        {
+            var item = new CheckBox("Issue", ViewModel.Issue);
+            this.WhenAnyValue(x => x.ViewModel.Issue)
+                .BindTo(item, x => x.Checked)
+                .DisposeWith(_subscriptions);
+            item.Events()
+                .Toggled
+                .Select(args => item.Checked)
+                .BindTo(this, x => x.ViewModel.Issue)
+                .DisposeWith(_subscriptions);
+            return item;
+        }
+
+        private CheckBox IdeaCheckBox()
+        {
+            var item = new CheckBox("Suggestion", ViewModel.Idea);
+            this.WhenAnyValue(x => x.ViewModel.Idea)
+                .BindTo(item, x => x.Checked)
+                .DisposeWith(_subscriptions);
+            item.Events()
+                .Toggled
+                .Select(old => item.Checked)
+                .BindTo(this, x => x.ViewModel.Idea)
+                .DisposeWith(_subscriptions);
+            return item;
         }
 
         private Label TimeElapsedLabel()
         {
-            var label = new Label(ViewModel.Elapsed);
+            var label = new Label("0 seconds passed");
             this.WhenAnyValue(x => x.ViewModel.Elapsed)
                 .Select(elapsed => (ustring) $"{elapsed} seconds passed")
                 .BindTo(label, x => x.Text)
