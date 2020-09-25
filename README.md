@@ -19,6 +19,7 @@ A  truly cross-platform app example created using <a href="https://reactiveui.ne
 - <a href="http://xunit.github.io/">xUnit</a> tests on <a href="https://www.microsoft.com/net/core">.NET Core</a>
 - <a href="https://github.com/fluentassertions/fluentassertions">FluentAssertions</a> to improve tests readability
 - <a href="https://github.com/nsubstitute/NSubstitute">NSubstitute</a> for stubs and mocks
+- <a href="https://github.com/nuke-build/nuke">NukeBuild</a> for building cross-platform .NET projects using C#
 - <a href="https://github.com/AvaloniaUI/Avalonia">AvaloniaUI</a> for Linux and MacOS
 - <a href="https://github.com/worldbeater/Citrus.Avalonia">Citrus</a> bright and modern AvaloniaUI theme
 - <a href="https://www.xamarin.com/">Xamarin.Forms</a> for Android, iOS and Tizen
