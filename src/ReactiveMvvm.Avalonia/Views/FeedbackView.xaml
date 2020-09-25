@@ -1,6 +1,9 @@
 ﻿<Window xmlns="https://github.com/avaloniaui" 
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="ReactiveMvvm.Avalonia.Views.FeedbackView"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:ReactiveMvvm.ViewModels;assembly=ReactiveMvvm"
+        d:DataContext="{d:DesignInstance viewModels:FeedbackViewModel, IsDesignTimeCreatable=False}"
         MinWidth="500" MinHeight="400"
         Width="500" Height="400"
         Background="#f0f0f0">
@@ -11,22 +14,22 @@
           <TextBlock Text="Feedback Form" Classes="Heading" />
           <StackPanel Orientation="Horizontal">
             <TextBlock Text="Time passed: "/>
-            <TextBlock Text="{Binding Elapsed, Mode=OneWay}"/>
+            <TextBlock Text="{Binding Elapsed}"/>
           </StackPanel>
-          <TextBox Text="{Binding Title, Mode=TwoWay}" Watermark="Issue title"/>
+          <TextBox Text="{Binding Title}" MaxLength="{Binding TitleLengthMax}" Watermark="Issue title" />
           <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding TitleLength, Mode=OneWay}"/>  
+            <TextBlock Text="{Binding TitleLength}"/>  
             <TextBlock Text=" letters used from "/>
-            <TextBlock Text="{Binding TitleLengthMax, Mode=OneTime}"/>  
+            <TextBlock Text="{Binding TitleLengthMax}"/>  
           </StackPanel>
-          <TextBox Text="{Binding Message, Mode=TwoWay}" Watermark="Issue description"/>
+          <TextBox Text="{Binding Message}" MaxLength="{Binding MessageLengthMax}" Watermark="Issue description"/>
           <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding MessageLength, Mode=OneWay}"/>  
+            <TextBlock Text="{Binding MessageLength}"/>  
             <TextBlock Text=" letters used from "/>
-            <TextBlock Text="{Binding MessageLengthMax, Mode=OneTime}"/>  
+            <TextBlock Text="{Binding MessageLengthMax}"/>  
           </StackPanel>
           <ComboBox Width="170" HorizontalAlignment="Left" Margin="0 5"
-                    SelectedIndex="{Binding Section, Mode=TwoWay}">
+                    SelectedIndex="{Binding Section}">
             <ComboBoxItem Content="User Interface"/>
             <ComboBoxItem Content="Audio"/>
             <ComboBoxItem Content="Video"/>
@@ -37,8 +40,8 @@
               <ColumnDefinition />
               <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <CheckBox Grid.Column="0" Content="Idea" IsChecked="{Binding Idea, Mode=TwoWay}"/>
-            <CheckBox Grid.Column="1" Content="Issue" IsChecked="{Binding Issue, Mode=TwoWay}"/>
+            <CheckBox Grid.Column="0" Content="Idea" IsChecked="{Binding Idea}"/>
+            <CheckBox Grid.Column="1" Content="Issue" IsChecked="{Binding Issue}"/>
           </Grid>
           <TextBlock Text="Please, fill in all the form fields." 
                      IsVisible="{Binding HasErrors}" Foreground="Red"/>

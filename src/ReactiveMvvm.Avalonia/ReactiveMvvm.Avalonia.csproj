@@ -21,9 +21,4 @@
     <ItemGroup>
       <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <Compile Update="Views\FeedbackView.xaml.cs">
-        <DependentUpon>FeedbackView.xaml</DependentUpon>
-      </Compile>
-    </ItemGroup>
 </Project>
