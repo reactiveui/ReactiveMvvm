@@ -1,16 +1,15 @@
 ﻿<rxui:ReactiveWindow 
     xmlns:rxui="http://reactiveui.net"
     x:Class="ReactiveMvvm.Wpf.Views.FeedbackView"
-    x:TypeArguments="viewmodels:FeedbackViewModel"
+    x:TypeArguments="viewModels:FeedbackViewModel"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="clr-namespace:ReactiveMvvm.ViewModels;assembly=ReactiveMvvm"
+    xmlns:viewModels="clr-namespace:ReactiveMvvm.ViewModels;assembly=ReactiveMvvm"
     mc:Ignorable="d" Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <StackPanel Width="300" VerticalAlignment="Center">
-            <TextBlock Text="Feedback" />
+    <GroupBox Width="300" VerticalAlignment="Center" Header="Feedback">
+        <StackPanel Margin="5">
             <TextBlock x:Name="TimeTextBlock" Margin="0 5" Text="Time elapsed: 0s" />
             <TextBox x:Name="TitleTextBox" />
             <TextBlock x:Name="TitleLengthTextBox" Margin="0 5" Text="0 letters used from 15" />
@@ -32,8 +31,8 @@
             </Grid>
             <TextBlock x:Name="HasErrorsTextBox" Foreground="Red"
                        Text="Please, fill in all the form fields." />
-            <Button x:Name="SubmitButton" Width="150" Margin="0 5"
+            <Button x:Name="SubmitButton" Width="150" Margin="0 5" Padding="5"
                     HorizontalAlignment="Left" Content="Send Feedback"/>
         </StackPanel>
-    </Grid>
+    </GroupBox>
 </rxui:ReactiveWindow>
