@@ -3,6 +3,7 @@ using ReactiveMvvm.WinForms.Services;
 using ReactiveMvvm.Services;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Windows;
 using System.Windows.Forms;
 using ReactiveUI;
 
@@ -13,7 +14,6 @@ namespace ReactiveMvvm.WinForms.Views
         public FeedbackView()
         {
             InitializeComponent();
-            ViewModel = new FeedbackViewModel(new WinFormsSender(), new Clock());
             this.WhenActivated(subscriptions =>
             {
                 this.Bind(ViewModel, x => x.Title, x => x.TitleTextBox.Text)
@@ -49,11 +49,11 @@ namespace ReactiveMvvm.WinForms.Views
                 this.BindCommand(ViewModel, x => x.Submit, x => x.SubmitButton)
                     .DisposeWith(subscriptions);
 
-                this.OneWayBind(ViewModel, x => x.Elapsed, x => x.TimeElapsedLabel.Text, time => $"Time elapsed: {time}")
+                this.OneWayBind(ViewModel, x => x.Elapsed, x => x.TimeElapsedLabel.Text, time => $"Elapsed: {time}")
                     .DisposeWith(subscriptions);
             });
         }
-
+        
         public FeedbackViewModel ViewModel { get; set; }
 
         object IViewFor.ViewModel
