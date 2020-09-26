@@ -59,6 +59,15 @@ internal class Build : NukeBuild
                     .SetProjectFile(path)
                     .SetConfiguration(Configuration))));
 
+    Target CompileTerminalApp => _ => _
+        .DependsOn(RunUnitTests)
+        .Executes(() => SourceDirectory
+            .GlobFiles("**/*.Terminal.csproj")
+            .ForEach(path =>
+                DotNetBuild(settings => settings
+                    .SetProjectFile(path)
+                    .SetConfiguration(Configuration))));
+
     Target CompileUniversalWindowsApp => _ => _
         .DependsOn(RunUnitTests)
         .Executes(() =>
@@ -163,11 +172,36 @@ internal class Build : NukeBuild
             Logger.Success("Successfully built WPF project.");
         });
 
+    Target CompileWindowsFormsApp => _ => _
+        .DependsOn(RunUnitTests)
+        .Executes(() =>
+        {
+            var execute = EnvironmentInfo.IsWin && Full;
+            Logger.Info($"Should compile for Windows Forms: {execute}");
+            if (!execute) return;
+
+            Logger.Normal("Restoring packages required by Windows Forms app...");
+            var project = SourceDirectory.GlobFiles("**/*.WinForms.csproj").First();
+            MSBuild(settings => settings
+                .SetProjectFile(project)
+                .SetTargets("Restore"));
+            Logger.Success("Successfully restored Windows Forms packages.");
+
+            Logger.Normal("Building Windows Forms project...");
+            MSBuild(settings => settings
+                .SetProjectFile(project)
+                .SetTargets("Build")
+                .SetConfiguration(Configuration));
+            Logger.Success("Successfully built Windows Forms project.");
+        });
+
     Target RunInteractive => _ => _
         .DependsOn(CompileAvaloniaApp)
+        .DependsOn(CompileTerminalApp)
         .DependsOn(CompileUniversalWindowsApp)
         .DependsOn(CompileXamarinAndroidApp)
         .DependsOn(CompileWindowsPresentationApp)
+        .DependsOn(CompileWindowsFormsApp)
         .Executes(() => SourceDirectory
             .GlobFiles($"**/{InteractiveProjectName}.csproj")
             .Where(x => Interactive)

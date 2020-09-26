@@ -8,6 +8,10 @@ A  truly cross-platform app example created using <a href="https://reactiveui.ne
 | --------------- | --------- | -------------- |
 | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="800" src="https://cdn-images-1.medium.com/max/675/1*JPlUC1YoAuE2eFng29LpaQ.png"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img src="https://cdn-images-1.medium.com/max/1500/1*d1oeBQF9ilZ5h_IIhYktPQ.png" width="800"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="800" src="https://cdn-images-1.medium.com/max/900/1*EsqN0dFMCUknKc-4wuIanA.png"></a> | 
 
+| <a href="https://github.com/dotnet/wpf">WPF</a> | <a href="https://github.com/dotnet/winforms">Windows Forms</a> | <a href="https://github.com/migueldeicaza/gui.cs">Terminal.Gui</a> |
+| --------------- | --------- | -------------- |
+| <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="780" src="https://user-images.githubusercontent.com/6759207/94264350-38409300-ff3f-11ea-9e78-852ee9bc8ae7.png"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img src="https://miro.medium.com/max/493/1*GGwXG5-u_Gc-yMCj8Q1tqQ.png" width="700"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="820" src="https://user-images.githubusercontent.com/6759207/94263920-80ab8100-ff3e-11ea-91f7-9614d6a1c1ae.png"></a> | 
+
 ## Technologies and Tools Used
 - <a href="https://reactiveui.net/">ReactiveUI</a> modern MVVM framework
 - <a href="http://reactivex.io/">Reactive Extensions</a> for the <a href="https://github.com/Reactive-Extensions/Rx.NET">.NET platform</a>
@@ -15,6 +19,7 @@ A  truly cross-platform app example created using <a href="https://reactiveui.ne
 - <a href="http://xunit.github.io/">xUnit</a> tests on <a href="https://www.microsoft.com/net/core">.NET Core</a>
 - <a href="https://github.com/fluentassertions/fluentassertions">FluentAssertions</a> to improve tests readability
 - <a href="https://github.com/nsubstitute/NSubstitute">NSubstitute</a> for stubs and mocks
+- <a href="https://github.com/nuke-build/nuke">NukeBuild</a> for building cross-platform .NET projects using C#
 - <a href="https://github.com/AvaloniaUI/Avalonia">AvaloniaUI</a> for Linux and MacOS
 - <a href="https://github.com/worldbeater/Citrus.Avalonia">Citrus</a> bright and modern AvaloniaUI theme
 - <a href="https://www.xamarin.com/">Xamarin.Forms</a> for Android, iOS and Tizen

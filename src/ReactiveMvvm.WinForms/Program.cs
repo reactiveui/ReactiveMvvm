@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using ReactiveMvvm.Services;
+using ReactiveMvvm.ViewModels;
+using ReactiveMvvm.WinForms.Services;
 using ReactiveMvvm.WinForms.Views;
 
 namespace ReactiveMvvm.WinForms
@@ -11,7 +14,10 @@ namespace ReactiveMvvm.WinForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FeedbackView());
+            Application.Run(new FeedbackView
+            {
+                ViewModel = new FeedbackViewModel(new WinFormsSender(), new Clock())
+            });
         }
     }
 }

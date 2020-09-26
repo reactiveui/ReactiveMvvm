@@ -1,6 +1,4 @@
 ﻿using ReactiveMvvm.ViewModels;
-using ReactiveMvvm.Wpf.Services;
-using ReactiveMvvm.Services;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ReactiveUI;
@@ -12,7 +10,6 @@ namespace ReactiveMvvm.Wpf.Views
         public FeedbackView()
         {
             InitializeComponent();
-            ViewModel = new FeedbackViewModel(new WpfSender(), new Clock());
             this.WhenActivated(subscriptions =>
             {
                 this.Bind(ViewModel, x => x.Title, x => x.TitleTextBox.Text)
