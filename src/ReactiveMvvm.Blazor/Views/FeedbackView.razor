@@ -1,9 +1,79 @@
 ﻿@page "/"
 @namespace ReactiveMvvm.Blazor.Views
+@using ReactiveUI
+@using System.Reactive
 @inherits ReactiveComponentBase<FeedbackViewModel>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="col-lg-6">
+    <h1>Feedback Form</h1>
+    <div class="form-group">
+        <label for="issueTitle">Issue Title</label>
+        <input type="email" class="form-control" id="issueTitle" 
+               aria-describedby="issueTitleHelp" 
+               placeholder="Please, enter issue title..."
+               maxlength="@ViewModel.TitleLengthMax"
+               @bind="@ViewModel.Title"
+               @bind:event="oninput">
+        <small id="issueTitleHelp" class="form-text text-muted">
+            @ViewModel.TitleLength letters used from @ViewModel.TitleLengthMax
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="issueDescription">Issue Description</label>
+        <input type="email" class="form-control" id="issueDescription"
+               aria-describedby="issueDescriptionHelp" 
+               placeholder="Please, enter issue title..."
+               maxlength="@ViewModel.MessageLengthMax"
+               @bind="@ViewModel.Message"
+               @bind:event="oninput">
+        <small id="issueDescriptionHelp" class="form-text text-muted">
+            @ViewModel.MessageLength letters used from @ViewModel.MessageLengthMax
+        </small>
+    </div>
+    <div class="form-group">
+        <select class="form-control" 
+                @bind="@ViewModel.Section" 
+                @bind:event="oninput">
+            <option value="0">User Interface</option>
+            <option value="1">Audio</option>
+            <option value="2">Video</option>
+            <option value="3">Voice</option>
+        </select>
+    </div>
+    <div class="row mb-3">
+        <div class="input-group col-6">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" 
+                           aria-label="Issue"
+                           @bind="@ViewModel.Issue"
+                           @bind:event="oninput">
+                </div>
+            </div>
+            <input type="text" readonly
+                   class="form-control" 
+                   value="Issue">
+        </div>
+        <div class="input-group col-6">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" 
+                           aria-label="Feature suggestion"
+                           @bind="@ViewModel.Idea"
+                           @bind:event="oninput">
+                </div>
+            </div>
+            <input type="text" readonly
+                   class="form-control"
+                   value="Feature suggestion">
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary"
+            @onclick="() => ViewModel.Submit.Execute().Subscribe()"
+            disabled="@ViewModel.HasErrors">
+        Send feedback
+    </button>
+    <small class="text-muted mt-0 mb-4">
+        Time passed: @ViewModel.Elapsed
+    </small>
+</div>
