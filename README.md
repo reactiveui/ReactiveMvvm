@@ -19,7 +19,7 @@ A  truly cross-platform app example created using the <a href="https://reactiveu
 ## Technologies and Tools Used
 - <a href="https://reactiveui.net/">ReactiveUI</a> modern MVVM framework
 - <a href="http://reactivex.io/">Reactive Extensions</a> for the <a href="https://github.com/Reactive-Extensions/Rx.NET">.NET platform</a>
-- <a href="https://github.com/Fody/PropertyChanged">PropertyChanged.Fody</a> for INotifyPropertyChanged injections
+- <a href="https://www.reactiveui.net/docs/handbook/view-models/boilerplate-code">ReactiveUI.Fody</a> for `INotifyPropertyChanged` injections
 - <a href="http://xunit.github.io/">xUnit</a> tests on <a href="https://www.microsoft.com/net/core">.NET Core</a>
 - <a href="https://github.com/fluentassertions/fluentassertions">FluentAssertions</a> to improve tests readability
 - <a href="https://github.com/nsubstitute/NSubstitute">NSubstitute</a> for stubs and mocks
