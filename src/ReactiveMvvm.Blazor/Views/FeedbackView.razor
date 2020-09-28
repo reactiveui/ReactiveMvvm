@@ -51,6 +51,7 @@
                 </div>
             </div>
             <input type="text" readonly
+                   tabindex="-1"
                    class="form-control" 
                    value="Issue">
         </div>
@@ -64,6 +65,7 @@
                 </div>
             </div>
             <input type="text" readonly
+                   tabindex="-1"
                    class="form-control"
                    value="Feature suggestion">
         </div>
@@ -73,7 +75,7 @@
             disabled="@ViewModel.HasErrors">
         Send feedback
     </button>
-    <small class="text-muted mt-0 mb-4">
+    <small class="text-muted ml-2">
         Time passed: @ViewModel.Elapsed
     </small>
 </div>
