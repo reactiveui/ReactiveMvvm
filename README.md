@@ -14,7 +14,7 @@ A  truly cross-platform app example created using <a href="https://reactiveui.ne
 
 | <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">ASP .NET Core via Blazor</a> | 
 | --------------- | 
-| <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="450" src="https://user-images.githubusercontent.com/6759207/94431677-44765b80-019e-11eb-9ebd-7e15b51a8255.png"></a> | 
+| <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="420" src="https://user-images.githubusercontent.com/6759207/94431677-44765b80-019e-11eb-9ebd-7e15b51a8255.png"></a> | 
 
 ## Technologies and Tools Used
 - <a href="https://reactiveui.net/">ReactiveUI</a> modern MVVM framework
