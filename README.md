@@ -12,6 +12,10 @@ A  truly cross-platform app example created using <a href="https://reactiveui.ne
 | --------------- | --------- | -------------- |
 | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="780" src="https://user-images.githubusercontent.com/6759207/94264350-38409300-ff3f-11ea-9e78-852ee9bc8ae7.png"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img src="https://miro.medium.com/max/493/1*GGwXG5-u_Gc-yMCj8Q1tqQ.png" width="700"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="820" src="https://user-images.githubusercontent.com/6759207/94263920-80ab8100-ff3e-11ea-91f7-9614d6a1c1ae.png"></a> | 
 
+| <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">ASP .NET Core via Blazor</a> | 
+| --------------- | 
+| <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="450" src="https://user-images.githubusercontent.com/6759207/94431677-44765b80-019e-11eb-9ebd-7e15b51a8255.png"></a> | 
+
 ## Technologies and Tools Used
 - <a href="https://reactiveui.net/">ReactiveUI</a> modern MVVM framework
 - <a href="http://reactivex.io/">Reactive Extensions</a> for the <a href="https://github.com/Reactive-Extensions/Rx.NET">.NET platform</a>
@@ -24,6 +28,7 @@ A  truly cross-platform app example created using <a href="https://reactiveui.ne
 - <a href="https://github.com/worldbeater/Citrus.Avalonia">Citrus</a> bright and modern AvaloniaUI theme
 - <a href="https://www.xamarin.com/">Xamarin.Forms</a> for Android, iOS and Tizen
 - <a href="https://docs.microsoft.com/en-us/windows/uwp/index">Universal Windows Platform</a> for Windows 10
+- <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">ASP .NET Core Blazor</a> bringing ReactiveUI to the Web
 - <a href="https://msdn.microsoft.com/ru-ru/library/aa970268(v=vs.100).aspx">Windows Presentation Foundation</a>
 - <a href="https://docs.microsoft.com/ru-ru/dotnet/framework/winforms/windows-forms-overview">Windows Forms</a>
 - <a href="https://www.jetbrains.com/rider/">JetBrains Rider</a> and <a href="https://visualstudio.microsoft.com/">Microsoft Visual Studio 2019</a> IDEs
