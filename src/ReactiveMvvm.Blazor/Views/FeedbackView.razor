@@ -71,12 +71,17 @@
                    value="Feature suggestion">
         </div>
     </div>
-    <button type="button" class="btn btn-primary"
-            @onclick="() => Observable.Return(Unit.Default).InvokeCommand(ViewModel.Submit)"
-            disabled="@ViewModel.HasErrors">
-        Send feedback
-    </button>
-    <small class="text-muted ml-2">
-        Time passed: @ViewModel.Elapsed
+    <small class="text-danger" hidden="@ViewModel.HasErrors.Equals(false)">
+        Please, fill in all the form fields.
     </small>
+    <div>
+        <button type="button" class="btn btn-primary"
+                @onclick="() => Observable.Return(Unit.Default).InvokeCommand(ViewModel.Submit)"
+                disabled="@ViewModel.HasErrors">
+            Send feedback
+        </button>
+        <small class="text-muted ml-2">
+            Time passed: @ViewModel.Elapsed
+        </small>
+    </div>
 </div>
