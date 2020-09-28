@@ -3,9 +3,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.Blazor" Version="11.5.35" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />
+    <ProjectReference Include="..\ReactiveMvvm.Blazor\ReactiveMvvm.Blazor.csproj" />
   </ItemGroup>
 </Project>

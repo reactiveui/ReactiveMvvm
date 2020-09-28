@@ -1,10 +1,5 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using ReactiveMvvm.Blazor.Wasm.Services;
-using ReactiveMvvm.Interfaces;
-using ReactiveMvvm.Services;
-using ReactiveMvvm.ViewModels;
 
 namespace ReactiveMvvm.Blazor.Wasm
 {
@@ -14,10 +9,7 @@ namespace ReactiveMvvm.Blazor.Wasm
         {
             var host = WebAssemblyHostBuilder.CreateDefault(args);
             host.RootComponents.Add<App>("app");
-            host.Services
-                .AddSingleton<IClock, Clock>()
-                .AddSingleton<ISender, LoggingSender>()
-                .AddSingleton<FeedbackViewModel>();
+            host.Services.AddAppServices();
             await host.Build().RunAsync();
         }
     }
