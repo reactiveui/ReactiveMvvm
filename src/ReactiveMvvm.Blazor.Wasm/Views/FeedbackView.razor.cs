@@ -10,7 +10,7 @@ namespace ReactiveMvvm.Blazor.Wasm.Views
         public FeedbackView() => this.WhenActivated(disposables => { });
 
         [Inject]
-        public FeedbackViewModel Dependency
+        public FeedbackViewModel FeedbackViewModel
         {
             get => ViewModel;
             set => ViewModel = value;

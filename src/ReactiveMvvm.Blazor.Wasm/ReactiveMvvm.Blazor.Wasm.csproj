@@ -16,4 +16,9 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Index.razor" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Properties\launchSettings.json">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
