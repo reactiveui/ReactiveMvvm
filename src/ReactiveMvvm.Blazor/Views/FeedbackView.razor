@@ -71,10 +71,10 @@
                    value="Feature suggestion">
         </div>
     </div>
-    <small class="text-danger" hidden="@ViewModel.HasErrors.Equals(false)">
+    <div class="alert alert-danger" hidden="@ViewModel.HasErrors.Equals(false)">
         Please, fill in all the form fields.
-    </small>
-    <div>
+    </div>
+    <div class="mt-2">
         <button type="button" class="btn btn-primary"
                 @onclick="() => Observable.Return(Unit.Default).InvokeCommand(ViewModel.Submit)"
                 disabled="@ViewModel.HasErrors">
