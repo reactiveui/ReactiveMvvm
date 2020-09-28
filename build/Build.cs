@@ -68,6 +68,15 @@ internal class Build : NukeBuild
                     .SetProjectFile(path)
                     .SetConfiguration(Configuration))));
 
+    Target CompileBlazorApp => _ => _
+        .DependsOn(RunUnitTests)
+        .Executes(() => SourceDirectory
+            .GlobFiles("**/*.Blazor.csproj")
+            .ForEach(path =>
+                DotNetBuild(settings => settings
+                    .SetProjectFile(path)
+                    .SetConfiguration(Configuration))));
+
     Target CompileUniversalWindowsApp => _ => _
         .DependsOn(RunUnitTests)
         .Executes(() =>

@@ -3,32 +3,31 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
 using ReactiveMvvm.Interfaces;
-using PropertyChanged;
+using ReactiveUI.Fody.Helpers;
 using ReactiveUI;
-using Splat;
 
 namespace ReactiveMvvm.ViewModels
 {
-    [AddINotifyPropertyChangedInterface]
-    public sealed class FeedbackViewModel : IActivatableViewModel, IEnableLogger
+    public sealed class FeedbackViewModel : ReactiveObject, IActivatableViewModel
     {
+        public ViewModelActivator Activator { get; } = new ViewModelActivator();
         public ReactiveCommand<Unit, Unit> Submit { get; }
-        public ViewModelActivator Activator { get; }
-        public bool HasErrors { get; private set; }
-        public string Elapsed { get; private set; } = string.Empty;
+        
+        [Reactive] public bool HasErrors { get; private set; }
+        [Reactive] public string Elapsed { get; private set; } = string.Empty;
 
-        public string Title { get; set; } = string.Empty;
-        public int TitleLength => Title.Length;
-        public int TitleLengthMax => 15;
+        [Reactive] public string Title { get; set; } = string.Empty;
+        [Reactive] public int TitleLength { get; private set; }
+        public int TitleLengthMax { get; } = 15;
 
-        public string Message { get; set; } = string.Empty;
-        public int MessageLength => Message.Length;
-        public int MessageLengthMax => 30;
+        [Reactive] public string Message { get; set; } = string.Empty;
+        [Reactive] public int MessageLength { get; private set; }
+        public int MessageLengthMax { get; } = 30;
 
-        public int Section { get; set; }
-        public bool Issue { get; set; } = true;
-        public bool Idea { get; set; }
-
+        [Reactive] public int Section { get; set; }
+        [Reactive] public bool Issue { get; set; } = true;
+        [Reactive] public bool Idea { get; set; }
+        
         public FeedbackViewModel(ISender sender, IClock clock)
         {
             this.WhenAnyValue(x => x.Idea)
@@ -37,6 +36,13 @@ namespace ReactiveMvvm.ViewModels
             this.WhenAnyValue(x => x.Issue)
                 .Select(selected => !selected)
                 .Subscribe(value => Idea = value);
+
+            this.WhenAnyValue(x => x.Title)
+                .Select(title => title.Length)
+                .Subscribe(length => TitleLength = length);
+            this.WhenAnyValue(x => x.Message)
+                .Select(message => message.Length)
+                .Subscribe(length => MessageLength = length);
 
             var valid = this
                 .WhenAnyValue(
@@ -56,14 +62,11 @@ namespace ReactiveMvvm.ViewModels
                 () => sender.Send(Title, Message, Section, Issue), 
                 valid);
 
-            Activator = new ViewModelActivator();
-            this.WhenActivated(disposables =>
-            {
+            this.WhenActivated(disposables => 
                 clock.Tick.Select(second => $"{second}s")
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .Subscribe(elapsed => Elapsed = elapsed)
-                    .DisposeWith(disposables);
-            });
-        } 
+                    .DisposeWith(disposables));
+        }
     }
 }
