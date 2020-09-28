@@ -12,7 +12,7 @@ A  truly cross-platform app example created using the <a href="https://reactiveu
 | --------------- | --------- | -------------- |
 | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="780" src="https://user-images.githubusercontent.com/6759207/94264350-38409300-ff3f-11ea-9e78-852ee9bc8ae7.png"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img src="https://miro.medium.com/max/493/1*GGwXG5-u_Gc-yMCj8Q1tqQ.png" width="700"></a> | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="820" src="https://user-images.githubusercontent.com/6759207/94263920-80ab8100-ff3e-11ea-91f7-9614d6a1c1ae.png"></a> | 
 
-| <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">ASP .NET Core via Blazor</a> | 
+| ASP .NET Core via <a href="https://github.com/worldbeater/ReactiveMvvm/tree/main/src/reactivemvvm.blazor.server">Blazor</a> or <a href="https://github.com/worldbeater/ReactiveMvvm/tree/main/src/reactivemvvm.blazor.wasm">Blazor.Wasm</a> | 
 | --------------- | 
 | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="420" src="https://user-images.githubusercontent.com/6759207/94431677-44765b80-019e-11eb-9ebd-7e15b51a8255.png"></a> | 
 
