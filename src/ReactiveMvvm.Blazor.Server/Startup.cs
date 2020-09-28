@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using ReactiveMvvm.Blazor.Services;
-using ReactiveMvvm.Blazor.Views;
+using ReactiveMvvm.Blazor.Server.Services;
+using ReactiveMvvm.Blazor.Server.Views;
 using ReactiveMvvm.Interfaces;
 using ReactiveMvvm.Services;
 using ReactiveMvvm.ViewModels;
 
-namespace ReactiveMvvm.Blazor
+namespace ReactiveMvvm.Blazor.Server
 {
     public class Startup
     {

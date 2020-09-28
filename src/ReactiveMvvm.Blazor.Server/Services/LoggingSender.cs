@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using ReactiveMvvm.Interfaces;
 
-namespace ReactiveMvvm.Blazor.Services
+namespace ReactiveMvvm.Blazor.Server.Services
 {
     public class LoggingSender : ISender
     {

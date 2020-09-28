@@ -3,7 +3,7 @@ using ReactiveMvvm.ViewModels;
 using ReactiveUI;
 using ReactiveUI.Blazor;
 
-namespace ReactiveMvvm.Blazor.Views
+namespace ReactiveMvvm.Blazor.Server.Views
 {
     public partial class FeedbackView : ReactiveComponentBase<FeedbackViewModel>
     {

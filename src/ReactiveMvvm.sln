@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.Terminal", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "build", "..\build\build.csproj", "{873F62EE-0231-4206-A2E6-B9DF19E56004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.Blazor", "ReactiveMvvm.Blazor\ReactiveMvvm.Blazor.csproj", "{13C5D9AC-85B0-4B8D-BFCD-D33E65816988}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.Blazor.Server", "ReactiveMvvm.Blazor.Server\ReactiveMvvm.Blazor.Server.csproj", "{13C5D9AC-85B0-4B8D-BFCD-D33E65816988}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveMvvm.Blazor.Wasm", "ReactiveMvvm.Blazor.Wasm\ReactiveMvvm.Blazor.Wasm.csproj", "{C059C2D5-E9A0-491F-A2E2-2A7FE1F736F0}"
 EndProject
