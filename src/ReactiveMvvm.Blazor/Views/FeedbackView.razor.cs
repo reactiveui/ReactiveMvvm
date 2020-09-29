@@ -1,18 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
-using ReactiveMvvm.ViewModels;
+﻿using ReactiveMvvm.ViewModels;
 using ReactiveUI;
+using ReactiveUI.Blazor;
 
 namespace ReactiveMvvm.Blazor.Views
 {
-    public partial class FeedbackView
+    public partial class FeedbackView : ReactiveInjectableComponentBase<FeedbackViewModel>
     {
         public FeedbackView() => this.WhenActivated(disposables => { });
-
-        [Inject]
-        public FeedbackViewModel Parameter
-        {
-            get => ViewModel;
-            set => ViewModel = value;
-        }
     }
 }
