@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <StartupObject>ReactiveMvvm.Wpf.Program</StartupObject>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
     <UseWpf>true</UseWpf>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.WPF" Version="11.4.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="19.5.41" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />

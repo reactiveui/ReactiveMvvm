@@ -5,15 +5,17 @@ using System.Reactive.Subjects;
 using ReactiveMvvm.ViewModels;
 using ReactiveUI;
 using Terminal.Gui;
+using ReactiveMarbles.ObservableEvents;
 using NStack;
 
 namespace ReactiveMvvm.Terminal.Views
 {
     public sealed class FeedbackView : Window, IViewFor<FeedbackViewModel>, IDisposable
     {
-        private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
+        private readonly CompositeDisposable _subscriptions = [];
         
-        public FeedbackView(FeedbackViewModel viewModel) : base(new Rect(0, 0, 30, 20), "Feedback Form")
+        public FeedbackView(FeedbackViewModel viewModel) : 
+            base(new Rect(0, 0, 30, 20))
         {
             ViewModel = viewModel;
             ViewModel.Activator.Activate();
@@ -34,13 +36,13 @@ namespace ReactiveMvvm.Terminal.Views
 
         private RadioGroup SectionRadioGroup()
         {
-            var radioGroup = new RadioGroup(new[] {"User Interface", "Audio", "Video", "Voice"});
+            var radioGroup = new RadioGroup(["User Interface", "Audio", "Video", "Voice"]);
             this.WhenAnyValue(x => x.ViewModel.Section)
-                .BindTo(radioGroup, x => x.Selected)
+                .BindTo(radioGroup, x => x.SelectedItem)
                 .DisposeWith(_subscriptions);
 
             var selected = new Subject<int>().DisposeWith(_subscriptions);
-            radioGroup.SelectionChanged = index => selected.OnNext(index);
+            radioGroup.SelectedItemChanged += (sender, args) => selected.OnNext(args.SelectedItem);
             selected.AsObservable()
                 .BindTo(this, x => x.ViewModel.Section)
                 .DisposeWith(_subscriptions);
@@ -60,7 +62,7 @@ namespace ReactiveMvvm.Terminal.Views
                 .DisposeWith(_subscriptions);
             this.WhenAnyValue(x => x.ViewModel.Idea)
                 .Skip(1)
-                .Subscribe(args => item.Redraw(item.Frame))
+                .Subscribe(args => item.OnDrawContent(item.Frame))
                 .DisposeWith(_subscriptions);
             return item;
         }
@@ -78,7 +80,7 @@ namespace ReactiveMvvm.Terminal.Views
                 .DisposeWith(_subscriptions);
             this.WhenAnyValue(x => x.ViewModel.Issue)
                 .Skip(1)
-                .Subscribe(args => item.Redraw(item.Frame))
+                .Subscribe(args => item.OnDrawContent(item.Frame))
                 .DisposeWith(_subscriptions);
             return item;
         }
@@ -100,7 +102,7 @@ namespace ReactiveMvvm.Terminal.Views
                 .BindTo(text, x => x.Text)
                 .DisposeWith(_subscriptions);
             text.Events()
-                .Changed
+                .TextChanged
                 .Select(older => text.Text)
                 .DistinctUntilChanged()
                 .BindTo(ViewModel, x => x.Message)
@@ -125,7 +127,7 @@ namespace ReactiveMvvm.Terminal.Views
                 .BindTo(text, x => x.Text)
                 .DisposeWith(_subscriptions);
             text.Events()
-                .Changed
+                .TextChanged
                 .Select(older => text.Text)
                 .DistinctUntilChanged()
                 .BindTo(ViewModel, x => x.Title)
@@ -145,7 +147,15 @@ namespace ReactiveMvvm.Terminal.Views
         
         public FeedbackViewModel ViewModel { get; set; }
         
-        public void Dispose() => _subscriptions.Dispose();
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                _subscriptions.Dispose();
+                ViewModel.Activator.Deactivate();
+            }
+        }
 
         object IViewFor.ViewModel
         {

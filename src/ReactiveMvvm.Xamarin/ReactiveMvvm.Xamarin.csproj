@@ -3,8 +3,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.XamForms" Version="11.4.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="19.5.41" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2622" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />

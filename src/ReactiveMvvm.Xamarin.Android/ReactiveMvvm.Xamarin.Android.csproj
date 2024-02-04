@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>ReactiveMvvm.Xamarin.Droid</RootNamespace>
     <AssemblyName>ReactiveMvvm.Xamarin.Android</AssemblyName>
-    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v13.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -47,8 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.AndroidSupport" Version="11.4.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
+    <PackageReference Include="ReactiveUI.AndroidSupport" Version="19.5.41" />
+    <PackageReference Include="Xamarin.AndroidX.MediaRouter">
+      <Version>1.6.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2622" />
     <PackageReference Include="Xamarin.Android.Support.v7.Preference" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.Media.Compat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.Fragment" Version="28.0.0.3" />
