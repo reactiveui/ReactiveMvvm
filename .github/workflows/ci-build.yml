@@ -10,13 +10,31 @@ env:
   productNamespacePrefix: "ReactiveMvvm"
 
 jobs:
-  build:
-    uses: reactiveui/actions-common/.github/workflows/workflow-common-setup-and-build.yml@main
-    with:
-      configuration: Release
-      productNamespacePrefix: "ReactiveMvvm"
-      useVisualStudioPreview: false
-      useMauiCheckDotNetTool: false
-      installWindowsSdk: false
-      installWorkflows: false
-      solutionFile: 'ReactiveMvvm.sln'
+  windows-latest:
+    name: windows-latest
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Java JDK 11'
+        uses: actions/setup-java@v4.0.0
+        with:
+          distribution: 'microsoft'
+          java-version: '11'
+      
+      - name: 'Install DotNet workloads'
+        shell: bash
+        run: |
+          dotnet workload install android ios tvos macos maui maccatalyst wasm-tools-net7 
+
+      - name: 'Cache: .nuke/temp, ~/.nuget/packages'
+        uses: actions/cache@v3
+        with:
+          path: |
+            .nuke/temp
+            ~/.nuget/packages
+          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
+      - name: 'Run: RunInteractive'
+        run: ./build.cmd RunInteractive
