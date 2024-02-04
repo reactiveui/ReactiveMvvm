@@ -1,20 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
+		<AvaloniaVersion>11.0.7</AvaloniaVersion>
     </PropertyGroup>
     <ItemGroup>
         <Compile Update="**\*.xaml.cs">
             <DependentUpon>%(Filename)</DependentUpon>
         </Compile>
-        <EmbeddedResource Include="**\*.xaml">
+		<AvaloniaResource Include="**\*.xaml">
             <SubType>Designer</SubType>
-        </EmbeddedResource>
+        </AvaloniaResource>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.7" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.7" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.7" />
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
         <PackageReference Include="Citrus.Avalonia" Version="2.1.1" />
     </ItemGroup>
     <ItemGroup>
