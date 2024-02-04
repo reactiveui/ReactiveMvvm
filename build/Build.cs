@@ -1,27 +1,23 @@
-using System;
 using System.Linq;
 using Nuke.Common;
-using Nuke.Common.Execution;
 using Nuke.Common.IO;
 using Nuke.Common.Tools.DotNet;
-using Nuke.Common.Tools.MSBuild;
 using Nuke.Common.Utilities.Collections;
+using Serilog;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static Nuke.Common.Tools.MSBuild.MSBuildTasks;
-using Serilog;
+using Nuke.Common.Tools.MSBuild;
 
-// ReSharper disable ArrangeTypeMemberModifiers
-
-[UnsetVisualStudioEnvironmentVariables]
-internal class Build : NukeBuild
+class Build : NukeBuild
 {
     const string InteractiveProjectName = "ReactiveMvvm.Avalonia";
     const string CoverageFileName = "coverage.cobertura.xml";
 
     public static int Main() => Execute<Build>(x => x.RunInteractive);
-    
-    [Parameter] readonly string Configuration = IsLocalBuild ? "Debug" : "Release";
+
+    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
+    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
     [Parameter] readonly bool Interactive;
     [Parameter] readonly bool Full;
 
@@ -33,8 +29,8 @@ internal class Build : NukeBuild
         .Executes(() => SourceDirectory
             .GlobDirectories("**/bin", "**/obj", "**/AppPackages", "**/BundleArtifacts")
             .Concat(RootDirectory.GlobDirectories("**/artifacts"))
-            .ForEach(DeleteDirectory));
-    
+            .ForEach(ap => ap.DeleteDirectory()));
+
     Target RunUnitTests => _ => _
         .DependsOn(Clean)
         .Executes(() => SourceDirectory
@@ -76,86 +72,14 @@ internal class Build : NukeBuild
                     .SetProjectFile(path)
                     .SetConfiguration(Configuration))));
 
-    Target CompileUniversalWindowsApp => _ => _
+    Target CompileMauiApp => _ => _
         .DependsOn(RunUnitTests)
-        .Executes(() =>
-        {
-            var execute = EnvironmentInfo.IsWin && Full;
-            Log.Information($"Should compile for Universal Windows: {execute}");
-            if (!execute) return;
-
-            Log.Debug("Restoring packages required by UAP...");
-            var project = SourceDirectory.GlobFiles("**/*.Uwp.csproj").First();
-            MSBuild(settings => settings
-                .SetProjectFile(project)
-                .SetTargets("Restore"));
-            Log.Debug("Successfully restored UAP packages.");
-
-            new[] { MSBuildTargetPlatform.x86,
-                    MSBuildTargetPlatform.x64,
-                    MSBuildTargetPlatform.arm }
-                .ForEach(BuildApp);
-
-            void BuildApp(MSBuildTargetPlatform platform)
-            {
-                Log.Debug("Cleaning UAP project...");
-                MSBuild(settings => settings
-                    .SetProjectFile(project)
-                    .SetTargets("Clean"));
-                Log.Debug("Successfully managed to clean UAP project.");
-
-                Log.Debug($"Building UAP project for {platform}...");
-                MSBuild(settings => settings
-                    .SetProjectFile(project)
-                    .SetTargets("Build")
-                    .SetConfiguration(Configuration)
-                    .SetTargetPlatform(platform)
-                    .SetProperty("AppxPackageSigningEnabled", false)
-                    .SetProperty("AppxPackageDir", ArtifactsDirectory)
-                    .SetProperty("UapAppxPackageBuildMode", "CI")
-                    .SetProperty("AppxBundle", "Always"));
-                Log.Debug($"Successfully built UAP project for {platform}.");
-            }
-        });
-
-    Target CompileXamarinAndroidApp => _ => _
-        .DependsOn(RunUnitTests)
-        .Executes(() =>
-        {
-            var execute = EnvironmentInfo.IsWin && Full;
-            Log.Information($"Should compile for Android: {execute}");
-            if (!execute) return;
-
-            Log.Debug("Restoring packages required by Xamarin Android...");
-            var project = SourceDirectory.GlobFiles("**/*.Xamarin.Android.csproj").First();
-            MSBuild(settings => settings
-                .SetProjectFile(project)
-                .SetTargets("Restore"));
-            Log.Debug("Successfully restored Xamarin Android packages.");
-
-            Log.Debug("Building Xamarin Android project...");
-            var java = Environment.GetEnvironmentVariable("JAVA_HOME");
-            MSBuild(settings => settings
-                .SetProjectFile(project)
-                .SetTargets("Build")
-                .SetConfiguration(Configuration)
-                .SetProperty("JavaSdkDirectory", java));
-            Log.Debug("Successfully built Xamarin Android project.");
-
-            Log.Debug("Signing Android package...");
-            MSBuild(settings => settings
-                .SetProjectFile(project)
-                .SetTargets("SignAndroidPackage")
-                .SetConfiguration(Configuration)
-                .SetProperty("JavaSdkDirectory", java));
-            Log.Debug("Successfully signed Xamarin Android APK.");
-
-            Log.Debug("Moving APK files to artifacts directory...");
-            SourceDirectory
-                .GlobFiles("**/bin/**/*-Signed.apk")
-                .ForEach(file => MoveFileToDirectory(file, ArtifactsDirectory));
-            Log.Debug("Successfully moved APK files.");
-        });
+        .Executes(() => SourceDirectory
+            .GlobFiles("**/*.Maui.csproj")
+            .ForEach(path =>
+                DotNetBuild(settings => settings
+                    .SetProjectFile(path)
+                    .SetConfiguration(Configuration))));
 
     Target CompileWindowsPresentationApp => _ => _
         .DependsOn(RunUnitTests)
@@ -205,18 +129,19 @@ internal class Build : NukeBuild
 
     Target RunInteractive => _ => _
         .DependsOn(CompileAvaloniaApp)
+        .DependsOn(CompileBlazorApp)
+        .DependsOn(CompileMauiApp)
         .DependsOn(CompileTerminalApp)
-        .DependsOn(CompileUniversalWindowsApp)
-        .DependsOn(CompileXamarinAndroidApp)
         .DependsOn(CompileWindowsPresentationApp)
         .DependsOn(CompileWindowsFormsApp)
         .Executes(() => SourceDirectory
             .GlobFiles($"**/{InteractiveProjectName}.csproj")
             .Where(x => Interactive)
-            .ForEach(path => 
+            .ForEach(path =>
                 DotNetRun(settings => settings
                     .SetProjectFile(path)
                     .SetConfiguration(Configuration)
                     .EnableNoRestore()
                     .EnableNoBuild())));
+
 }
