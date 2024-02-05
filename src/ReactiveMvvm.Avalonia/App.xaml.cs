@@ -1,11 +1,10 @@
 ﻿using Avalonia;
-using Avalonia.Logging.Serilog;
+using Avalonia.Logging;
 using Avalonia.Markup.Xaml;
 using ReactiveMvvm.Avalonia.Services;
 using ReactiveMvvm.Avalonia.Views;
 using ReactiveMvvm.Services;
 using ReactiveMvvm.ViewModels;
-using Serilog;
 
 namespace ReactiveMvvm.Avalonia
 {
@@ -19,12 +18,6 @@ namespace ReactiveMvvm.Avalonia
 
         public override void OnFrameworkInitializationCompleted()
         {
-#if DEBUG
-            SerilogLogger.Initialize(new LoggerConfiguration()
-                .MinimumLevel.Warning()
-                .WriteTo.Trace(outputTemplate: "{Area}: {Message}")
-                .CreateLogger());
-#endif
             var view = new FeedbackView();
             var context = new FeedbackViewModel(
                 new AvaloniaSender(view),

@@ -1,9 +1,0 @@
-﻿<Application 
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:xamarin="clr-namespace:ReactiveMvvm.Xamarin.Views;assembly=ReactiveMvvm.Xamarin"
-    x:Class="ReactiveMvvm.Xamarin.App">
-    <Application.MainPage>
-        <xamarin:FeedbackView />
-    </Application.MainPage>
-</Application>

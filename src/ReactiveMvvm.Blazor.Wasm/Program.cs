@@ -1,16 +1,13 @@
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using ReactiveMvvm.Blazor.Wasm;
+using ReactiveMvvm.Blazor;
 
-namespace ReactiveMvvm.Blazor.Wasm
-{
-    public class Program
-    {
-        public static async Task Main(string[] args)
-        {
-            var host = WebAssemblyHostBuilder.CreateDefault(args);
-            host.RootComponents.Add<App>("app");
-            host.Services.AddAppServices();
-            await host.Build().RunAsync();
-        }
-    }
-}
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Services
+    .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
+    .AddAppServices();
+await builder.Build().RunAsync();

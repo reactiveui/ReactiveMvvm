@@ -1,0 +1,39 @@
+﻿<rxui:ReactiveContentPage
+    x:Class="ReactiveMvvm.Maui.Views.FeedbackView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:rxui="clr-namespace:ReactiveUI.Maui;assembly=ReactiveUI.Maui"
+    xmlns:vm="clr-namespace:ReactiveMvvm.ViewModels;assembly=ReactiveMvvm"
+    x:TypeArguments="vm:FeedbackViewModel">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Label Style="{DynamicResource TitleStyle}" Text="Feedback" />
+            <Label x:Name="TimeElapsedLabel" />
+            <Entry x:Name="TitleEntry" Placeholder="Title" />
+            <Label x:Name="TitleLengthEntry" />
+            <Entry x:Name="MessageEntry" Placeholder="Message" />
+            <Label x:Name="MessageLengthEntry" />
+            <Picker x:Name="SectionPicker">
+                <Picker.Items>
+                    <x:String>User Interface</x:String>
+                    <x:String>Audio</x:String>
+                    <x:String>Video</x:String>
+                    <x:String>Voice</x:String>
+                </Picker.Items>
+            </Picker>
+            <StackLayout Orientation="Horizontal">
+                <Switch x:Name="IdeaSwitch" />
+                <Label Text="Idea" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Switch x:Name="IssueSwitch" />
+                <Label Text="Issue" />
+            </StackLayout>
+            <Label
+                x:Name="HasErrorsLabel"
+                Text="Please, fill in all the form fields."
+                TextColor="Red" />
+            <Button x:Name="SubmitButton" Text="Send Feedback" />
+        </StackLayout>
+    </ContentPage.Content>
+</rxui:ReactiveContentPage>
