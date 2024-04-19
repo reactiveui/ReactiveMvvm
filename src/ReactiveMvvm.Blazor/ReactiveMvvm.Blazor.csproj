@@ -5,7 +5,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="ReactiveUI.Blazor" Version="19.5.72" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.4" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />
