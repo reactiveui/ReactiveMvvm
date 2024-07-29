@@ -1,9 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
-    <PackageReference Include="ReactiveUI" Version="20.1.1" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="ReactiveUI" Version="20.1.1" />
+		<PackageReference Include="ReactiveUI.SourceGenerators" Version="1.0.3" PrivateAssets="all" />
+		<PackageReference Include="System.Text.Json" Version="8.0.4" />
+	</ItemGroup>
 </Project>

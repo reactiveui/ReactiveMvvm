@@ -3,30 +3,38 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
 using ReactiveMvvm.Interfaces;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI;
 
 namespace ReactiveMvvm.ViewModels
 {
-    public sealed class FeedbackViewModel : ReactiveObject, IActivatableViewModel
+    public partial class FeedbackViewModel : ReactiveObject, IActivatableViewModel
     {
+        [Reactive] 
+        private bool _hasErrors;
+        [Reactive] 
+        private string _elapsed = string.Empty;
+        [Reactive] 
+        private string _title = string.Empty;
+        [Reactive] 
+        private int _titleLength;
+        [Reactive] 
+        private string _message = string.Empty;
+        [Reactive] 
+        private int _messageLength;
+        [Reactive] 
+        private int _section;
+        [Reactive] 
+        private bool _issue = true;
+        [Reactive] 
+        private bool _idea;
+
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
         public ReactiveCommand<Unit, Unit> Submit { get; }
-        
-        [Reactive] public bool HasErrors { get; private set; }
-        [Reactive] public string Elapsed { get; private set; } = string.Empty;
 
-        [Reactive] public string Title { get; set; } = string.Empty;
-        [Reactive] public int TitleLength { get; private set; }
         public int TitleLengthMax { get; } = 15;
 
-        [Reactive] public string Message { get; set; } = string.Empty;
-        [Reactive] public int MessageLength { get; private set; }
         public int MessageLengthMax { get; } = 30;
-
-        [Reactive] public int Section { get; set; }
-        [Reactive] public bool Issue { get; set; } = true;
-        [Reactive] public bool Idea { get; set; }
         
         public FeedbackViewModel(ISender sender, IClock clock)
         {
