@@ -14,7 +14,7 @@ namespace ReactiveMvvm.Terminal
             Application.Init();
             Application.Run(
                 new FeedbackView(
-                    new FeedbackViewModel(
+                    new(
                         new TerminalSender(), 
                         new Clock())));
         }

@@ -21,7 +21,7 @@ namespace ReactiveMvvm.Maui.Views
                 this.OneWayBind(ViewModel, x => x.TitleLengthMax, x => x.TitleEntry.MaxLength)
                     .DisposeWith(subscriptions);
 
-                this.WhenAnyValue(x => x.ViewModel.TitleLength, x => x.ViewModel.TitleLengthMax)
+                this.WhenAnyValue(x => x.ViewModel!.TitleLength, x => x.ViewModel!.TitleLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
                     .BindTo(this, x => x.TitleLengthEntry.Text)
                     .DisposeWith(subscriptions);
@@ -31,7 +31,7 @@ namespace ReactiveMvvm.Maui.Views
                 this.OneWayBind(ViewModel, x => x.MessageLengthMax, x => x.MessageEntry.MaxLength)
                     .DisposeWith(subscriptions);
 
-                this.WhenAnyValue(x => x.ViewModel.MessageLength, x => x.ViewModel.MessageLengthMax)
+                this.WhenAnyValue(x => x.ViewModel!.MessageLength, x => x.ViewModel!.MessageLengthMax)
                     .Select(values => $"{values.Item1} letters used from {values.Item2}")
                     .BindTo(this, x => x.MessageLengthEntry.Text)
                     .DisposeWith(subscriptions);

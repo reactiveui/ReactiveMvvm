@@ -14,29 +14,28 @@ namespace ReactiveMvvm.Terminal.Views
     {
         private readonly CompositeDisposable _subscriptions = [];
         
-        public FeedbackView(FeedbackViewModel viewModel) : 
-            base(new Rect(0, 0, 30, 20))
+        public FeedbackView(FeedbackViewModel viewModel)
         {
             ViewModel = viewModel;
             ViewModel.Activator.Activate();
             this.StackPanel(TimeElapsedLabel())
-                .Append(new Label("Issue Title"))
+                .Append(new Label() { Text = "Issue Title" })
                 .Append(TitleDescription())
                 .Append(TitleInput())
-                .Append(new Label("Issue Description"))
+                .Append(new Label() { Text = "Issue Description" })
                 .Append(MessageDescription())
                 .Append(MessageInput())
-                .Append(new Label("Feedback Type"))
+                .Append(new Label() { Text = "Feedback Type" })
                 .Append(IssueCheckBox())
                 .Append(IdeaCheckBox())
-                .Append(new Label("Feedback Category"))
+                .Append(new Label() { Text = "Feedback Category" })
                 .Append(SectionRadioGroup())
-                .Append(new Button("Send Feedback"), 4);
+                .Append(new Button() { Text = "Send Feedback" }, 4);
         }
 
         private RadioGroup SectionRadioGroup()
         {
-            var radioGroup = new RadioGroup(["User Interface", "Audio", "Video", "Voice"]);
+            var radioGroup = new RadioGroup() { RadioLabels = ["User Interface", "Audio", "Video", "Voice"] };
             this.WhenAnyValue(x => x.ViewModel.Section)
                 .BindTo(radioGroup, x => x.SelectedItem)
                 .DisposeWith(_subscriptions);
@@ -51,13 +50,14 @@ namespace ReactiveMvvm.Terminal.Views
         
         private CheckBox IssueCheckBox()
         {
-            var item = new CheckBox("Issue", ViewModel.Issue);
+            var item = new CheckBox() { Text = "Issue", State = ViewModel.Issue ? CheckState.Checked : CheckState.UnChecked };
             this.WhenAnyValue(x => x.ViewModel.Issue)
-                .BindTo(item, x => x.Checked)
+                .Select(issue => issue ? CheckState.Checked : CheckState.UnChecked)
+                .BindTo(item, x => x.State)
                 .DisposeWith(_subscriptions);
             item.Events()
-                .Toggled
-                .Select(args => item.Checked)
+                .Toggle
+                .Select(args => args.NewValue == CheckState.Checked)
                 .BindTo(this, x => x.ViewModel.Issue)
                 .DisposeWith(_subscriptions);
             this.WhenAnyValue(x => x.ViewModel.Idea)
@@ -69,13 +69,14 @@ namespace ReactiveMvvm.Terminal.Views
 
         private CheckBox IdeaCheckBox()
         {
-            var item = new CheckBox("Suggestion", ViewModel.Idea);
+            var item = new CheckBox() { Text = "Suggestion", State = ViewModel.Idea ? CheckState.Checked : CheckState.UnChecked };
             this.WhenAnyValue(x => x.ViewModel.Idea)
-                .BindTo(item, x => x.Checked)
+                .Select(issue => issue ? CheckState.Checked : CheckState.UnChecked)
+                .BindTo(item, x => x.State)
                 .DisposeWith(_subscriptions);
             item.Events()
-                .Toggled
-                .Select(old => item.Checked)
+                .Toggle
+                .Select(args => args.NewValue == CheckState.Checked)
                 .BindTo(this, x => x.ViewModel.Idea)
                 .DisposeWith(_subscriptions);
             this.WhenAnyValue(x => x.ViewModel.Issue)
@@ -87,7 +88,7 @@ namespace ReactiveMvvm.Terminal.Views
 
         private Label TimeElapsedLabel()
         {
-            var label = new Label("0 seconds passed");
+            var label = new Label() { Text = "0 seconds passed" };
             this.WhenAnyValue(x => x.ViewModel.Elapsed)
                 .Select(elapsed => (ustring) $"{elapsed} seconds passed")
                 .BindTo(label, x => x.Text)
@@ -97,7 +98,7 @@ namespace ReactiveMvvm.Terminal.Views
 
         private TextField MessageInput()
         {
-            var text = new TextField(ViewModel.Message);
+            var text = new TextField() { Text = ViewModel.Message, Width = 40 };
             this.WhenAnyValue(x => x.ViewModel.Message)
                 .BindTo(text, x => x.Text)
                 .DisposeWith(_subscriptions);
@@ -112,7 +113,7 @@ namespace ReactiveMvvm.Terminal.Views
 
         private Label MessageDescription()
         {
-            var label = new Label($"0 letters used from {ViewModel.MessageLengthMax}");
+            var label = new Label() { Text = $"0 letters used from {ViewModel.MessageLengthMax}" };
             this.WhenAnyValue(x => x.ViewModel.MessageLength, x => x.ViewModel.MessageLengthMax)
                 .Select(values => (ustring) $"{values.Item1} letters used from {values.Item2}")
                 .BindTo(label, x => x.Text)
@@ -122,7 +123,7 @@ namespace ReactiveMvvm.Terminal.Views
         
         private TextField TitleInput()
         {
-            var text = new TextField(ViewModel.Title);
+            var text = new TextField() { Text = ViewModel.Title, Width = 40 };
             this.WhenAnyValue(x => x.ViewModel.Title)
                 .BindTo(text, x => x.Text)
                 .DisposeWith(_subscriptions);
@@ -137,7 +138,7 @@ namespace ReactiveMvvm.Terminal.Views
 
         private Label TitleDescription()
         {
-            var label = new Label($"0 letters used from {ViewModel.TitleLengthMax}");
+            var label = new Label() { Text = $"0 letters used from {ViewModel.TitleLengthMax}" };
             this.WhenAnyValue(x => x.ViewModel.TitleLength, x => x.ViewModel.TitleLengthMax)
                 .Select(values => (ustring) $"{values.Item1} letters used from {values.Item2}")
                 .BindTo(label, x => x.Text)

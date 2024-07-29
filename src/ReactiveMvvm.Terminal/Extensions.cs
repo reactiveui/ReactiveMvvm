@@ -9,7 +9,7 @@ namespace ReactiveMvvm.Terminal
             TNew control)
             where TOwner : View
             where TNew : View =>
-            new MemoizedElement<TOwner, TNew>(owner, control);
+            new(owner, control);
 
         public static MemoizedElement<TOwner, TNew> Append<TOwner, TOld, TNew>(
             this MemoizedElement<TOwner, TOld> owner, 
