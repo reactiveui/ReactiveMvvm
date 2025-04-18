@@ -5,7 +5,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="ReactiveUI" Version="20.2.45" />
-		<PackageReference Include="ReactiveUI.SourceGenerators" Version="1.0.3" PrivateAssets="all" />
+		<PackageReference Include="ReactiveUI.SourceGenerators" Version="1.1.31" PrivateAssets="all" />
 		<PackageReference Include="System.Text.Json" Version="8.0.5" />
 	</ItemGroup>
 </Project>
