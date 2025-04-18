@@ -2,7 +2,7 @@
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
-		<AvaloniaVersion>11.1.1</AvaloniaVersion>
+		<AvaloniaVersion>11.2.6</AvaloniaVersion>
     </PropertyGroup>
     <ItemGroup>
         <Compile Update="**\*.xaml.cs">
