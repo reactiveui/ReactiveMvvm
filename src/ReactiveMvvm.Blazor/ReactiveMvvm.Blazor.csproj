@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <RazorLangVersion>3.0</RazorLangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="ReactiveUI.Blazor" Version="20.2.45" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.7" />
+        <PackageReference Include="ReactiveUI.Blazor" Version="26.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.15" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />
