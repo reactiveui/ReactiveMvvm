@@ -1,0 +1,16 @@
+{
+  "solution": {
+    "path": "ReactiveMvvm.sln",
+    "projects": [
+      "ReactiveMvvm.Avalonia\\ReactiveMvvm.Avalonia.csproj",
+      "ReactiveMvvm.Blazor.Server\\ReactiveMvvm.Blazor.Server.csproj",
+      "ReactiveMvvm.Blazor.Wasm\\ReactiveMvvm.Blazor.Wasm.csproj",
+      "ReactiveMvvm.Blazor\\ReactiveMvvm.Blazor.csproj",
+      "ReactiveMvvm.Terminal\\ReactiveMvvm.Terminal.csproj",
+      "ReactiveMvvm.Tests\\ReactiveMvvm.Tests.csproj",
+      "ReactiveMvvm.WinForms\\ReactiveMvvm.WinForms.csproj",
+      "ReactiveMvvm.Wpf\\ReactiveMvvm.Wpf.csproj",
+      "ReactiveMvvm\\ReactiveMvvm.csproj"
+    ]
+  }
+}
