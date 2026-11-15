@@ -70,11 +70,10 @@ namespace ReactiveMvvm.ViewModels
                 () => sender.Send(Title, Message, Section, Issue), 
                 valid);
 
-            this.WhenActivated(disposables => 
+            this.WhenActivated((Action<IDisposable> dispose) => dispose(
                 clock.Tick.Select(second => $"{second}s")
-                    .ObserveOn(RxApp.MainThreadScheduler)
-                    .Subscribe(elapsed => Elapsed = elapsed)
-                    .DisposeWith(disposables));
+                    .ObserveOn(RxSchedulers.MainThreadScheduler)
+                    .Subscribe(elapsed => Elapsed = elapsed)));
         }
     }
 }

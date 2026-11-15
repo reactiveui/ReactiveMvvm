@@ -2,11 +2,12 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <StartupObject>ReactiveMvvm.Wpf.Program</StartupObject>
-    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetFrameworks>net10.0-windows10.0.19041.0;net11.0-windows10.0.19041.0</TargetFrameworks>
     <UseWpf>true</UseWpf>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.WPF" Version="26.0.1" />
+    <PackageReference Include="ReactiveUI.Wpf.Reactive" Version="26.0.1" />
+    <Using Include="ReactiveUI.Reactive" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />

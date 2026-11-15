@@ -8,13 +8,17 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using Microsoft.Reactive.Testing;
 using ReactiveUI;
+using ReactiveUI.Reactive.Builder;
 using ReactiveUI.Testing;
 using Xunit;
 
 namespace ReactiveMvvm.Tests
 {
+    [Collection("ReactiveUI schedulers")]
     public sealed class FeedbackViewModelTests
     {
+        static FeedbackViewModelTests() => RxAppBuilder.CreateReactiveUIBuilder().WithCoreServices().BuildApp();
+
         private readonly ISender _sender = Substitute.For<ISender>();
         private readonly IClock _clock = Substitute.For<IClock>();
         private readonly FeedbackViewModel _feedback;
@@ -28,8 +32,8 @@ namespace ReactiveMvvm.Tests
             // required to avoid concurrency and Task.Delays in unit test harness. There
             // is a TestScheduler in the ReactiveUI.Testing package as well, where you can
             // control time-dependent scenarios, by using .AdvanceBy() or .AdvanceByMs().  
-            RxApp.MainThreadScheduler = Scheduler.Immediate;
-            RxApp.TaskpoolScheduler = Scheduler.Immediate;
+            RxSchedulers.MainThreadScheduler = Scheduler.Immediate;
+            RxSchedulers.TaskpoolScheduler = Scheduler.Immediate;
             _feedback = new FeedbackViewModel(_sender, _clock);
         }
 

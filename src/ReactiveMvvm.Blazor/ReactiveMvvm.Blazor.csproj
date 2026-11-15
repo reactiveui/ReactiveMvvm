@@ -1,12 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
         <RazorLangVersion>3.0</RazorLangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="ReactiveUI.Blazor" Version="26.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.15" />
+        <PackageReference Include="ReactiveUI.Blazor.Reactive" Version="26.0.1" />
     </ItemGroup>
+    <Choose>
+        <When Condition="'$(TargetFramework)' == 'net11.0'">
+            <ItemGroup>
+                <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="11.0.0" />
+            </ItemGroup>
+        </When>
+        <Otherwise>
+            <ItemGroup>
+                <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.15" />
+            </ItemGroup>
+        </Otherwise>
+    </Choose>
     <ItemGroup>
         <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />
     </ItemGroup>

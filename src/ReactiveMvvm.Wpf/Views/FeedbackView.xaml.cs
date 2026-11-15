@@ -1,4 +1,4 @@
-﻿using ReactiveMvvm.ViewModels;
+using ReactiveMvvm.ViewModels;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ReactiveUI;
@@ -18,7 +18,7 @@ namespace ReactiveMvvm.Wpf.Views
                     .DisposeWith(subscriptions);
 
                 this.WhenAnyValue(x => x.ViewModel.TitleLength, x => x.ViewModel.TitleLengthMax)
-                    .Select(values => $"{values.Item1} letters used from {values.Item2}")
+                    .Select(values => $"{values.Property1} letters used from {values.Property2}")
                     .BindTo(this, x => x.TitleLengthTextBox.Text)
                     .DisposeWith(subscriptions);
 
@@ -28,7 +28,7 @@ namespace ReactiveMvvm.Wpf.Views
                     .DisposeWith(subscriptions);
 
                 this.WhenAnyValue(x => x.ViewModel.MessageLength, x => x.ViewModel.MessageLengthMax)
-                    .Select(values => $"{values.Item1} letters used from {values.Item2}")
+                    .Select(values => $"{values.Property1} letters used from {values.Property2}")
                     .BindTo(this, x => x.MessageLengthTextBox.Text)
                     .DisposeWith(subscriptions);
 

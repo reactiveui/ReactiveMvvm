@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
@@ -6,7 +6,6 @@ using ReactiveMvvm.ViewModels;
 using ReactiveUI;
 using Terminal.Gui;
 using ReactiveMarbles.ObservableEvents;
-using NStack;
 
 namespace ReactiveMvvm.Terminal.Views
 {
@@ -33,15 +32,16 @@ namespace ReactiveMvvm.Terminal.Views
                 .Append(new Button() { Text = "Send Feedback" }, 4);
         }
 
-        private RadioGroup SectionRadioGroup()
+        private OptionSelector SectionRadioGroup()
         {
-            var radioGroup = new RadioGroup() { RadioLabels = ["User Interface", "Audio", "Video", "Voice"] };
-            this.WhenAnyValue(x => x.ViewModel.Section)
-                .BindTo(radioGroup, x => x.SelectedItem)
+            var radioGroup = new OptionSelector() { Labels = ["User Interface", "Audio", "Video", "Voice"] };
+ViewModel.WhenAnyValue(x => x.Section)
+                .Select(section => (int?)section)
+                .BindTo(radioGroup, x => x.Value)
                 .DisposeWith(_subscriptions);
 
             var selected = new Subject<int>().DisposeWith(_subscriptions);
-            radioGroup.SelectedItemChanged += (sender, args) => selected.OnNext(args.SelectedItem);
+            radioGroup.ValueChanged += (sender, args) => selected.OnNext(args.NewValue ?? -1);
             selected.AsObservable()
                 .BindTo(this, x => x.ViewModel.Section)
                 .DisposeWith(_subscriptions);
@@ -50,38 +50,38 @@ namespace ReactiveMvvm.Terminal.Views
         
         private CheckBox IssueCheckBox()
         {
-            var item = new CheckBox() { Text = "Issue", State = ViewModel.Issue ? CheckState.Checked : CheckState.UnChecked };
-            this.WhenAnyValue(x => x.ViewModel.Issue)
+            var item = new CheckBox() { Text = "Issue", Value = ViewModel.Issue ? CheckState.Checked : CheckState.UnChecked };
+ViewModel.WhenAnyValue(x => x.Issue)
                 .Select(issue => issue ? CheckState.Checked : CheckState.UnChecked)
-                .BindTo(item, x => x.State)
+                .BindTo(item, x => x.Value)
                 .DisposeWith(_subscriptions);
             item.Events()
-                .Toggle
+                .ValueChanged
                 .Select(args => args.NewValue == CheckState.Checked)
-                .BindTo(this, x => x.ViewModel.Issue)
+                .Subscribe(issue => ViewModel.Issue = issue)
                 .DisposeWith(_subscriptions);
-            this.WhenAnyValue(x => x.ViewModel.Idea)
+ViewModel.WhenAnyValue(x => x.Idea)
                 .Skip(1)
-                .Subscribe(args => item.OnDrawContent(item.Frame))
+                .Subscribe(args => item.SetNeedsDraw())
                 .DisposeWith(_subscriptions);
             return item;
         }
 
         private CheckBox IdeaCheckBox()
         {
-            var item = new CheckBox() { Text = "Suggestion", State = ViewModel.Idea ? CheckState.Checked : CheckState.UnChecked };
-            this.WhenAnyValue(x => x.ViewModel.Idea)
+            var item = new CheckBox() { Text = "Suggestion", Value = ViewModel.Idea ? CheckState.Checked : CheckState.UnChecked };
+ViewModel.WhenAnyValue(x => x.Idea)
                 .Select(issue => issue ? CheckState.Checked : CheckState.UnChecked)
-                .BindTo(item, x => x.State)
+                .BindTo(item, x => x.Value)
                 .DisposeWith(_subscriptions);
             item.Events()
-                .Toggle
+                .ValueChanged
                 .Select(args => args.NewValue == CheckState.Checked)
-                .BindTo(this, x => x.ViewModel.Idea)
+                .Subscribe(idea => ViewModel.Idea = idea)
                 .DisposeWith(_subscriptions);
-            this.WhenAnyValue(x => x.ViewModel.Issue)
+ViewModel.WhenAnyValue(x => x.Issue)
                 .Skip(1)
-                .Subscribe(args => item.OnDrawContent(item.Frame))
+                .Subscribe(args => item.SetNeedsDraw())
                 .DisposeWith(_subscriptions);
             return item;
         }
@@ -89,8 +89,8 @@ namespace ReactiveMvvm.Terminal.Views
         private Label TimeElapsedLabel()
         {
             var label = new Label() { Text = "0 seconds passed" };
-            this.WhenAnyValue(x => x.ViewModel.Elapsed)
-                .Select(elapsed => (ustring) $"{elapsed} seconds passed")
+ViewModel.WhenAnyValue(x => x.Elapsed)
+                .Select(elapsed => $"{elapsed} seconds passed")
                 .BindTo(label, x => x.Text)
                 .DisposeWith(_subscriptions);
             return label;
@@ -99,14 +99,13 @@ namespace ReactiveMvvm.Terminal.Views
         private TextField MessageInput()
         {
             var text = new TextField() { Text = ViewModel.Message, Width = 40 };
-            this.WhenAnyValue(x => x.ViewModel.Message)
+ViewModel.WhenAnyValue(x => x.Message)
                 .BindTo(text, x => x.Text)
                 .DisposeWith(_subscriptions);
-            text.Events()
-                .TextChanged
-                .Select(older => text.Text)
+            Observable.FromEventPattern(text, nameof(text.TextChanged))
+                .Select(_ => text.Text)
                 .DistinctUntilChanged()
-                .BindTo(ViewModel, x => x.Message)
+                .Subscribe(message => ViewModel.Message = message)
                 .DisposeWith(_subscriptions);
             return text;
         }
@@ -114,8 +113,8 @@ namespace ReactiveMvvm.Terminal.Views
         private Label MessageDescription()
         {
             var label = new Label() { Text = $"0 letters used from {ViewModel.MessageLengthMax}" };
-            this.WhenAnyValue(x => x.ViewModel.MessageLength, x => x.ViewModel.MessageLengthMax)
-                .Select(values => (ustring) $"{values.Item1} letters used from {values.Item2}")
+ViewModel.WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax)
+                .Select(values => $"{values.Property1} letters used from {values.Property2}")
                 .BindTo(label, x => x.Text)
                 .DisposeWith(_subscriptions);
             return label;
@@ -124,14 +123,13 @@ namespace ReactiveMvvm.Terminal.Views
         private TextField TitleInput()
         {
             var text = new TextField() { Text = ViewModel.Title, Width = 40 };
-            this.WhenAnyValue(x => x.ViewModel.Title)
+ViewModel.WhenAnyValue(x => x.Title)
                 .BindTo(text, x => x.Text)
                 .DisposeWith(_subscriptions);
-            text.Events()
-                .TextChanged
-                .Select(older => text.Text)
+            Observable.FromEventPattern(text, nameof(text.TextChanged))
+                .Select(_ => text.Text)
                 .DistinctUntilChanged()
-                .BindTo(ViewModel, x => x.Title)
+                .Subscribe(title => ViewModel.Title = title)
                 .DisposeWith(_subscriptions);
             return text;
         }
@@ -139,8 +137,8 @@ namespace ReactiveMvvm.Terminal.Views
         private Label TitleDescription()
         {
             var label = new Label() { Text = $"0 letters used from {ViewModel.TitleLengthMax}" };
-            this.WhenAnyValue(x => x.ViewModel.TitleLength, x => x.ViewModel.TitleLengthMax)
-                .Select(values => (ustring) $"{values.Item1} letters used from {values.Item2}")
+ViewModel.WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax)
+                .Select(values => $"{values.Property1} letters used from {values.Property2}")
                 .BindTo(label, x => x.Text)
                 .DisposeWith(_subscriptions);
             return label;

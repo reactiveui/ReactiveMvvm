@@ -1,4 +1,4 @@
-﻿using ReactiveMvvm.ViewModels;
+using ReactiveMvvm.ViewModels;
 using ReactiveMvvm.WinForms.Services;
 using ReactiveMvvm.Services;
 using System.Reactive.Disposables;
@@ -22,7 +22,7 @@ namespace ReactiveMvvm.WinForms.Views
                     .DisposeWith(subscriptions);
                 
                 this.WhenAnyValue(x => x.ViewModel.TitleLength, x => x.ViewModel.TitleLengthMax)
-                    .Select(values => $"{values.Item1} letters used from {values.Item2}")
+                    .Select(values => $"{values.Property1} letters used from {values.Property2}")
                     .BindTo(this, x => x.TitleLengthLabel.Text)
                     .DisposeWith(subscriptions);
 
@@ -32,7 +32,7 @@ namespace ReactiveMvvm.WinForms.Views
                     .DisposeWith(subscriptions);
 
                 this.WhenAnyValue(x => x.ViewModel.MessageLength, x => x.ViewModel.MessageLengthMax)
-                    .Select(values => $"{values.Item1} letters used from {values.Item2}")
+                    .Select(values => $"{values.Property1} letters used from {values.Property2}")
                     .BindTo(this, x => x.MessageLengthLabel.Text)
                     .DisposeWith(subscriptions);
 
@@ -54,6 +54,7 @@ namespace ReactiveMvvm.WinForms.Views
             });
         }
         
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public FeedbackViewModel ViewModel { get; set; }
 
         object IViewFor.ViewModel

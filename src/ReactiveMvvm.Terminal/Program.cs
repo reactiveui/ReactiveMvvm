@@ -5,6 +5,7 @@ using ReactiveMvvm.Terminal.Services;
 using ReactiveMvvm.Terminal.Views;
 using ReactiveMvvm.ViewModels;
 using ReactiveUI;
+using ReactiveUI.Reactive.Builder;
 using Terminal.Gui;
 
 namespace ReactiveMvvm.Terminal
@@ -13,10 +14,12 @@ namespace ReactiveMvvm.Terminal
     {
         public static void Main(string[] args)
         {
-            Application.Init();
-            RxApp.MainThreadScheduler = TerminalScheduler.Default;
-            RxApp.TaskpoolScheduler = TaskPoolScheduler.Default;
-            Application.Run(
+            using var application = Application.Create();
+            application.Init();
+            RxAppBuilder.CreateReactiveUIBuilder().WithCoreServices().BuildApp();
+            RxSchedulers.MainThreadScheduler = new TerminalScheduler(application);
+            RxSchedulers.TaskpoolScheduler = TaskPoolScheduler.Default;
+            application.Run(
                 new FeedbackView(
                     new(
                         new TerminalSender(), 

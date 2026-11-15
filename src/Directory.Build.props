@@ -2,4 +2,8 @@
   <PropertyGroup>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
+  <ItemGroup>
+    <Using Include="ReactiveUI.Reactive" />
+    <Using Include="ReactiveUI.Binding.Reactive" />
+  </ItemGroup>
 </Project>

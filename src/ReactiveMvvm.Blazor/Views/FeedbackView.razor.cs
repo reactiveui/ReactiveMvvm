@@ -1,11 +1,11 @@
 ﻿using ReactiveMvvm.ViewModels;
 using ReactiveUI;
-using ReactiveUI.Blazor;
+using ReactiveUI.Reactive.Blazor;
 
 namespace ReactiveMvvm.Blazor.Views
 {
     public partial class FeedbackView : ReactiveInjectableComponentBase<FeedbackViewModel>
     {
-        public FeedbackView() => this.WhenActivated(disposables => { });
+        public FeedbackView() => this.WhenActivated();
     }
 }

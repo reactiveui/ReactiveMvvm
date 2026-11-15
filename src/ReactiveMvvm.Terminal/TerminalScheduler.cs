@@ -5,10 +5,8 @@ using Terminal.Gui;
 
 namespace ReactiveMvvm;
 
-public class TerminalScheduler : LocalScheduler
+public sealed class TerminalScheduler(IApplication application) : LocalScheduler
 {
-    public static readonly TerminalScheduler Default = new ();
-    private TerminalScheduler () { }
 
     public override IDisposable Schedule<TState> (
         TState state,
@@ -21,7 +19,7 @@ public class TerminalScheduler : LocalScheduler
             var composite = new CompositeDisposable (2);
             var cancellation = new CancellationDisposable ();
 
-            Application.Invoke (
+            application.Invoke (
                                 () =>
                                 {
                                     if (!cancellation.Token.IsCancellationRequested)
@@ -39,7 +37,7 @@ public class TerminalScheduler : LocalScheduler
         {
             var composite = new CompositeDisposable (2);
 
-            object timeout = Application.AddTimeout (
+            object timeout = application.AddTimeout (
                                                      dueTime,
                                                      () =>
                                                      {
@@ -48,7 +46,7 @@ public class TerminalScheduler : LocalScheduler
                                                          return false;
                                                      }
                                                     );
-            composite.Add (Disposable.Create (() => Application.RemoveTimeout (timeout)));
+            composite.Add (Disposable.Create (() => application.RemoveTimeout (timeout)));
 
             return composite;
         }

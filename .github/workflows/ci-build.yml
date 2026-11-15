@@ -19,7 +19,8 @@ jobs:
       productNamespacePrefix: ReactiveMvvm
       solutionFile: ReactiveMvvm.slnf
       installWorkloads: true
-      # The tests are xUnit, whose host rejects the TUnit-only detailed-logging switches.
+      testProjects: ReactiveMvvm.Tests/*.csproj
+      # xUnit supports MTP coverage but does not accept TUnit's --output switch.
       enableDetailedTestLogging: false
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

@@ -2,11 +2,11 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <StartupObject>ReactiveMvvm.WinForms.Program</StartupObject>
-    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetFrameworks>net10.0-windows10.0.19041.0;net11.0-windows10.0.19041.0</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.WinForms" Version="26.0.1" />
+    <PackageReference Include="ReactiveUI.Winforms.Reactive" Version="26.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReactiveMvvm\ReactiveMvvm.csproj" />

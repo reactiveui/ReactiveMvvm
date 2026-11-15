@@ -1,4 +1,4 @@
-﻿using ReactiveMvvm.Services;
+using ReactiveMvvm.Services;
 using FluentAssertions;
 using System;
 using Microsoft.Reactive.Testing;
@@ -9,6 +9,7 @@ using Xunit;
 
 namespace ReactiveMvvm.Tests
 {
+    [Collection("ReactiveUI schedulers")]
     public sealed class ClockTests
     {
         private readonly TestScheduler _scheduler = new TestScheduler();
@@ -19,7 +20,7 @@ namespace ReactiveMvvm.Tests
             // We replace the default task pool scheduler with the ReactiveUI test scheduler. 
             // With this TestScheduler from ReactiveUI.Testing package you can control
             // time-dependent scenarios, by using .AdvanceBy() or .AdvanceByMs() methods.
-            RxApp.TaskpoolScheduler = _scheduler;
+            RxSchedulers.TaskpoolScheduler = _scheduler;
             _clock = new Clock();
         }
 
