@@ -37,10 +37,10 @@ jobs:
           - os: windows-latest
             target: windows10.0.19041.0
             arguments: ''
-          - os: macos-latest
+          - os: xcode-27
             target: ios
             arguments: '-p:RuntimeIdentifier=iossimulator-arm64 -p:EnableCodeSigning=false'
-          - os: macos-latest
+          - os: xcode-27
             target: maccatalyst
             arguments: '-p:EnableCodeSigning=false'
     steps:
@@ -53,9 +53,32 @@ jobs:
           solution-file: ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj
           install-workloads: 'true'
           stamp-version: 'false'
-      - name: Restore
+      # The .NET 11 workload includes the original .NET 10 Apple SDK, which requires Xcode 26.0.
+      # Use the current .NET 10 workload for its Apple targets on the Xcode 27.2 runner.
+      - name: Install .NET 10 for Apple targets
+        if: matrix.framework == 'net10.0' && matrix.platform.os == 'xcode-27'
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v5
+        with:
+          dotnet-version: 10.0.404
+      - name: Select .NET 10 for Apple targets
+        if: matrix.framework == 'net10.0' && matrix.platform.os == 'xcode-27'
+        run: dotnet new globaljson --sdk-version 10.0.404 --roll-forward latestPatch
+      - name: Install current .NET 10 Apple workloads
+        if: matrix.framework == 'net10.0' && matrix.platform.os == 'xcode-27'
+        run: dotnet workload install maui-ios maui-maccatalyst --version 10.0.404
+      - name: Restore .NET 10 Apple target
+        if: matrix.framework == 'net10.0' && matrix.platform.os == 'xcode-27'
         working-directory: src
-        run: dotnet restore ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj
-      - name: Build
+        run: dotnet restore ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj -p:TargetFramework=${{ matrix.framework }}-${{ matrix.platform.target }} -p:Configuration=Release ${{ matrix.platform.arguments }}
+      - name: Restore .NET 10 core reference
+        if: matrix.framework == 'net10.0' && matrix.platform.os == 'xcode-27'
+        working-directory: src
+        run: dotnet restore ReactiveMvvm/ReactiveMvvm.csproj -p:TargetFramework=net10.0 -p:Configuration=Release
+      - name: Build .NET 10 Apple target
+        if: matrix.framework == 'net10.0' && matrix.platform.os == 'xcode-27'
         working-directory: src
         run: dotnet build ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj --no-restore --configuration Release --framework ${{ matrix.framework }}-${{ matrix.platform.target }} ${{ matrix.platform.arguments }}
+      - name: Build
+        if: matrix.framework != 'net10.0' || matrix.platform.os != 'xcode-27'
+        working-directory: src
+        run: dotnet build ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj --configuration Release --framework ${{ matrix.framework }}-${{ matrix.platform.target }} ${{ matrix.platform.arguments }}
