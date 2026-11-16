@@ -1,0 +1,45 @@
+namespace ReactiveMvvm
+{
+    public static class DisposableExtensions
+    {
+        extension<T>(T subscription) where T : System.IDisposable
+        {
+            public T DisposeWith(ReactiveUI.Primitives.Reactive.Disposables.ContainerDisposable container) { }
+            public T DisposeWith(System.Reactive.Disposables.CompositeDisposable container) { }
+        }
+    }
+}
+namespace ReactiveMvvm.Interfaces
+{
+    public interface IClock
+    {
+        System.IObservable<long> Tick { get; }
+    }
+    public interface ISender
+    {
+        System.Threading.Tasks.Task Send(string title, string message, int section, bool bug) { }
+    }
+}
+namespace ReactiveMvvm.Services
+{
+    [System.Diagnostics.DebuggerDisplay("{Tick}")]
+    public sealed class Clock : ReactiveMvvm.Interfaces.IClock
+    {
+        public Clock() { }
+        public Clock(System.Reactive.Concurrency.IScheduler scheduler) { }
+        public System.IObservable<long> Tick { get; }
+    }
+}
+namespace ReactiveMvvm.ViewModels
+{
+    [System.Diagnostics.DebuggerDisplay("{Title}")]
+    public sealed class FeedbackViewModel : ReactiveUI.Reactive.ReactiveObject, ReactiveUI.Reactive.IActivatableViewModel, System.IDisposable
+    {
+        public FeedbackViewModel(ReactiveMvvm.Interfaces.ISender sender, ReactiveMvvm.Interfaces.IClock clock) { }
+        public ReactiveUI.Reactive.ViewModelActivator Activator { get; }
+        public int MessageLengthMax { get; }
+        public ReactiveUI.Reactive.ReactiveCommand<System.Reactive.Unit, System.Reactive.Unit> Submit { get; }
+        public int TitleLengthMax { get; }
+        public void Dispose() { }
+    }
+}

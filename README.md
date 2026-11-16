@@ -1,8 +1,13 @@
-[![Build Status](https://worldbeater.visualstudio.com/Camelotia/_apis/build/status/ReactiveMvvm-CI)](https://worldbeater.visualstudio.com/Camelotia/_build/latest?definitionId=4) [![Pull Requests](https://img.shields.io/github/issues-pr/worldbeater/reactivemvvm.svg)](https://github.com/worldbeater/reactivemvvm/pulls) [![Issues](https://img.shields.io/github/issues/worldbeater/reactivemvvm.svg)](https://github.com/worldbeater/reactivemvvm/issues) ![License](https://img.shields.io/github/license/worldbeater/reactivemvvm.svg) ![Size](https://img.shields.io/github/repo-size/worldbeater/reactivemvvm.svg) [![Code Coverage](https://img.shields.io/azure-devops/coverage/worldbeater/camelotia/4.svg)](https://worldbeater.visualstudio.com/Camelotia/_build/latest?definitionId=4)
-
 # ReactiveMvvm
 
-A  truly cross-platform app example created using the <a href="https://reactiveui.net">ReactiveUI .NET MVVM framework</a>, <a href="https://www.reactiveui.net/docs/handbook/view-models/boilerplate-code">ReactiveUI.Fody</a> and most popular XAML UI frameworks. The app implements the MVVM architecture extended with <a href="https://medium.com/@worldbeater/reactive-mvvm-for-net-platform-175dc69cfc82">reactive programming and assembly weaving</a>. It was built to demonstrate how to avoid writing boilerplate code when working with the `INotifyPropertyChanged` interface and how to create portable and maintainable view models. Article on Medium: https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b
+<img src="images/logo.png" alt="ReactiveMvvm" width="160" />
+
+[![Build](https://github.com/reactiveui/ReactiveMvvm/actions/workflows/ci-build.yml/badge.svg)](https://github.com/reactiveui/ReactiveMvvm/actions/workflows/ci-build.yml)
+[![License](https://img.shields.io/github/license/reactiveui/ReactiveMvvm)](LICENSE)
+
+A cross-platform feedback application built with ReactiveUI, reactive view models and source-generated properties. The same view model powers Avalonia, WPF, Windows Forms, .NET MAUI, Terminal.Gui and Blazor views on .NET 10 and .NET 11.
+
+The screenshots below show the application's original implementations. The Xamarin.Forms sample has been replaced by .NET MAUI.
 
 | <a href="https://github.com/AvaloniaUI/Avalonia">AvaloniaUI</a> | <a href="https://docs.microsoft.com/ru-ru/xamarin/xamarin-forms/">Xamarin.Forms</a> | <a href="https://docs.microsoft.com/ru-ru/windows/uwp/get-started/universal-application-platform-guide">Universal Windows Platform</a> |
 | --------------- | --------- | -------------- |
@@ -16,22 +21,12 @@ A  truly cross-platform app example created using the <a href="https://reactiveu
 | --------------- | 
 | <a href="https://medium.com/@worldbeater/reactive-ui-fody-cross-platform-forms-7b501d79f46b"><img width="420" src="https://user-images.githubusercontent.com/6759207/94431677-44765b80-019e-11eb-9ebd-7e15b51a8255.png"></a> | 
 
-## Technologies and Tools Used
-- <a href="https://reactiveui.net/">ReactiveUI</a> modern MVVM framework
-- <a href="http://reactivex.io/">Reactive Extensions</a> for the <a href="https://github.com/Reactive-Extensions/Rx.NET">.NET platform</a>
-- <a href="https://www.reactiveui.net/docs/handbook/view-models/boilerplate-code">ReactiveUI.Fody</a> for `INotifyPropertyChanged` injections
-- <a href="http://xunit.github.io/">xUnit</a> tests on <a href="https://www.microsoft.com/net/core">.NET Core</a>
-- <a href="https://github.com/fluentassertions/fluentassertions">FluentAssertions</a> to improve tests readability
-- <a href="https://github.com/nsubstitute/NSubstitute">NSubstitute</a> for stubs and mocks
-- <a href="https://github.com/nuke-build/nuke">NukeBuild</a> for building cross-platform .NET projects using C#
-- <a href="https://github.com/AvaloniaUI/Avalonia">AvaloniaUI</a> for Linux and MacOS
-- <a href="https://github.com/worldbeater/Citrus.Avalonia">Citrus</a> bright and modern AvaloniaUI theme
-- <a href="https://www.xamarin.com/">Xamarin.Forms</a> for Android, iOS and Tizen
-- <a href="https://docs.microsoft.com/en-us/windows/uwp/index">Universal Windows Platform</a> for Windows 10
-- <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">ASP .NET Core Blazor</a> bringing ReactiveUI to the Web
-- <a href="https://msdn.microsoft.com/ru-ru/library/aa970268(v=vs.100).aspx">Windows Presentation Foundation</a>
-- <a href="https://docs.microsoft.com/ru-ru/dotnet/framework/winforms/windows-forms-overview">Windows Forms</a>
-- <a href="https://www.jetbrains.com/rider/">JetBrains Rider</a> and <a href="https://visualstudio.microsoft.com/">Microsoft Visual Studio 2019</a> IDEs
+## Technologies
+
+- ReactiveUI and System.Reactive for observable state, commands and view activation.
+- ReactiveUI.SourceGenerators for reactive properties.
+- Avalonia with the Fluent theme, WPF, Windows Forms, .NET MAUI, Terminal.Gui and Blazor for platform views.
+- TUnit and Microsoft.Testing.Platform for deterministic tests and Cobertura coverage.
 
 ## Sponsors
 

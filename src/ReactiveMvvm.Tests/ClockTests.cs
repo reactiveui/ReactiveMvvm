@@ -1,41 +1,34 @@
-using ReactiveMvvm.Services;
-using FluentAssertions;
+// Copyright (c) 2019-2026 ReactiveUI and Contributors. All rights reserved.
+// ReactiveUI and Contributors licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
 using System;
+using System.Threading.Tasks;
 using Microsoft.Reactive.Testing;
-using ReactiveMvvm.Interfaces;
-using ReactiveUI;
+using ReactiveMvvm.Services;
 using ReactiveUI.Testing;
-using Xunit;
 
-namespace ReactiveMvvm.Tests
+namespace ReactiveMvvm.Tests;
+
+/// <summary>Verifies clock ticks using independently controlled virtual time.</summary>
+public sealed class ClockTests
 {
-    [Collection("ReactiveUI schedulers")]
-    public sealed class ClockTests
-    {
-        private readonly TestScheduler _scheduler = new TestScheduler();
-        private readonly IClock _clock;
-        
-        public ClockTests()
-        {
-            // We replace the default task pool scheduler with the ReactiveUI test scheduler. 
-            // With this TestScheduler from ReactiveUI.Testing package you can control
-            // time-dependent scenarios, by using .AdvanceBy() or .AdvanceByMs() methods.
-            RxSchedulers.TaskpoolScheduler = _scheduler;
-            _clock = new Clock();
-        }
+    /// <summary>Virtual scheduler milliseconds in one second.</summary>
+    private const int MillisecondsPerSecond = 1000;
 
-        [Fact]
-        public void ShouldAdvanceNextValueByOne()
-        {
-            var value = (long?) null;
-            _clock.Tick.Subscribe(next => value = next);
-            value.Should().BeNull();
-            
-            _scheduler.AdvanceByMs(1000);
-            value.Should().Be(0L);
-            
-            _scheduler.AdvanceByMs(1000);
-            value.Should().Be(1L);
-        }
+    /// <summary>Checks that each elapsed second advances the sequential tick.</summary>
+    /// <returns>A task representing the test.</returns>
+    [Test]
+    public async Task Tick_AdvancesOncePerSecond()
+    {
+        var scheduler = new TestScheduler();
+        var clock = new Clock(scheduler);
+        long? value = null;
+        using var subscription = clock.Tick.Subscribe(next => value = next);
+        await Assert.That(value).IsNull();
+        scheduler.AdvanceByMs(MillisecondsPerSecond);
+        await Assert.That(value).IsEqualTo(0L);
+        scheduler.AdvanceByMs(MillisecondsPerSecond);
+        await Assert.That(value).IsEqualTo(1L);
     }
 }

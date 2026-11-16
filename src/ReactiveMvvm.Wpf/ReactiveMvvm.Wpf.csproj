@@ -6,7 +6,7 @@
     <UseWpf>true</UseWpf>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.Wpf.Reactive" Version="26.0.1" />
+    <PackageReference Include="ReactiveUI.Wpf.Reactive" />
     <Using Include="ReactiveUI.Reactive" />
   </ItemGroup>
   <ItemGroup>

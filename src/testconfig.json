@@ -1,20 +1,20 @@
 {
-  "platform": {
-    "execution": {
-      "parallel": false
-    }
-  },
-  "extensions": [
-    {
-      "extensionId": "Microsoft.Testing.Extensions.CodeCoverage",
-      "settings": {
-        "format": "cobertura",
-        "skipAutoProperties": true,
-        "modulePaths": {
-          "include": [ "ReactiveMvvm" ],
-          "exclude": [ ".*\\.Tests" ]
+  "codeCoverage": {
+    "Configuration": {
+      "Format": "cobertura",
+      "CodeCoverage": {
+        "SkipAutoProperties": false,
+        "Attributes": {
+          "Exclude": ["^System\\.CodeDom\\.Compiler\\.GeneratedCodeAttribute$"]
+        },
+        "Sources": {
+          "Exclude": ["[/\\\\]obj[/\\\\].*\\.g\\.cs$"]
+        },
+        "ModulePaths": {
+          "Include": ["ReactiveMvvm\\.dll$"],
+          "Exclude": [".*Tests\\.dll$", ".*TestRunner.*"]
         }
       }
     }
-  ]
+  }
 }

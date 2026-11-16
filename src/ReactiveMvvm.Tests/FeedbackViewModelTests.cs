@@ -1,100 +1,150 @@
-using ReactiveMvvm.ViewModels;
-using ReactiveMvvm.Interfaces;
-using FluentAssertions;
-using NSubstitute;
+// Copyright (c) 2019-2026 ReactiveUI and Contributors. All rights reserved.
+// ReactiveUI and Contributors licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
 using System;
-using System.Reactive;
-using System.Reactive.Concurrency;
+using System.Diagnostics;
 using System.Reactive.Linq;
-using Microsoft.Reactive.Testing;
-using ReactiveUI;
-using ReactiveUI.Reactive.Builder;
-using ReactiveUI.Testing;
-using Xunit;
+using System.Threading.Tasks;
+using ReactiveMvvm.Interfaces;
+using ReactiveMvvm.ViewModels;
 
-namespace ReactiveMvvm.Tests
+namespace ReactiveMvvm.Tests;
+
+/// <summary>Verifies feedback validation, submission and activation.</summary>
+[NotInParallel]
+[TestExecutor<ReactiveMvvmTestExecutor>]
+public sealed class FeedbackViewModelTests
 {
-    [Collection("ReactiveUI schedulers")]
-    public sealed class FeedbackViewModelTests
+    /// <summary>Valid feedback message.</summary>
+    private const string FeedbackMessage = "Message!";
+
+    /// <summary>Valid feedback title.</summary>
+    private const string FeedbackTitle = "Title!";
+
+    /// <summary>Character count of the test message.</summary>
+    private const int ExpectedMessageLength = 5;
+
+    /// <summary>Maximum message length exposed to the views.</summary>
+    private const int MessageLengthLimit = 30;
+
+    /// <summary>Character count of the test title.</summary>
+    private const int ExpectedTitleLength = 11;
+
+    /// <summary>Maximum title length exposed to the views.</summary>
+    private const int TitleLengthLimit = 15;
+
+    /// <summary>Checks the form's initial validation state.</summary>
+    /// <returns>A task representing the test.</returns>
+    [Test]
+    public async Task Constructor_InitializesDefaults()
     {
-        static FeedbackViewModelTests() => RxAppBuilder.CreateReactiveUIBuilder().WithCoreServices().BuildApp();
+        using var feedback = new FeedbackViewModel(new TestSender(), new TestClock());
+        await Assert.That(feedback.HasErrors).IsTrue();
+        await Assert.That(feedback.Elapsed).IsEqualTo(string.Empty);
+        await Assert.That(feedback.Section).IsEqualTo(0);
+    }
 
-        private readonly ISender _sender = Substitute.For<ISender>();
-        private readonly IClock _clock = Substitute.For<IClock>();
-        private readonly FeedbackViewModel _feedback;
+    /// <summary>Checks that valid text enables submission.</summary>
+    /// <returns>A task representing the test.</returns>
+    [Test]
+    public async Task Form_EnablesValidFeedback()
+    {
+        using var feedback = new FeedbackViewModel(new TestSender(), new TestClock());
+        feedback.Message = FeedbackMessage;
+        feedback.Title = FeedbackTitle;
+        feedback.Idea = true;
+        await Assert.That(feedback.HasErrors).IsFalse();
+    }
 
-        // For every test, a new instance of FeedbackViewModelTests is created by xUnit.
-        // This allows us to extract the commonly used mocks and tested objects into
-        // fields, in order to avoid duplicating the initialization code.
-        public FeedbackViewModelTests()
+    /// <summary>Checks that submission forwards the entered feedback.</summary>
+    /// <returns>A task representing the test.</returns>
+    [Test]
+    public async Task Submit_ForwardsFeedback()
+    {
+        var sender = new TestSender();
+        using var feedback = new FeedbackViewModel(sender, new TestClock());
+        feedback.Title = FeedbackTitle;
+        feedback.Message = FeedbackMessage;
+        using var subscription = feedback.Submit.Execute().Subscribe();
+        await Assert.That(sender.Title).IsEqualTo(FeedbackTitle);
+        await Assert.That(sender.Message).IsEqualTo(FeedbackMessage);
+        await Assert.That(sender.Section).IsEqualTo(0);
+        await Assert.That(sender.Bug).IsTrue();
+    }
+
+    /// <summary>Checks that activation observes clock ticks.</summary>
+    /// <returns>A task representing the test.</returns>
+    [Test]
+    public async Task Activation_ObservesClock()
+    {
+        using var feedback = new FeedbackViewModel(new TestSender(), new TestClock());
+        using var activation = feedback.Activator.Activate();
+        await Assert.That(feedback.Elapsed).IsEqualTo("42s");
+    }
+
+    /// <summary>Checks that text lengths and input limits are exposed to views.</summary>
+    /// <returns>A task representing the test.</returns>
+    [Test]
+    public async Task Text_TracksLengths()
+    {
+        using var feedback = new FeedbackViewModel(new TestSender(), new TestClock());
+        feedback.Message = "Words";
+        feedback.Title = "Issue Title";
+        await Assert.That(feedback.MessageLength).IsEqualTo(ExpectedMessageLength);
+        await Assert.That(feedback.MessageLengthMax).IsEqualTo(MessageLengthLimit);
+        await Assert.That(feedback.TitleLength).IsEqualTo(ExpectedTitleLength);
+        await Assert.That(feedback.TitleLengthMax).IsEqualTo(TitleLengthLimit);
+    }
+
+    /// <summary>Checks that issue and idea selections remain mutually exclusive.</summary>
+    /// <returns>A task representing the test.</returns>
+    [Test]
+    public async Task Category_UpdatesDependentSelection()
+    {
+        using var feedback = new FeedbackViewModel(new TestSender(), new TestClock());
+        await Assert.That(feedback.Idea).IsFalse();
+        feedback.Idea = true;
+        await Assert.That(feedback.Issue).IsFalse();
+        feedback.Issue = true;
+        await Assert.That(feedback.Idea).IsFalse();
+    }
+
+    /// <summary>Records submitted feedback without an external mocking framework.</summary>
+    [DebuggerDisplay("{Title}")]
+    private sealed class TestSender : ISender
+    {
+        /// <summary>Gets the last submitted title.</summary>
+        public string Title { get; private set; } = string.Empty;
+
+        /// <summary>Gets the last submitted message.</summary>
+        public string Message { get; private set; } = string.Empty;
+
+        /// <summary>Gets the last submitted section.</summary>
+        public int Section { get; private set; }
+
+        /// <summary>Gets a value indicating whether the last submission was an issue.</summary>
+        public bool Bug { get; private set; }
+
+        /// <inheritdoc/>
+        public Task Send(string title, string message, int section, bool bug)
         {
-            // We replace the default schedulers with the immediate scheduler. This is
-            // required to avoid concurrency and Task.Delays in unit test harness. There
-            // is a TestScheduler in the ReactiveUI.Testing package as well, where you can
-            // control time-dependent scenarios, by using .AdvanceBy() or .AdvanceByMs().  
-            RxSchedulers.MainThreadScheduler = Scheduler.Immediate;
-            RxSchedulers.TaskpoolScheduler = Scheduler.Immediate;
-            _feedback = new FeedbackViewModel(_sender, _clock);
+            Title = title;
+            Message = message;
+            Section = section;
+            Bug = bug;
+            return Task.CompletedTask;
         }
+    }
 
-        [Fact]
-        public void ShouldInitializeDefaultsProperly()
-        {
-            _feedback.HasErrors.Should().BeTrue();
-            _feedback.Elapsed.Should().BeEmpty();
-            _feedback.Section.Should().Be(0);
-        }
+    /// <summary>Provides an immediate deterministic clock tick.</summary>
+    [DebuggerDisplay("{Tick}")]
+    private sealed class TestClock : IClock
+    {
+        /// <summary>Deterministic tick emitted by the test clock.</summary>
+        private const long ElapsedSeconds = 42L;
 
-        [Fact]
-        public void ShouldEnableCommandWhenFeedbackIsValid()
-        {
-            _feedback.Message = "Message!";
-            _feedback.Title = "Title!";
-            _feedback.Section = 0;
-            _feedback.Idea = true;
-            _feedback.HasErrors.Should().BeFalse();
-        }
-
-        [Fact]
-        public void ShouldSendFeedbackWhenSubmitIsPressed()
-        {
-            _feedback.Message = "Message!";
-            _feedback.Title = "Title!";
-            _feedback.Section = 0;
-            _feedback.Issue = true;
-            _feedback.Submit.Execute().Subscribe();
-            _sender.Received().Send("Title!", "Message!", 0, true);
-        }
-
-        [Fact]
-        public void ShouldStartTheClockWhenActivated()
-        {
-            _clock.Tick.ReturnsForAnyArgs(call => Observable.Return<long>(42, Scheduler.Immediate));
-            using (_feedback.Activator.Activate())
-                _feedback.Elapsed.Should().Be("42s");
-        }
-
-        [Fact]
-        public void ShouldCorrectlyInitializeLengthRelatedProperties()
-        {
-            _feedback.Message = "Words";
-            _feedback.MessageLength.Should().Be(5);
-            _feedback.MessageLengthMax.Should().Be(30);
-
-            _feedback.Title = "Issue Title";
-            _feedback.TitleLength.Should().Be(11);
-            _feedback.TitleLengthMax.Should().Be(15);
-        }
-
-        [Fact]
-        public void ShouldAutomaticallySwitchDependentProperties()
-        {
-            _feedback.Issue = true;
-            _feedback.Idea.Should().BeFalse();
-            _feedback.Idea = true;
-            _feedback.Issue.Should().BeFalse();
-            _feedback.Issue = true;
-            _feedback.Idea.Should().BeFalse();
-        }
+        /// <inheritdoc/>
+        public IObservable<long> Tick { get; } = Observable.Return(ElapsedSeconds);
     }
 }

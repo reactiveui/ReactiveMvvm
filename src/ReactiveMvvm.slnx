@@ -1,0 +1,12 @@
+<Solution>
+  <Project Path="ReactiveMvvm.Avalonia/ReactiveMvvm.Avalonia.csproj" />
+  <Project Path="ReactiveMvvm.Blazor.Server/ReactiveMvvm.Blazor.Server.csproj" />
+  <Project Path="ReactiveMvvm.Blazor.Wasm/ReactiveMvvm.Blazor.Wasm.csproj" />
+  <Project Path="ReactiveMvvm.Blazor/ReactiveMvvm.Blazor.csproj" />
+  <Project Path="ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj" />
+  <Project Path="ReactiveMvvm.Terminal/ReactiveMvvm.Terminal.csproj" />
+  <Project Path="ReactiveMvvm.Tests/ReactiveMvvm.Tests.csproj" />
+  <Project Path="ReactiveMvvm.WinForms/ReactiveMvvm.WinForms.csproj" />
+  <Project Path="ReactiveMvvm.Wpf/ReactiveMvvm.Wpf.csproj" />
+  <Project Path="ReactiveMvvm/ReactiveMvvm.csproj" />
+</Solution>

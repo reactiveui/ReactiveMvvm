@@ -20,7 +20,42 @@ jobs:
       solutionFile: ReactiveMvvm.slnf
       installWorkloads: true
       testProjects: ReactiveMvvm.Tests/*.csproj
-      # xUnit supports MTP coverage but does not accept TUnit's --output switch.
-      enableDetailedTestLogging: false
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  maui:
+    name: MAUI ${{ matrix.framework }}-${{ matrix.platform.target }}
+    runs-on: ${{ matrix.platform.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        framework: [net10.0, net11.0]
+        platform:
+          - os: ubuntu-latest
+            target: android
+            arguments: ''
+          - os: windows-latest
+            target: windows10.0.19041.0
+            arguments: ''
+          - os: macos-latest
+            target: ios
+            arguments: '-p:RuntimeIdentifier=iossimulator-arm64 -p:EnableCodeSigning=false'
+          - os: macos-latest
+            target: maccatalyst
+            arguments: '-p:EnableCodeSigning=false'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Setup .NET Environment
+        uses: reactiveui/actions-common/.github/actions/dotnet-environment@main
+        with:
+          dotnet-versions: 11.0.x
+          solution-file: ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj
+          install-workloads: 'true'
+          stamp-version: 'false'
+      - name: Restore
+        working-directory: src
+        run: dotnet restore ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj
+      - name: Build
+        working-directory: src
+        run: dotnet build ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj --no-restore --configuration Release --framework ${{ matrix.framework }}-${{ matrix.platform.target }} ${{ matrix.platform.arguments }}

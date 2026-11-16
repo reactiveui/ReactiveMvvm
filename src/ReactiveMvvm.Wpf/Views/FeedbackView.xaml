@@ -1,4 +1,4 @@
-﻿<rxui:ReactiveWindow 
+<rxui:ReactiveWindow
     xmlns:rxui="http://reactiveui.net"
     x:Class="ReactiveMvvm.Wpf.Views.FeedbackView"
     x:TypeArguments="viewModels:FeedbackViewModel"

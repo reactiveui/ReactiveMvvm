@@ -1,7 +1,9 @@
-﻿@page "/"
+@page "/"
 @namespace ReactiveMvvm.Blazor.Views
 @inherits ReactiveInjectableComponentBase<FeedbackViewModel>
 
+@if (ViewModel is not null)
+{
 <div class="col-lg-6">
     <h1>Feedback Form</h1>
     <div class="form-group">
@@ -82,3 +84,4 @@
         </small>
     </div>
 </div>
+}

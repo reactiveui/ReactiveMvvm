@@ -1,16 +1,17 @@
-﻿using ObjCRuntime;
+// Copyright (c) 2019-2026 ReactiveUI and Contributors. All rights reserved.
+// ReactiveUI and Contributors licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
+using System.Runtime.CompilerServices;
 using UIKit;
 
-namespace ReactiveMvvm.Maui
+namespace ReactiveMvvm.Maui;
+
+/// <summary>Starts the platform feedback application.</summary>
+public static class Program
 {
-    public class Program
-    {
-        // This is the main entry point of the application.
-        static void Main(string[] args)
-        {
-            // if you want to use a different Application Delegate class from "AppDelegate"
-            // you can specify it here.
-            UIApplication.Main(args, null, typeof(AppDelegate));
-        }
-    }
+    /// <summary>Starts the platform application.</summary>
+    /// <param name="args">The command-line arguments.</param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void Main(string[] args) => UIApplication.Main(args, null, typeof(AppDelegate));
 }

@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "ReactiveMvvm.sln",
+    "path": "ReactiveMvvm.slnx",
     "projects": [
       "ReactiveMvvm.Avalonia\\ReactiveMvvm.Avalonia.csproj",
       "ReactiveMvvm.Blazor.Server\\ReactiveMvvm.Blazor.Server.csproj",

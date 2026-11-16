@@ -1,8 +1,10 @@
-﻿<Window xmlns="https://github.com/avaloniaui" 
+<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="ReactiveMvvm.Avalonia.Views.FeedbackView"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:viewModels="clr-namespace:ReactiveMvvm.ViewModels;assembly=ReactiveMvvm"
+        x:DataType="viewModels:FeedbackViewModel"
+        Icon="/Assets/logo.png"
         d:DataContext="{d:DesignInstance viewModels:FeedbackViewModel, IsDesignTimeCreatable=False}"
         MinWidth="500" MinHeight="400"
         Width="500" Height="400"
@@ -16,13 +18,13 @@
             <TextBlock Text="Time passed: "/>
             <TextBlock Text="{Binding Elapsed}"/>
           </StackPanel>
-          <TextBox Text="{Binding Title}" MaxLength="{Binding TitleLengthMax}" Watermark="Issue title" />
+          <TextBox Text="{Binding Title}" MaxLength="{Binding TitleLengthMax}" PlaceholderText="Issue title" />
           <StackPanel Orientation="Horizontal">
             <TextBlock Text="{Binding TitleLength}"/>  
             <TextBlock Text=" letters used from "/>
             <TextBlock Text="{Binding TitleLengthMax}"/>  
           </StackPanel>
-          <TextBox Text="{Binding Message}" MaxLength="{Binding MessageLengthMax}" Watermark="Issue description"/>
+          <TextBox Text="{Binding Message}" MaxLength="{Binding MessageLengthMax}" PlaceholderText="Issue description"/>
           <StackPanel Orientation="Horizontal">
             <TextBlock Text="{Binding MessageLength}"/>  
             <TextBlock Text=" letters used from "/>
