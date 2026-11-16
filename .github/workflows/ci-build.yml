@@ -42,7 +42,7 @@ jobs:
             arguments: ''
           - os: xcode-27
             target: ios
-            arguments: '-p:EnableCodeSigning=false'
+            arguments: '-p:RuntimeIdentifier=iossimulator-arm64 -p:EnableCodeSigning=false'
           - os: xcode-27
             target: maccatalyst
             arguments: '-p:EnableCodeSigning=false'
@@ -56,6 +56,9 @@ jobs:
           solution-file: ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj
           install-workloads: 'true'
           stamp-version: 'false'
+      - name: Install the iOS 26.0 simulator runtime
+        if: matrix.framework == 'net10.0' && matrix.platform.target == 'ios'
+        run: xcodebuild -downloadPlatform iOS -buildVersion 26.0 -architectureVariant arm64
       - name: Build
         working-directory: src
-        run: dotnet build ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj --configuration Release --framework ${{ matrix.framework }}-${{ matrix.platform.target }} ${{ matrix.platform.arguments }} ${{ matrix.platform.target == 'ios' && format('-p:RuntimeIdentifier={0}', matrix.framework == 'net10.0' && 'ios-arm64' || 'iossimulator-arm64') || '' }}
+        run: dotnet build ReactiveMvvm.Maui/ReactiveMvvm.Maui.csproj --configuration Release --framework ${{ matrix.framework }}-${{ matrix.platform.target }} ${{ matrix.platform.arguments }}
