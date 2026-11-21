@@ -14,7 +14,7 @@
     <PackageVersion Include="ReactiveUI.Blazor.Reactive" Version="27.0.1" />
     <PackageVersion Include="ReactiveUI.Maui.Reactive" Version="27.0.1" />
     <PackageVersion Include="ReactiveUI.Reactive" Version="27.0.1" />
-    <PackageVersion Include="ReactiveUI.SourceGenerators" Version="5.0.0" />
+    <PackageVersion Include="ReactiveUI.SourceGenerators" Version="5.1.0" />
     <PackageVersion Include="ReactiveUI.Testing.Reactive" Version="27.0.1" />
     <PackageVersion Include="ReactiveUI.Winforms.Reactive" Version="27.0.1" />
     <PackageVersion Include="ReactiveUI.Wpf.Reactive" Version="27.0.1" />
