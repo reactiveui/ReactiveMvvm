@@ -72,13 +72,13 @@ public sealed class FeedbackView : Window, IViewFor<FeedbackViewModel>
     private OptionSelector SectionRadioGroup()
     {
         var radioGroup = new OptionSelector { Labels = ["User Interface", "Audio", "Video", "Voice"] };
-        _ = ViewModel.WhenAnyValue(x => x.Section).Select(static section => (int?)section).BindTo(radioGroup, x => x.Value)
+        _ = ViewModel.WhenAnyValue(static x => x.Section).Select(static section => (int?)section).BindTo(radioGroup, static x => x.Value)
             .DisposeWith(_subscriptions);
         _ = Observable.FromEventPattern<ValueChangedEventArgs<int?>>(
             handler => radioGroup.ValueChanged += handler,
             handler => radioGroup.ValueChanged -= handler)
             .Select(static args => args.EventArgs.NewValue ?? -1)
-            .BindTo(this, x => x.ViewModel.Section)
+            .BindTo(this, static x => x.ViewModel.Section)
             .DisposeWith(_subscriptions);
         return radioGroup;
     }
@@ -88,14 +88,14 @@ public sealed class FeedbackView : Window, IViewFor<FeedbackViewModel>
     private CheckBox IssueCheckBox()
     {
         var item = new CheckBox { Text = "Issue", Value = ViewModel.Issue ? CheckState.Checked : CheckState.UnChecked };
-        _ = ViewModel.WhenAnyValue(x => x.Issue).Select(static issue => issue ? CheckState.Checked : CheckState.UnChecked)
-            .BindTo(item, x => x.Value)
+        _ = ViewModel.WhenAnyValue(static x => x.Issue).Select(static issue => issue ? CheckState.Checked : CheckState.UnChecked)
+            .BindTo(item, static x => x.Value)
             .DisposeWith(_subscriptions);
         _ = Observable.FromEventPattern<ValueChangedEventArgs<CheckState>>(handler => item.ValueChanged += handler, handler => item.ValueChanged -= handler)
             .Select(static args => args.EventArgs.NewValue == CheckState.Checked)
             .Subscribe(issue => ViewModel.Issue = issue)
             .DisposeWith(_subscriptions);
-        _ = ViewModel.WhenAnyValue(x => x.Idea).Skip(1).Subscribe(args => item.SetNeedsDraw()).DisposeWith(_subscriptions);
+        _ = ViewModel.WhenAnyValue(static x => x.Idea).Skip(1).Subscribe(args => item.SetNeedsDraw()).DisposeWith(_subscriptions);
         return item;
     }
 
@@ -104,14 +104,14 @@ public sealed class FeedbackView : Window, IViewFor<FeedbackViewModel>
     private CheckBox IdeaCheckBox()
     {
         var item = new CheckBox { Text = "Suggestion", Value = ViewModel.Idea ? CheckState.Checked : CheckState.UnChecked };
-        _ = ViewModel.WhenAnyValue(x => x.Idea).Select(static issue => issue ? CheckState.Checked : CheckState.UnChecked)
-            .BindTo(item, x => x.Value)
+        _ = ViewModel.WhenAnyValue(static x => x.Idea).Select(static issue => issue ? CheckState.Checked : CheckState.UnChecked)
+            .BindTo(item, static x => x.Value)
             .DisposeWith(_subscriptions);
         _ = Observable.FromEventPattern<ValueChangedEventArgs<CheckState>>(handler => item.ValueChanged += handler, handler => item.ValueChanged -= handler)
             .Select(static args => args.EventArgs.NewValue == CheckState.Checked)
             .Subscribe(idea => ViewModel.Idea = idea)
             .DisposeWith(_subscriptions);
-        _ = ViewModel.WhenAnyValue(x => x.Issue).Skip(1).Subscribe(args => item.SetNeedsDraw()).DisposeWith(_subscriptions);
+        _ = ViewModel.WhenAnyValue(static x => x.Issue).Skip(1).Subscribe(args => item.SetNeedsDraw()).DisposeWith(_subscriptions);
         return item;
     }
 
@@ -120,7 +120,7 @@ public sealed class FeedbackView : Window, IViewFor<FeedbackViewModel>
     private Label TimeElapsedLabel()
     {
         var label = new Label { Text = "0 seconds passed" };
-        _ = ViewModel.WhenAnyValue(x => x.Elapsed).Select(static elapsed => $"{elapsed} seconds passed").BindTo(label, x => x.Text)
+        _ = ViewModel.WhenAnyValue(static x => x.Elapsed).Select(static elapsed => $"{elapsed} seconds passed").BindTo(label, static x => x.Text)
             .DisposeWith(_subscriptions);
         return label;
     }
@@ -130,7 +130,7 @@ public sealed class FeedbackView : Window, IViewFor<FeedbackViewModel>
     private TextField MessageInput()
     {
         var text = new TextField { Text = ViewModel.Message, Width = TextFieldWidth };
-        _ = ViewModel.WhenAnyValue(x => x.Message).BindTo(text, x => x.Text).DisposeWith(_subscriptions);
+        _ = ViewModel.WhenAnyValue(static x => x.Message).BindTo(text, static x => x.Text).DisposeWith(_subscriptions);
         _ = Observable.FromEventPattern(handler => text.TextChanged += handler, handler => text.TextChanged -= handler)
             .Select(_ => text.Text)
             .DistinctUntilChanged()
@@ -144,8 +144,8 @@ public sealed class FeedbackView : Window, IViewFor<FeedbackViewModel>
     private Label MessageDescription()
     {
         var label = new Label { Text = $"0 letters used from {ViewModel.MessageLengthMax}" };
-        _ = ViewModel.WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax).Select(static values => $"{values.Property1} letters used from {values.Property2}")
-            .BindTo(label, x => x.Text)
+        _ = ViewModel.WhenAnyValue(static x => x.MessageLength, static x => x.MessageLengthMax).Select(static values => $"{values.Property1} letters used from {values.Property2}")
+            .BindTo(label, static x => x.Text)
             .DisposeWith(_subscriptions);
         return label;
     }
@@ -155,7 +155,7 @@ public sealed class FeedbackView : Window, IViewFor<FeedbackViewModel>
     private TextField TitleInput()
     {
         var text = new TextField { Text = ViewModel.Title, Width = TextFieldWidth };
-        _ = ViewModel.WhenAnyValue(x => x.Title).BindTo(text, x => x.Text).DisposeWith(_subscriptions);
+        _ = ViewModel.WhenAnyValue(static x => x.Title).BindTo(text, static x => x.Text).DisposeWith(_subscriptions);
         _ = Observable.FromEventPattern(handler => text.TextChanged += handler, handler => text.TextChanged -= handler)
             .Select(_ => text.Text)
             .DistinctUntilChanged()
@@ -169,8 +169,8 @@ public sealed class FeedbackView : Window, IViewFor<FeedbackViewModel>
     private Label TitleDescription()
     {
         var label = new Label { Text = $"0 letters used from {ViewModel.TitleLengthMax}" };
-        _ = ViewModel.WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax).Select(static values => $"{values.Property1} letters used from {values.Property2}")
-            .BindTo(label, x => x.Text)
+        _ = ViewModel.WhenAnyValue(static x => x.TitleLength, static x => x.TitleLengthMax).Select(static values => $"{values.Property1} letters used from {values.Property2}")
+            .BindTo(label, static x => x.Text)
             .DisposeWith(_subscriptions);
         return label;
     }
