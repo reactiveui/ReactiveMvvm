@@ -31,4 +31,16 @@ public sealed class ClockTests
         scheduler.AdvanceByMs(MillisecondsPerSecond);
         await Assert.That(value).IsEqualTo(1L);
     }
+
+    /// <summary>Checks that the default clock creates a tick sequence on the application scheduler.</summary>
+    /// <returns>A task representing the test.</returns>
+    [Test]
+    public async Task Constructor_UsesTheApplicationScheduler() =>
+        await Assert.That(new Clock().Tick).IsNotNull();
+
+    /// <summary>Checks that a missing scheduler is rejected.</summary>
+    /// <returns>A task representing the test.</returns>
+    [Test]
+    public async Task Constructor_RejectsAMissingScheduler() =>
+        _ = await Assert.That(static () => new Clock(null!)).Throws<ArgumentNullException>();
 }

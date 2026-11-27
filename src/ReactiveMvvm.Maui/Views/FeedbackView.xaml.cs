@@ -24,24 +24,24 @@ public partial class FeedbackView : ReactiveContentPage<FeedbackViewModel>
             var viewModel = new FeedbackViewModel(new MauiSender(this), new Clock());
             ViewModel = viewModel;
             subscriptions.Add(viewModel);
-            _ = this.Bind(viewModel, x => x.Title, x => x.TitleEntry.Text).DisposeWith(subscriptions);
-            _ = this.OneWayBind(viewModel, x => x.TitleLengthMax, x => x.TitleEntry.MaxLength).DisposeWith(subscriptions);
-            _ = viewModel.WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax)
+            _ = this.Bind(viewModel, static x => x.Title, static x => x.TitleEntry.Text).DisposeWith(subscriptions);
+            _ = this.OneWayBind(viewModel, static x => x.TitleLengthMax, static x => x.TitleEntry.MaxLength).DisposeWith(subscriptions);
+            _ = viewModel.WhenAnyValue(static x => x.TitleLength, static x => x.TitleLengthMax)
                 .Select(static values => $"{values.Property1} letters used from {values.Property2}")
                 .BindTo(this, static x => x.TitleLengthEntry.Text)
                 .DisposeWith(subscriptions);
-            _ = this.Bind(viewModel, x => x.Message, x => x.MessageEntry.Text).DisposeWith(subscriptions);
-            _ = this.OneWayBind(viewModel, x => x.MessageLengthMax, x => x.MessageEntry.MaxLength).DisposeWith(subscriptions);
-            _ = viewModel.WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax)
+            _ = this.Bind(viewModel, static x => x.Message, static x => x.MessageEntry.Text).DisposeWith(subscriptions);
+            _ = this.OneWayBind(viewModel, static x => x.MessageLengthMax, static x => x.MessageEntry.MaxLength).DisposeWith(subscriptions);
+            _ = viewModel.WhenAnyValue(static x => x.MessageLength, static x => x.MessageLengthMax)
                 .Select(static values => $"{values.Property1} letters used from {values.Property2}")
                 .BindTo(this, static x => x.MessageLengthEntry.Text)
                 .DisposeWith(subscriptions);
-            _ = this.Bind(viewModel, x => x.Section, x => x.SectionPicker.SelectedIndex).DisposeWith(subscriptions);
-            _ = this.Bind(viewModel, x => x.Idea, x => x.IdeaSwitch.IsToggled).DisposeWith(subscriptions);
-            _ = this.Bind(viewModel, x => x.Issue, x => x.IssueSwitch.IsToggled).DisposeWith(subscriptions);
-            _ = this.OneWayBind(viewModel, x => x.HasErrors, x => x.HasErrorsLabel.IsVisible).DisposeWith(subscriptions);
-            _ = this.BindCommand(viewModel, x => x.Submit, x => x.SubmitButton).DisposeWith(subscriptions);
-            _ = this.OneWayBind(viewModel, x => x.Elapsed, x => x.TimeElapsedLabel.Text, static time => $"Time elapsed: {time}")
+            _ = this.Bind(viewModel, static x => x.Section, static x => x.SectionPicker.SelectedIndex).DisposeWith(subscriptions);
+            _ = this.Bind(viewModel, static x => x.Idea, static x => x.IdeaSwitch.IsToggled).DisposeWith(subscriptions);
+            _ = this.Bind(viewModel, static x => x.Issue, static x => x.IssueSwitch.IsToggled).DisposeWith(subscriptions);
+            _ = this.OneWayBind(viewModel, static x => x.HasErrors, static x => x.HasErrorsLabel.IsVisible).DisposeWith(subscriptions);
+            _ = this.BindCommand(viewModel, static x => x.Submit, static x => x.SubmitButton).DisposeWith(subscriptions);
+            _ = this.OneWayBind(viewModel, static x => x.Elapsed, static x => x.TimeElapsedLabel.Text, static time => $"Time elapsed: {time}")
                 .DisposeWith(subscriptions);
         });
     }

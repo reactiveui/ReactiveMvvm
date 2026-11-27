@@ -4,24 +4,24 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Avalonia" Version="12.1.6" />
-    <PackageVersion Include="Avalonia.Desktop" Version="12.1.6" />
-    <PackageVersion Include="Avalonia.Themes.Fluent" Version="12.1.6" />
+    <PackageVersion Include="Avalonia" Version="12.2.0" />
+    <PackageVersion Include="Avalonia.Desktop" Version="12.2.0" />
+    <PackageVersion Include="Avalonia.Themes.Fluent" Version="12.2.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.12.0" />
     <PackageVersion Include="PerformanceSharp.Analyzers" Version="5.2.0" />
     <PackageVersion Include="PublicApiSharp.Analyzers" Version="2.2.0" />
-    <PackageVersion Include="ReactiveUI.Avalonia.Reactive" Version="12.1.7" />
-    <PackageVersion Include="ReactiveUI.Blazor.Reactive" Version="27.0.1" />
-    <PackageVersion Include="ReactiveUI.Maui.Reactive" Version="27.0.1" />
-    <PackageVersion Include="ReactiveUI.Reactive" Version="27.0.1" />
-    <PackageVersion Include="ReactiveUI.SourceGenerators" Version="5.0.0" />
-    <PackageVersion Include="ReactiveUI.Testing.Reactive" Version="27.0.1" />
-    <PackageVersion Include="ReactiveUI.Winforms.Reactive" Version="27.0.1" />
-    <PackageVersion Include="ReactiveUI.Wpf.Reactive" Version="27.0.1" />
+    <PackageVersion Include="ReactiveUI.Avalonia.Reactive" Version="12.1.9" />
+    <PackageVersion Include="ReactiveUI.Blazor.Reactive" Version="28.0.0" />
+    <PackageVersion Include="ReactiveUI.Maui.Reactive" Version="28.0.0" />
+    <PackageVersion Include="ReactiveUI.Reactive" Version="28.0.0" />
+    <PackageVersion Include="ReactiveUI.SourceGenerators" Version="7.1.0" />
+    <PackageVersion Include="ReactiveUI.Testing.Reactive" Version="28.0.0" />
+    <PackageVersion Include="ReactiveUI.Winforms.Reactive" Version="28.0.0" />
+    <PackageVersion Include="ReactiveUI.Wpf.Reactive" Version="28.0.0" />
     <PackageVersion Include="SecuritySharp.Analyzers" Version="5.2.0" />
     <PackageVersion Include="StyleSharp.Analyzers" Version="5.2.0" />
-    <PackageVersion Include="TUnit" Version="1.85.0" />
-    <PackageVersion Include="Terminal.Gui" Version="2.6.0-develop.61" />
+    <PackageVersion Include="TUnit" Version="1.87.12" />
+    <PackageVersion Include="Terminal.Gui" Version="2.6.1-develop.10" />
   </ItemGroup>
   <Choose>
     <When Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net11.0'))">

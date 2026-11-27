@@ -23,22 +23,22 @@ public partial class FeedbackView : Form, IViewFor<FeedbackViewModel>
                 return;
             }
 
-            _ = this.Bind(viewModel, x => x.Title, x => x.TitleTextBox.Text).DisposeWith(subscriptions);
-            _ = this.OneWayBind(viewModel, x => x.TitleLengthMax, x => x.TitleTextBox.MaxLength).DisposeWith(subscriptions);
-            _ = viewModel.WhenAnyValue(x => x.TitleLength, x => x.TitleLengthMax).Select(static values => $"{values.Property1} letters used from {values.Property2}")
-                .BindTo(this, x => x.TitleLengthLabel.Text)
+            _ = this.Bind(viewModel, static x => x.Title, static x => x.TitleTextBox.Text).DisposeWith(subscriptions);
+            _ = this.OneWayBind(viewModel, static x => x.TitleLengthMax, static x => x.TitleTextBox.MaxLength).DisposeWith(subscriptions);
+            _ = viewModel.WhenAnyValue(static x => x.TitleLength, static x => x.TitleLengthMax).Select(static values => $"{values.Property1} letters used from {values.Property2}")
+                .BindTo(this, static x => x.TitleLengthLabel.Text)
                 .DisposeWith(subscriptions);
-            _ = this.Bind(viewModel, x => x.Message, x => x.MessageTextBox.Text).DisposeWith(subscriptions);
-            _ = this.OneWayBind(viewModel, x => x.MessageLengthMax, x => x.MessageTextBox.MaxLength).DisposeWith(subscriptions);
-            _ = viewModel.WhenAnyValue(x => x.MessageLength, x => x.MessageLengthMax).Select(static values => $"{values.Property1} letters used from {values.Property2}")
-                .BindTo(this, x => x.MessageLengthLabel.Text)
+            _ = this.Bind(viewModel, static x => x.Message, static x => x.MessageTextBox.Text).DisposeWith(subscriptions);
+            _ = this.OneWayBind(viewModel, static x => x.MessageLengthMax, static x => x.MessageTextBox.MaxLength).DisposeWith(subscriptions);
+            _ = viewModel.WhenAnyValue(static x => x.MessageLength, static x => x.MessageLengthMax).Select(static values => $"{values.Property1} letters used from {values.Property2}")
+                .BindTo(this, static x => x.MessageLengthLabel.Text)
                 .DisposeWith(subscriptions);
-            _ = this.Bind(viewModel, x => x.Section, x => x.SectionComboBox.SelectedIndex).DisposeWith(subscriptions);
-            _ = this.Bind(viewModel, x => x.Idea, x => x.IdeaCheckBox.Checked).DisposeWith(subscriptions);
-            _ = this.Bind(viewModel, x => x.Issue, x => x.IssueCheckBox.Checked).DisposeWith(subscriptions);
-            _ = this.OneWayBind(viewModel, x => x.HasErrors, x => x.HasErrorsTextBox.Visible).DisposeWith(subscriptions);
-            _ = this.BindCommand(viewModel, x => x.Submit, x => x.SubmitButton).DisposeWith(subscriptions);
-            _ = this.OneWayBind(viewModel, x => x.Elapsed, x => x.TimeElapsedLabel.Text, static time => $"Elapsed: {time}")
+            _ = this.Bind(viewModel, static x => x.Section, static x => x.SectionComboBox.SelectedIndex).DisposeWith(subscriptions);
+            _ = this.Bind(viewModel, static x => x.Idea, static x => x.IdeaCheckBox.Checked).DisposeWith(subscriptions);
+            _ = this.Bind(viewModel, static x => x.Issue, static x => x.IssueCheckBox.Checked).DisposeWith(subscriptions);
+            _ = this.OneWayBind(viewModel, static x => x.HasErrors, static x => x.HasErrorsTextBox.Visible).DisposeWith(subscriptions);
+            _ = this.BindCommand(viewModel, static x => x.Submit, static x => x.SubmitButton).DisposeWith(subscriptions);
+            _ = this.OneWayBind(viewModel, static x => x.Elapsed, static x => x.TimeElapsedLabel.Text, static time => $"Elapsed: {time}")
                 .DisposeWith(subscriptions);
         });
     }

@@ -63,29 +63,29 @@ public sealed partial class FeedbackViewModel : ReactiveObject, IActivatableView
         ArgumentNullException.ThrowIfNull(sender);
         ArgumentNullException.ThrowIfNull(clock);
 
-        _ = this.WhenAnyValue(x => x.Idea)
+        _ = this.WhenAnyValue(static x => x.Idea)
             .Select(static selected => !selected)
             .Subscribe(value => Issue = value)
             .DisposeWith(_subscriptions);
-        _ = this.WhenAnyValue(x => x.Issue)
+        _ = this.WhenAnyValue(static x => x.Issue)
             .Select(static selected => !selected)
             .Subscribe(value => Idea = value)
             .DisposeWith(_subscriptions);
-        _ = this.WhenAnyValue(x => x.Title)
+        _ = this.WhenAnyValue(static x => x.Title)
             .Select(static title => title.Length)
             .Subscribe(length => TitleLength = length)
             .DisposeWith(_subscriptions);
-        _ = this.WhenAnyValue(x => x.Message)
+        _ = this.WhenAnyValue(static x => x.Message)
             .Select(static message => message.Length)
             .Subscribe(length => MessageLength = length)
             .DisposeWith(_subscriptions);
 
         var valid = this.WhenAnyValue(
-            x => x.Title,
-            x => x.Message,
-            x => x.Issue,
-            x => x.Idea,
-            x => x.Section,
+            static x => x.Title,
+            static x => x.Message,
+            static x => x.Issue,
+            static x => x.Idea,
+            static x => x.Section,
             static (title, message, issue, idea, section) =>
                 !string.IsNullOrWhiteSpace(message)
                 && !string.IsNullOrWhiteSpace(title)
