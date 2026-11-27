@@ -21,7 +21,7 @@
     <PackageVersion Include="SecuritySharp.Analyzers" Version="5.2.0" />
     <PackageVersion Include="StyleSharp.Analyzers" Version="5.2.0" />
     <PackageVersion Include="TUnit" Version="1.87.12" />
-    <PackageVersion Include="Terminal.Gui" Version="2.6.1-develop.4" />
+    <PackageVersion Include="Terminal.Gui" Version="2.6.1-develop.10" />
   </ItemGroup>
   <Choose>
     <When Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net11.0'))">
