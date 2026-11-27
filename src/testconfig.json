@@ -10,6 +10,9 @@
         "Sources": {
           "Exclude": ["[/\\\\]obj[/\\\\].*\\.g\\.cs$"]
         },
+        "Functions": {
+          "Exclude": [".*__.*"]
+        },
         "ModulePaths": {
           "Include": ["ReactiveMvvm\\.dll$"],
           "Exclude": [".*Tests\\.dll$", ".*TestRunner.*"]
