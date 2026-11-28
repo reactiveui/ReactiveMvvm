@@ -6,7 +6,7 @@
 
 [![Build](https://img.shields.io/github/actions/workflow/status/reactiveui/ReactiveMvvm/ci-build.yml?branch=main&label=build&logo=githubactions&logoColor=white)](https://github.com/reactiveui/ReactiveMvvm/actions/workflows/ci-build.yml)
 [![License](https://img.shields.io/github/license/reactiveui/ReactiveMvvm?color=blue)](https://github.com/reactiveui/ReactiveMvvm/blob/main/LICENSE)
-[![Discussions](https://img.shields.io/badge/discussions-ask%20a%20question-8A2BE2?logo=github&logoColor=white)](https://github.com/reactiveui/ReactiveUI/discussions)
+[![Discussions](https://img.shields.io/badge/discussions-ask%20a%20question-8A2BE2?logo=github&logoColor=white)](https://github.com/reactiveui/ReactiveMvvm/discussions)
 
 </div>
 
@@ -37,7 +37,7 @@ The screenshots below show the application's original implementations. The Xamar
 
 ReactiveMvvm is part of [ReactiveUI](https://github.com/reactiveui) and is released under the [MIT license](https://github.com/reactiveui/ReactiveMvvm/blob/main/LICENSE). We welcome contributions of every size, from bug reports and documentation to features and tests.
 
-- **Questions:** ask in [GitHub Discussions](https://github.com/reactiveui/ReactiveUI/discussions).
+- **Questions:** ask in [GitHub Discussions](https://github.com/reactiveui/ReactiveMvvm/discussions).
 - **Bugs and feature requests:** open a [GitHub issue](https://github.com/reactiveui/ReactiveMvvm/issues/new/choose).
 - **Larger changes:** open an issue or discussion first, so we can agree on the approach before you start.
 - **Contributor guide:** read [reactiveui.net/contribute](https://www.reactiveui.net/contribute/) for [building and testing](https://www.reactiveui.net/contribute/building-and-testing/) and [pull requests](https://www.reactiveui.net/contribute/pull-requests/).
