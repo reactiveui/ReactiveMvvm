@@ -1,9 +1,14 @@
+<div align="center">
+
+<a href="https://github.com/reactiveui/ReactiveMvvm"><img src="https://raw.githubusercontent.com/reactiveui/ReactiveMvvm/main/images/logo.png" alt="ReactiveMvvm" width="128"></a>
+
 # ReactiveMvvm
 
-<img src="images/logo.png" alt="ReactiveMvvm" width="160" />
+[![Build](https://img.shields.io/github/actions/workflow/status/reactiveui/ReactiveMvvm/ci-build.yml?branch=main&label=build&logo=githubactions&logoColor=white)](https://github.com/reactiveui/ReactiveMvvm/actions/workflows/ci-build.yml)
+[![License](https://img.shields.io/github/license/reactiveui/ReactiveMvvm?color=blue)](https://github.com/reactiveui/ReactiveMvvm/blob/main/LICENSE)
+[![Discussions](https://img.shields.io/badge/discussions-ask%20a%20question-8A2BE2?logo=github&logoColor=white)](https://github.com/reactiveui/ReactiveUI/discussions)
 
-[![Build](https://github.com/reactiveui/ReactiveMvvm/actions/workflows/ci-build.yml/badge.svg)](https://github.com/reactiveui/ReactiveMvvm/actions/workflows/ci-build.yml)
-[![License](https://img.shields.io/github/license/reactiveui/ReactiveMvvm)](LICENSE)
+</div>
 
 A cross-platform feedback application built with ReactiveUI, reactive view models and source-generated properties. The same view model powers Avalonia, WPF, Windows Forms, .NET MAUI, Terminal.Gui and Blazor views on .NET 10 and .NET 11.
 
@@ -27,6 +32,31 @@ The screenshots below show the application's original implementations. The Xamar
 - ReactiveUI.SourceGenerators for reactive properties.
 - Avalonia with the Fluent theme, WPF, Windows Forms, .NET MAUI, Terminal.Gui and Blazor for platform views.
 - TUnit and Microsoft.Testing.Platform for deterministic tests and Cobertura coverage.
+
+## Contribute
+
+ReactiveMvvm is part of [ReactiveUI](https://github.com/reactiveui) and is released under the [MIT license](https://github.com/reactiveui/ReactiveMvvm/blob/main/LICENSE). We welcome contributions of every size, from bug reports and documentation to features and tests.
+
+- **Questions:** ask in [GitHub Discussions](https://github.com/reactiveui/ReactiveUI/discussions).
+- **Bugs and feature requests:** open a [GitHub issue](https://github.com/reactiveui/ReactiveMvvm/issues/new/choose).
+- **Larger changes:** open an issue or discussion first, so we can agree on the approach before you start.
+- **Contributor guide:** read [reactiveui.net/contribute](https://www.reactiveui.net/contribute/) for [building and testing](https://www.reactiveui.net/contribute/building-and-testing/) and [pull requests](https://www.reactiveui.net/contribute/pull-requests/).
+
+### Coding standards
+
+Every pull request must meet these standards. The build checks most of them.
+
+- Follow the [ReactiveUI C# style guide](https://www.reactiveui.net/contribute/software-style-guide/code-style/).
+- The repository's `.editorconfig` and the StyleSharp, PerformanceSharp and SecuritySharp analyzers run on every build. Fix each finding in the code. Do not suppress it or relax the `.editorconfig`.
+- Add tests for every bug fix and new feature.
+- Document public APIs with XML documentation comments.
+- Write commit messages in the [Conventional Commits](https://www.reactiveui.net/contribute/software-style-guide/commit-message-convention/) format.
+- Follow the [Code of Conduct](https://github.com/reactiveui/.github/blob/main/CODE_OF_CONDUCT.md).
+
+### Support the project
+
+- Sponsor the maintainers on GitHub Sponsors: [reactivemarbles](https://github.com/sponsors/reactivemarbles), [glennawatson](https://github.com/sponsors/glennawatson) and [chrispulman](https://github.com/sponsors/chrispulman).
+- Ask your employer to support open source, for example with the [balanced employee IP agreement](https://github.com/github/balanced-employee-ip-agreement).
 
 ## Sponsors
 
